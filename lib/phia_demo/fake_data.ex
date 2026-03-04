@@ -1,6 +1,8 @@
 defmodule PhiaDemo.FakeData do
   @moduledoc "Hardcoded fake data for the PhiaUI dashboard demo."
 
+  # ── Overview ──────────────────────────────────────────────────────────────
+
   def stats do
     [
       %{
@@ -34,33 +36,211 @@ defmodule PhiaDemo.FakeData do
     ]
   end
 
-  def recent_orders do
+  def highlights do
     [
-      %{id: "#4521", cliente: "Ana Costa", produto: "Plano Pro", valor: "R$ 299,00", status: :pago, data: "01/03/2026"},
-      %{id: "#4520", cliente: "Bruno Lima", produto: "Plano Starter", valor: "R$ 99,00", status: :pendente, data: "01/03/2026"},
-      %{id: "#4519", cliente: "Carla Souza", produto: "Plano Enterprise", valor: "R$ 999,00", status: :pago, data: "28/02/2026"},
-      %{id: "#4518", cliente: "Diego Melo", produto: "Plano Pro", valor: "R$ 299,00", status: :cancelado, data: "28/02/2026"},
-      %{id: "#4517", cliente: "Elena Rocha", produto: "Plano Starter", valor: "R$ 99,00", status: :pago, data: "27/02/2026"},
-      %{id: "#4516", cliente: "Fábio Nunes", produto: "Plano Pro", valor: "R$ 299,00", status: :pago, data: "27/02/2026"},
-      %{id: "#4515", cliente: "Gabi Torres", produto: "Plano Enterprise", valor: "R$ 999,00", status: :pendente, data: "26/02/2026"},
-      %{id: "#4514", cliente: "Hugo Alves", produto: "Plano Starter", valor: "R$ 99,00", status: :pago, data: "26/02/2026"},
-      %{id: "#4513", cliente: "Ísis Ferreira", produto: "Plano Pro", valor: "R$ 299,00", status: :pago, data: "25/02/2026"},
-      %{id: "#4512", cliente: "João Ribeiro", produto: "Plano Enterprise", valor: "R$ 999,00", status: :cancelado, data: "25/02/2026"}
+      %{
+        title: "Meta de Receita Batida",
+        subtitle: "Fevereiro 2026",
+        stat: "R$ 33.100",
+        detail: "+12,5% acima do previsto para o mês",
+        icon: "trending-up",
+        badge: "Recorde"
+      },
+      %{
+        title: "Maior Base de Usuários",
+        subtitle: "Desde o lançamento",
+        stat: "12.847",
+        detail: "Usuários ativos — crescimento de 8,2% ao mês",
+        icon: "users",
+        badge: "Novo Máximo"
+      },
+      %{
+        title: "NPS Histórico",
+        subtitle: "Pesquisa Q1 2026",
+        stat: "72",
+        detail: "Top 10% da indústria — clientes muito satisfeitos",
+        icon: "star",
+        badge: "Destaque"
+      },
+      %{
+        title: "Enterprise Plus Lançado",
+        subtitle: "Novo plano disponível",
+        stat: "R$ 1.999/mês",
+        detail: "3 contratos fechados na primeira semana",
+        icon: "zap",
+        badge: "Novo"
+      }
     ]
   end
 
-  def users do
+  # ── Orders ──────────────────────────────────────────────────────────────
+
+  def recent_orders do
     [
-      %{id: 1, nome: "Ana Costa", email: "ana@acme.com", role: "Admin", status: :ativo, cadastro: "Jan 2024"},
-      %{id: 2, nome: "Bruno Lima", email: "bruno@acme.com", role: "Editor", status: :ativo, cadastro: "Mar 2024"},
-      %{id: 3, nome: "Carla Souza", email: "carla@acme.com", role: "Viewer", status: :inativo, cadastro: "Jun 2024"},
-      %{id: 4, nome: "Diego Melo", email: "diego@acme.com", role: "Editor", status: :ativo, cadastro: "Ago 2024"},
-      %{id: 5, nome: "Elena Rocha", email: "elena@acme.com", role: "Admin", status: :ativo, cadastro: "Set 2024"},
-      %{id: 6, nome: "Fábio Nunes", email: "fabio@acme.com", role: "Viewer", status: :pendente, cadastro: "Nov 2024"},
-      %{id: 7, nome: "Gabi Torres", email: "gabi@acme.com", role: "Editor", status: :ativo, cadastro: "Dez 2024"},
-      %{id: 8, nome: "Hugo Alves", email: "hugo@acme.com", role: "Viewer", status: :inativo, cadastro: "Fev 2025"}
+      %{
+        id: "#4521",
+        cliente: "Ana Costa",
+        produto: "Plano Pro",
+        valor: "R$ 299,00",
+        status: :pago,
+        data: "01/03/2026"
+      },
+      %{
+        id: "#4520",
+        cliente: "Bruno Lima",
+        produto: "Plano Starter",
+        valor: "R$ 99,00",
+        status: :pendente,
+        data: "01/03/2026"
+      },
+      %{
+        id: "#4519",
+        cliente: "Carla Souza",
+        produto: "Plano Enterprise",
+        valor: "R$ 999,00",
+        status: :pago,
+        data: "28/02/2026"
+      },
+      %{
+        id: "#4518",
+        cliente: "Diego Melo",
+        produto: "Plano Pro",
+        valor: "R$ 299,00",
+        status: :cancelado,
+        data: "28/02/2026"
+      },
+      %{
+        id: "#4517",
+        cliente: "Elena Rocha",
+        produto: "Plano Starter",
+        valor: "R$ 99,00",
+        status: :pago,
+        data: "27/02/2026"
+      },
+      %{
+        id: "#4516",
+        cliente: "Fábio Nunes",
+        produto: "Plano Pro",
+        valor: "R$ 299,00",
+        status: :pago,
+        data: "27/02/2026"
+      },
+      %{
+        id: "#4515",
+        cliente: "Gabi Torres",
+        produto: "Plano Enterprise",
+        valor: "R$ 999,00",
+        status: :pendente,
+        data: "26/02/2026"
+      },
+      %{
+        id: "#4514",
+        cliente: "Hugo Alves",
+        produto: "Plano Starter",
+        valor: "R$ 99,00",
+        status: :pago,
+        data: "26/02/2026"
+      },
+      %{
+        id: "#4513",
+        cliente: "Ísis Ferreira",
+        produto: "Plano Pro",
+        valor: "R$ 299,00",
+        status: :pago,
+        data: "25/02/2026"
+      },
+      %{
+        id: "#4512",
+        cliente: "João Ribeiro",
+        produto: "Plano Enterprise",
+        valor: "R$ 999,00",
+        status: :cancelado,
+        data: "25/02/2026"
+      }
     ]
   end
+
+  # ── Users ──────────────────────────────────────────────────────────────
+
+  def users do
+    [
+      %{
+        id: 1,
+        nome: "Ana Costa",
+        email: "ana@acme.com",
+        role: "Admin",
+        status: :ativo,
+        cadastro: "Jan 2024"
+      },
+      %{
+        id: 2,
+        nome: "Bruno Lima",
+        email: "bruno@acme.com",
+        role: "Editor",
+        status: :ativo,
+        cadastro: "Mar 2024"
+      },
+      %{
+        id: 3,
+        nome: "Carla Souza",
+        email: "carla@acme.com",
+        role: "Viewer",
+        status: :inativo,
+        cadastro: "Jun 2024"
+      },
+      %{
+        id: 4,
+        nome: "Diego Melo",
+        email: "diego@acme.com",
+        role: "Editor",
+        status: :ativo,
+        cadastro: "Ago 2024"
+      },
+      %{
+        id: 5,
+        nome: "Elena Rocha",
+        email: "elena@acme.com",
+        role: "Admin",
+        status: :ativo,
+        cadastro: "Set 2024"
+      },
+      %{
+        id: 6,
+        nome: "Fábio Nunes",
+        email: "fabio@acme.com",
+        role: "Viewer",
+        status: :pendente,
+        cadastro: "Nov 2024"
+      },
+      %{
+        id: 7,
+        nome: "Gabi Torres",
+        email: "gabi@acme.com",
+        role: "Editor",
+        status: :ativo,
+        cadastro: "Dez 2024"
+      },
+      %{
+        id: 8,
+        nome: "Hugo Alves",
+        email: "hugo@acme.com",
+        role: "Viewer",
+        status: :inativo,
+        cadastro: "Fev 2025"
+      }
+    ]
+  end
+
+  def role_options do
+    [
+      %{value: "all", label: "Todos os papéis"},
+      %{value: "Admin", label: "Admin"},
+      %{value: "Editor", label: "Editor"},
+      %{value: "Viewer", label: "Viewer"}
+    ]
+  end
+
+  # ── Charts ──────────────────────────────────────────────────────────────
 
   def revenue_by_month do
     [
@@ -106,6 +286,8 @@ defmodule PhiaDemo.FakeData do
     ]
   end
 
+  # ── Analytics ──────────────────────────────────────────────────────────────
+
   def top_products do
     [
       %{name: "Plano Enterprise", revenue: "R$ 11.988", orders: 12, pct: 100},
@@ -126,25 +308,84 @@ defmodule PhiaDemo.FakeData do
 
   def analytics_stats do
     [
-      %{title: "Visitantes Únicos", value: "98.421", trend: :up, trend_value: "+14,3%", description: "vs. mês anterior"},
-      %{title: "Páginas por Sessão", value: "3,8", trend: :up, trend_value: "+0,4", description: "vs. mês anterior"},
-      %{title: "Taxa de Rejeição", value: "32,1%", trend: :down, trend_value: "-2,1%", description: "vs. mês anterior"}
+      %{
+        title: "Visitantes Únicos",
+        value: "98.421",
+        trend: :up,
+        trend_value: "+14,3%",
+        description: "vs. mês anterior"
+      },
+      %{
+        title: "Páginas por Sessão",
+        value: "3,8",
+        trend: :up,
+        trend_value: "+0,4",
+        description: "vs. mês anterior"
+      },
+      %{
+        title: "Taxa de Rejeição",
+        value: "32,1%",
+        trend: :down,
+        trend_value: "-2,1%",
+        description: "vs. mês anterior"
+      }
     ]
   end
 
+  def period_options do
+    [
+      %{value: "last_7", label: "Últimos 7 dias"},
+      %{value: "last_30", label: "Últimos 30 dias"},
+      %{value: "last_90", label: "Últimos 90 dias"},
+      %{value: "this_year", label: "Este ano"},
+      %{value: "last_year", label: "Ano anterior"}
+    ]
+  end
+
+  # ── Activity & Notifications ──────────────────────────────────────────────
+
   def activity_log do
     [
-      %{title: "Venda Enterprise", desc: "Carla Souza — R$ 999,00", date: "28/02"},
-      %{title: "Novo usuário", desc: "Fábio Nunes — Plano Starter", date: "27/02"},
-      %{title: "Cancelamento", desc: "João Ribeiro — Plano Enterprise", date: "25/02"},
-      %{title: "Upgrade de plano", desc: "Diego Melo → Pro", date: "24/02"}
+      %{
+        title: "Venda Enterprise — Carla Souza",
+        desc: "Plano Enterprise ativado — R$ 999,00",
+        date: "28/02"
+      },
+      %{
+        title: "Novo Usuário — Fábio Nunes",
+        desc: "Cadastro aprovado — Plano Starter",
+        date: "27/02"
+      },
+      %{
+        title: "Cancelamento — João Ribeiro",
+        desc: "Plano Enterprise encerrado a pedido do cliente",
+        date: "25/02"
+      },
+      %{
+        title: "Upgrade de Plano — Diego Melo",
+        desc: "Starter → Pro — diferença cobrada proporcionalmente",
+        date: "24/02"
+      },
+      %{
+        title: "NPS Coletado — Q1 2026",
+        desc: "Score: 72 — 183 respostas recebidas",
+        date: "20/02"
+      }
     ]
   end
 
   def notifications do
     [
-      %{title: "Pedido confirmado", description: "Pedido #4521 foi pago com sucesso.", variant: :default},
-      %{title: "Usuário removido", description: "Conta de Hugo Alves foi desativada.", variant: :destructive}
+      %{
+        title: "Pedido confirmado",
+        description: "Pedido #4521 foi pago com sucesso.",
+        variant: :default
+      },
+      %{
+        title: "Usuário removido",
+        description: "Conta de Hugo Alves foi desativada.",
+        variant: :destructive
+      }
     ]
   end
 end

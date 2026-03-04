@@ -65,7 +65,7 @@ defmodule PhiaDemoWeb.Layouts do
         hidden
       >
         Attempting to reconnect
-        <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
+        <PhiaDemoWeb.CoreComponents.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
       </.flash>
 
       <.flash
@@ -77,7 +77,7 @@ defmodule PhiaDemoWeb.Layouts do
         hidden
       >
         Attempting to reconnect
-        <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
+        <PhiaDemoWeb.CoreComponents.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
       </.flash>
     </div>
     """

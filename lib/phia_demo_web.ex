@@ -80,32 +80,48 @@ defmodule PhiaDemoWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components — exclude functions overridden by PhiaUI
-      import PhiaDemoWeb.CoreComponents, except: [button: 1, table: 1]
+      import PhiaDemoWeb.CoreComponents, except: [button: 1, table: 1, icon: 1]
 
-      # PhiaUI components
+      # PhiaUI — Icon (Lucide sprites, overrides CoreComponents.icon)
+      import PhiaUi.Components.Icon
+
+      # PhiaUI — Dashboard & Layout
       import PhiaUi.Components.Shell
       import PhiaUi.Components.StatCard
       import PhiaUi.Components.MetricGrid
       import PhiaUi.Components.ChartShell
       import PhiaUi.Components.Card
+
+      # PhiaUI — Primitives
       import PhiaUi.Components.Badge
       import PhiaUi.Components.Button
-      import PhiaUi.Components.Table
+      import PhiaUi.Components.ButtonGroup
       import PhiaUi.Components.Alert
       import PhiaUi.Components.Skeleton
       import PhiaUi.Components.Breadcrumb
+      import PhiaUi.Components.Avatar
+
+      # PhiaUI — Data Display
+      import PhiaUi.Components.Table
       import PhiaUi.Components.Pagination
-      import PhiaUi.Components.DarkModeToggle
+      import PhiaUi.Components.EmptyState
       import PhiaUi.Components.Accordion
+
+      # PhiaUI — Interactive
       import PhiaUi.Components.Tooltip
       import PhiaUi.Components.Dialog
-      import PhiaUi.Components.DropdownMenu
-      import PhiaUi.Components.Toast
-      import PhiaUi.Components.Avatar
       import PhiaUi.Components.AlertDialog
+      import PhiaUi.Components.DropdownMenu
       import PhiaUi.Components.Collapsible
-      import PhiaUi.Components.ButtonGroup
-      import PhiaUi.Components.EmptyState
+      import PhiaUi.Components.Popover
+      import PhiaUi.Components.ContextMenu
+      import PhiaUi.Components.Carousel
+      import PhiaUi.Components.Drawer
+      import PhiaUi.Components.Combobox
+
+      # PhiaUI — Utilities
+      import PhiaUi.Components.Toast
+      import PhiaUi.Components.DarkModeToggle
 
       # Common modules used in templates
       alias Phoenix.LiveView.JS

@@ -10,6 +10,7 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
      socket
      |> assign(:page_title, "Visão Geral")
      |> assign(:stats, FakeData.stats())
+     |> assign(:highlights, FakeData.highlights())
      |> assign(:orders, FakeData.recent_orders())
      |> assign(:revenue, FakeData.revenue_by_month())
      |> assign(:top_products, FakeData.top_products())
@@ -21,6 +22,7 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
     ~H"""
     <DashboardLayout.layout current_path="/">
       <div class="p-6 space-y-6">
+        <%!-- Breadcrumb --%>
         <.breadcrumb>
           <.breadcrumb_list>
             <.breadcrumb_item>
@@ -33,17 +35,46 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
           </.breadcrumb_list>
         </.breadcrumb>
 
+        <%!-- Header --%>
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-2xl font-semibold text-foreground">Visão Geral</h1>
-            <p class="text-sm text-muted-foreground mt-1">Resumo do desempenho do mês</p>
+            <h1 class="text-2xl font-bold text-foreground tracking-tight">Visão Geral</h1>
+            <p class="text-sm text-muted-foreground mt-1">Resumo do desempenho — Fevereiro 2026</p>
           </div>
-          <div class="flex items-center gap-2">
-            <.badge variant={:outline}>Fev 2026</.badge>
-            <span class="text-sm text-muted-foreground">03/03/2026</span>
-          </div>
+          <.badge variant={:default} class="text-xs px-3 py-1">Ao Vivo</.badge>
         </div>
 
+        <%!-- Carousel: Highlights --%>
+        <.carousel id="highlights-carousel" loop={true}>
+          <.carousel_content>
+            <.carousel_item :for={h <- @highlights}>
+              <div class="px-1">
+                <.card class="border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/50">
+                  <.card_content class="p-6">
+                    <div class="flex items-start justify-between">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-3">
+                          <.badge variant={:default} class="text-xs">{h.badge}</.badge>
+                        </div>
+                        <p class="text-sm font-medium text-muted-foreground">{h.subtitle}</p>
+                        <p class="text-3xl font-bold text-foreground mt-1">{h.stat}</p>
+                        <h3 class="text-base font-semibold text-foreground mt-2">{h.title}</h3>
+                        <p class="text-sm text-muted-foreground mt-1">{h.detail}</p>
+                      </div>
+                      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                        <.icon name={h.icon} size={:md} class="text-primary" />
+                      </div>
+                    </div>
+                  </.card_content>
+                </.card>
+              </div>
+            </.carousel_item>
+          </.carousel_content>
+          <.carousel_previous />
+          <.carousel_next />
+        </.carousel>
+
+        <%!-- Metric Grid --%>
         <.metric_grid cols={4}>
           <.stat_card
             :for={s <- @stats}
@@ -55,48 +86,41 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
           />
         </.metric_grid>
 
+        <%!-- Revenue Chart --%>
         <.chart_shell
           title="Receita Mensal"
-          description="Últimos 12 meses"
-          period="Mar 2025 – Fev 2026"
-          min_height="240px"
+          description="Últimos 12 meses — Mar 2025 a Fev 2026"
+          period="R$"
+          min_height="260px"
         >
-          <svg viewBox="0 0 420 210" class="w-full h-full">
+          <svg viewBox="0 0 432 220" class="w-full h-full">
             <% max_val = Enum.max(Enum.map(@revenue, & &1.value)) %>
-            <%!-- Horizontal grid lines at 25%, 50%, 75% --%>
-            <%= for pct <- [0.25, 0.5, 0.75] do %>
-              <% y = 170 - trunc(pct * 160) %>
+            <%= for pct <- [0.25, 0.5, 0.75, 1.0] do %>
+              <% y = 185 - trunc(pct * 160) %>
               <line
-                x1="0"
+                x1="32"
                 y1={y}
-                x2="420"
+                x2="430"
                 y2={y}
                 class="stroke-border"
                 stroke-width="1"
                 stroke-dasharray="4 4"
               />
+              <text x="28" y={y + 4} text-anchor="end" class="fill-muted-foreground" style="font-size:8px">
+                {trunc(max_val * pct / 1000)}k
+              </text>
             <% end %>
             <%= for {item, i} <- Enum.with_index(@revenue) do %>
               <% bar_h = trunc(item.value / max_val * 160) %>
-              <% x = i * 35 + 4 %>
-              <% y = 170 - bar_h %>
-              <% label = "R$#{trunc(item.value / 1000)}k" %>
-              <rect x={x} y={y} width="28" height={bar_h} class="fill-primary opacity-80" rx="3" />
+              <% x = i * 33 + 34 %>
+              <% y = 185 - bar_h %>
+              <rect x={x} y={y} width="26" height={bar_h} class="fill-primary opacity-80" rx="3" />
               <text
-                x={x + 14}
-                y={y - 4}
+                x={x + 13}
+                y="205"
                 text-anchor="middle"
                 class="fill-muted-foreground"
-                style="font-size:8px"
-              >
-                {label}
-              </text>
-              <text
-                x={x + 14}
-                y="190"
-                text-anchor="middle"
-                class="fill-muted-foreground"
-                style="font-size:9px"
+                style="font-size:8.5px"
               >
                 {item.mes}
               </text>
@@ -104,6 +128,7 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
           </svg>
         </.chart_shell>
 
+        <%!-- Two-column: Orders + Top Products --%>
         <div class="grid gap-6 lg:grid-cols-2">
           <.card>
             <.card_header>
@@ -121,11 +146,13 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
                   </.table_row>
                 </.table_header>
                 <.table_body>
-                  <.table_row :for={o <- @orders}>
+                  <.table_row :for={o <- Enum.take(@orders, 6)}>
                     <.table_cell class="font-mono text-xs">{o.id}</.table_cell>
-                    <.table_cell>{o.cliente}</.table_cell>
-                    <.table_cell class="font-medium">{o.valor}</.table_cell>
-                    <.table_cell><.order_status_badge status={o.status} /></.table_cell>
+                    <.table_cell class="font-medium">{o.cliente}</.table_cell>
+                    <.table_cell>{o.valor}</.table_cell>
+                    <.table_cell>
+                      <.badge variant={order_variant(o.status)}>{order_label(o.status)}</.badge>
+                    </.table_cell>
                   </.table_row>
                 </.table_body>
               </.table>
@@ -143,13 +170,10 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
                   <div class="space-y-1.5">
                     <div class="flex items-center justify-between text-sm">
                       <span class="font-medium text-foreground">{p.name}</span>
-                      <span class="text-muted-foreground">{p.revenue}</span>
+                      <span class="text-muted-foreground text-xs">{p.revenue}</span>
                     </div>
                     <div class="h-2 w-full rounded-full bg-secondary">
-                      <div
-                        class="h-2 rounded-full bg-primary"
-                        style={"width: #{p.pct}%"}
-                      />
+                      <div class="h-2 rounded-full bg-primary transition-all" style={"width: #{p.pct}%"} />
                     </div>
                     <p class="text-xs text-muted-foreground">{p.orders} pedidos</p>
                   </div>
@@ -159,36 +183,31 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
           </.card>
         </div>
 
-        <%!-- Skeleton loading state demo --%>
+        <%!-- Skeleton loading demo --%>
         <.card>
           <.card_header>
-            <.card_title>Carregando Dados</.card_title>
-            <.card_description>Demonstração do componente Skeleton para estados de carregamento</.card_description>
+            <.card_title>Estados de Carregamento</.card_title>
+            <.card_description>Demonstração do componente <code class="text-xs font-mono bg-muted px-1 py-0.5 rounded">Skeleton</code></.card_description>
           </.card_header>
           <.card_content>
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div class="flex items-center gap-3">
-                <.skeleton shape={:circle} width="40px" height="40px" />
-                <div class="flex-1 space-y-2">
-                  <.skeleton class="h-4 w-3/4" />
-                  <.skeleton class="h-3 w-1/2" />
+            <div class="grid gap-6 sm:grid-cols-3">
+              <%= for _ <- 1..3 do %>
+                <div class="flex items-center gap-3">
+                  <.skeleton shape={:circle} width="40px" height="40px" />
+                  <div class="flex-1 space-y-2">
+                    <.skeleton class="h-4 w-3/4" />
+                    <.skeleton class="h-3 w-1/2" />
+                  </div>
                 </div>
-              </div>
-              <div class="flex items-center gap-3">
-                <.skeleton shape={:circle} width="40px" height="40px" />
-                <div class="flex-1 space-y-2">
-                  <.skeleton class="h-4 w-3/4" />
-                  <.skeleton class="h-3 w-1/2" />
-                </div>
-              </div>
-              <div class="sm:col-span-2">
-                <.skeleton_text lines={3} />
+              <% end %>
+              <div class="sm:col-span-3">
+                <.skeleton_text lines={2} />
               </div>
             </div>
           </.card_content>
         </.card>
 
-        <%!-- Accordion: Atividade Recente --%>
+        <%!-- Accordion: Activity --%>
         <.card>
           <.card_header>
             <.card_title>Atividade Recente</.card_title>
@@ -212,7 +231,7 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
                   <.accordion_content value={"act-#{i}"}>
                     <div class="flex items-center justify-between text-sm pb-2">
                       <span class="text-muted-foreground">{a.desc}</span>
-                      <.badge variant={:outline}>{a.date}</.badge>
+                      <.badge variant={:outline} class="text-xs">{a.date}</.badge>
                     </div>
                   </.accordion_content>
                 </.accordion_item>
@@ -225,19 +244,11 @@ defmodule PhiaDemoWeb.DashboardLive.Overview do
     """
   end
 
-  defp order_status_badge(assigns) do
-    ~H"""
-    <.badge variant={status_variant(@status)}>
-      {status_label(@status)}
-    </.badge>
-    """
-  end
+  defp order_variant(:pago), do: :default
+  defp order_variant(:pendente), do: :secondary
+  defp order_variant(:cancelado), do: :destructive
 
-  defp status_variant(:pago), do: :default
-  defp status_variant(:pendente), do: :secondary
-  defp status_variant(:cancelado), do: :destructive
-
-  defp status_label(:pago), do: "Pago"
-  defp status_label(:pendente), do: "Pendente"
-  defp status_label(:cancelado), do: "Cancelado"
+  defp order_label(:pago), do: "Pago"
+  defp order_label(:pendente), do: "Pendente"
+  defp order_label(:cancelado), do: "Cancelado"
 end

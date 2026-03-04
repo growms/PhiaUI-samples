@@ -17,15 +17,15 @@ defmodule PhiaDemoWeb.DashboardLayout do
     <.shell>
       <:topbar>
         <.mobile_sidebar_toggle />
-        <span class="ml-2 font-semibold text-foreground">PhiaUI Demo</span>
+        <span class="ml-2 font-semibold text-foreground tracking-tight">PhiaUI Demo</span>
         <div class="ml-auto flex items-center gap-3">
           <.dark_mode_toggle id="theme-toggle" />
-          <div class="flex items-center gap-2">
-            <.avatar size="sm">
-              <.avatar_fallback name="Admin Costa" />
+          <div class="hidden sm:flex items-center gap-2.5">
+            <.avatar size="sm" class="ring-2 ring-primary/20">
+              <.avatar_fallback name="Admin Costa" class="bg-primary/15 text-primary font-semibold" />
             </.avatar>
-            <div class="hidden sm:block">
-              <p class="text-sm font-medium text-foreground leading-none">Admin Costa</p>
+            <div class="leading-none">
+              <p class="text-sm font-semibold text-foreground">Admin Costa</p>
               <p class="text-xs text-muted-foreground mt-0.5">Administrador</p>
             </div>
           </div>
@@ -34,69 +34,60 @@ defmodule PhiaDemoWeb.DashboardLayout do
       <:sidebar>
         <.sidebar>
           <:brand>
-            <div class="flex items-center gap-2">
-              <div class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <div class="flex items-center gap-2.5">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
                 <.icon name="layers" size={:sm} />
               </div>
               <div>
                 <span class="text-sm font-bold text-foreground leading-none">PhiaUI</span>
-                <span class="ml-1 text-xs text-muted-foreground">Demo</span>
+                <p class="text-xs text-muted-foreground leading-none mt-0.5">v0.1.3 Demo</p>
               </div>
             </div>
           </:brand>
           <:nav_items>
-            <.tooltip id="tip-overview" delay_ms={400}>
-              <.tooltip_trigger tooltip_id="tip-overview">
-                <.sidebar_item href="/" active={@current_path == "/"}>
-                  <.icon name="layout-dashboard" size={:sm} class="shrink-0" />
-                  Visão Geral
-                </.sidebar_item>
-              </.tooltip_trigger>
-              <.tooltip_content tooltip_id="tip-overview" position={:right}>Visão Geral</.tooltip_content>
-            </.tooltip>
-            <.tooltip id="tip-analytics" delay_ms={400}>
-              <.tooltip_trigger tooltip_id="tip-analytics">
-                <.sidebar_item href="/analytics" active={@current_path == "/analytics"}>
-                  <.icon name="bar-chart-2" size={:sm} class="shrink-0" />
-                  Analytics
-                </.sidebar_item>
-              </.tooltip_trigger>
-              <.tooltip_content tooltip_id="tip-analytics" position={:right}>Analytics</.tooltip_content>
-            </.tooltip>
-            <.tooltip id="tip-users" delay_ms={400}>
-              <.tooltip_trigger tooltip_id="tip-users">
-                <.sidebar_item href="/users" active={@current_path == "/users"}>
-                  <.icon name="users" size={:sm} class="shrink-0" />
-                  Usuários
-                </.sidebar_item>
-              </.tooltip_trigger>
-              <.tooltip_content tooltip_id="tip-users" position={:right}>Usuários</.tooltip_content>
-            </.tooltip>
-            <.tooltip id="tip-orders" delay_ms={400}>
-              <.tooltip_trigger tooltip_id="tip-orders">
-                <.sidebar_item href="/orders" active={@current_path == "/orders"}>
-                  <.icon name="package" size={:sm} class="shrink-0" />
-                  Pedidos
-                </.sidebar_item>
-              </.tooltip_trigger>
-              <.tooltip_content tooltip_id="tip-orders" position={:right}>Pedidos</.tooltip_content>
-            </.tooltip>
+            <div class="px-3 mb-1">
+              <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Dashboard</p>
+            </div>
+            <.nav_item current_path={@current_path} href="/" icon="layout-dashboard" label="Visão Geral" />
+            <.nav_item current_path={@current_path} href="/analytics" icon="bar-chart-2" label="Analytics" />
+            <.nav_item current_path={@current_path} href="/users" icon="users" label="Usuários" />
+            <.nav_item current_path={@current_path} href="/orders" icon="package" label="Pedidos" />
+            <div class="px-3 mt-4 mb-1">
+              <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Showcase</p>
+            </div>
+            <.nav_item current_path={@current_path} href="/components" icon="puzzle" label="Componentes" />
+            <.nav_item current_path={@current_path} href="/settings" icon="sliders-horizontal" label="Configurações" />
           </:nav_items>
           <:footer_items>
-            <.tooltip id="tip-settings" delay_ms={400}>
-              <.tooltip_trigger tooltip_id="tip-settings">
-                <.sidebar_item href="#" active={false}>
-                  <.icon name="settings" size={:sm} class="shrink-0" />
-                  Configurações
-                </.sidebar_item>
-              </.tooltip_trigger>
-              <.tooltip_content tooltip_id="tip-settings" position={:right}>Configurações</.tooltip_content>
-            </.tooltip>
+            <div class="px-3 mb-1">
+              <p class="text-xs text-muted-foreground">PhiaUI © 2026</p>
+            </div>
           </:footer_items>
         </.sidebar>
       </:sidebar>
       <%= render_slot(@inner_block) %>
     </.shell>
+    """
+  end
+
+  # ── Private: single nav item with tooltip ─────────────────────────────────
+
+  attr :current_path, :string, required: true
+  attr :href, :string, required: true
+  attr :icon, :string, required: true
+  attr :label, :string, required: true
+
+  defp nav_item(assigns) do
+    ~H"""
+    <.tooltip id={"tip-#{@icon}"} delay_ms={400}>
+      <.tooltip_trigger tooltip_id={"tip-#{@icon}"}>
+        <.sidebar_item href={@href} active={@current_path == @href}>
+          <.icon name={@icon} size={:sm} class="shrink-0" />
+          {@label}
+        </.sidebar_item>
+      </.tooltip_trigger>
+      <.tooltip_content tooltip_id={"tip-#{@icon}"} position={:right}>{@label}</.tooltip_content>
+    </.tooltip>
     """
   end
 end

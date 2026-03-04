@@ -1,235 +1,236 @@
-# PhiaUI Samples
+# PhiaUI Samples — Dashboard Demo
 
-> A real-world dashboard demo showcasing the [PhiaUI](https://hex.pm/packages/phia_ui) component library for **Phoenix LiveView**.
+A modern, feature-rich **Phoenix LiveView** dashboard built to showcase the [PhiaUI](https://hex.pm/packages/phia_ui) component library. This project serves as a living reference for developers integrating PhiaUI into their own Phoenix applications.
 
 ---
 
 ## Overview
 
-This repository contains a fully functional **admin dashboard** built with Elixir, Phoenix 1.8, Phoenix LiveView 1.1, and Tailwind CSS — demonstrating **26+ PhiaUI components** in a production-like application.
-
-```
-┌─────────────────────────────────────────────────────┐
-│  PhiaUI Demo                           🌙  👤 Admin │
-├──────────────┬──────────────────────────────────────┤
-│ ⎕ Visão Geral│  Dashboard / Visão Geral             │
-│ ⎕ Analytics  │                                      │
-│ ⎕ Usuários   │  ┌────┐ ┌────┐ ┌────┐ ┌────┐        │
-│ ⎕ Pedidos    │  │KPI │ │KPI │ │KPI │ │KPI │        │
-│              │  └────┘ └────┘ └────┘ └────┘        │
-│              │                                      │
-│              │  ┌──────────── Bar Chart ──────────┐ │
-│              │  └────────────────────────────────┘ │
-│──────────────│                                      │
-│ ⚙ Config    │  ┌── Table ──┐  ┌── Products ──┐    │
-└──────────────┴──────────────────────────────────────┘
-```
-
-The app features four interactive LiveView pages:
-
-| Route | Module | Description |
-|---|---|---|
-| `/` | `DashboardLive.Overview` | KPI cards, bar chart, orders table, top products, skeleton demo, accordion activity log |
-| `/analytics` | `DashboardLive.Analytics` | Traffic metrics, area chart, donut chart, collapsible filters, empty state |
-| `/users` | `DashboardLive.Users` | User table with avatars, dropdown actions, dialog form, confirm delete, pagination, toast |
-| `/orders` | `DashboardLive.Orders` | Order listing with tooltip badges, button group export, collapsible filters, pagination |
-
----
-
-## PhiaUI Components Demonstrated
-
-| Component | Module | Pages |
-|---|---|---|
-| `<.shell>` / `<.sidebar>` / `<.sidebar_item>` / `<.mobile_sidebar_toggle>` | Shell | Todas |
-| `<.stat_card>` / `<.metric_grid>` | StatCard / MetricGrid | Todas |
-| `<.chart_shell>` (+ SVG inline) | ChartShell | Overview, Analytics |
-| `<.card>` / `<.card_header>` / `<.card_title>` / `<.card_description>` / `<.card_content>` / `<.card_footer>` | Card | Todas |
-| `<.badge>` | Badge | Todas |
-| `<.button>` | Button | Todas |
-| `<.table>` / `<.table_header>` / `<.table_body>` / `<.table_row>` / `<.table_head>` / `<.table_cell>` | Table | Overview, Users, Orders |
-| `<.alert>` / `<.alert_title>` / `<.alert_description>` | Alert | Analytics, Users |
-| `<.icon>` (Lucide sprites) | Icon | Layout |
-| `<.skeleton>` / `<.skeleton_text>` | Skeleton | Overview |
-| `<.breadcrumb>` / `<.breadcrumb_list>` / `<.breadcrumb_item>` / `<.breadcrumb_link>` / `<.breadcrumb_page>` / `<.breadcrumb_separator>` | Breadcrumb | Todas |
-| `<.accordion>` / `<.accordion_item>` / `<.accordion_trigger>` / `<.accordion_content>` | Accordion | Overview (activity log) |
-| `<.collapsible>` / `<.collapsible_trigger>` / `<.collapsible_content>` | Collapsible | Analytics (filters), Orders (filters) |
-| `<.pagination>` / `<.pagination_content>` / `<.pagination_item>` / `<.pagination_link>` / `<.pagination_previous>` / `<.pagination_next>` | Pagination | Users, Orders |
-| `<.dark_mode_toggle>` | DarkModeToggle | Layout (topbar) |
-| `<.tooltip>` / `<.tooltip_trigger>` / `<.tooltip_content>` | Tooltip | Layout (sidebar), Orders (badges) |
-| `<.avatar>` / `<.avatar_fallback>` | Avatar | Layout (topbar), Users (table) |
-| `<.dialog>` / `<.dialog_trigger>` / `<.dialog_content>` / `<.dialog_header>` / `<.dialog_title>` / `<.dialog_description>` / `<.dialog_footer>` / `<.dialog_close>` | Dialog | Users (new user form) |
-| `<.alert_dialog>` / `<.alert_dialog_header>` / `<.alert_dialog_title>` / `<.alert_dialog_description>` / `<.alert_dialog_footer>` / `<.alert_dialog_action>` / `<.alert_dialog_cancel>` | AlertDialog | Users (confirm delete) |
-| `<.dropdown_menu>` / `<.dropdown_menu_trigger>` / `<.dropdown_menu_content>` / `<.dropdown_menu_item>` / `<.dropdown_menu_label>` / `<.dropdown_menu_separator>` / `<.dropdown_menu_group>` | DropdownMenu | Users (row actions) |
-| `<.toast>` (push_event) | Toast | Users (delete confirmation) |
-| `<.button_group>` | ButtonGroup | Orders (export buttons) |
-| `<.empty>` | EmptyState | Analytics (canal data) |
-
-**Total: 30+ PhiaUI components and sub-components demonstrated**
-
----
-
-## Prerequisites
-
-- **Elixir** `~> 1.15`
-- **Erlang/OTP** 26+
-- **Node.js** (for initial asset compilation — one-time only)
-- **Mix** (bundled with Elixir)
-
-> PhiaUI `~> 0.1.2` is fetched automatically from [Hex.pm](https://hex.pm/packages/phia_ui).
+| | |
+|---|---|
+| **Repository** | [github.com/charlenopires/PhiaUI-samples](https://github.com/charlenopires/PhiaUI-samples) |
+| **Framework** | Phoenix `~> 1.8.3` + LiveView `~> 1.1.0` |
+| **UI Library** | [PhiaUI](https://hex.pm/packages/phia_ui) `~> 0.1.3` |
+| **CSS** | Tailwind CSS v4 (via `@theme` directive, OKLCH colors) |
+| **Theme** | Violet — light + dark mode |
+| **Language** | Elixir `~> 1.15` |
+| **Data** | Hardcoded via `PhiaDemo.FakeData` (no Ecto, no Mailer) |
 
 ---
 
 ## Getting Started
 
-### 1. Clone
-
 ```bash
+# Clone the repo
 git clone https://github.com/charlenopires/PhiaUI-samples.git
 cd PhiaUI-samples
-```
 
-### 2. Install dependencies and build assets
-
-```bash
+# Install deps and build assets
 mix setup
-```
 
-This runs:
-- `mix deps.get` — fetches Elixir deps (including `phia_ui ~> 0.1.2`)
-- `tailwind.install` / `esbuild.install` — downloads local binaries
-- `mix compile` — compiles the project
-- `tailwind phia_demo` / `esbuild phia_demo` — builds CSS and JS
-
-### 3. Start the server
-
-```bash
+# Start the dev server
 mix phx.server
 ```
 
-Or with IEx:
+Open **http://localhost:4000**
 
-```bash
-iex -S mix phx.server
+---
+
+## Pages
+
+### `/` — Visão Geral (Overview)
+
+General KPIs, highlight carousel, charts, recent orders and activity feed.
+
+| Component | Usage |
+|-----------|-------|
+| `Carousel` | Rotating highlight cards |
+| `MetricGrid` + `StatCard` | 4 KPIs with trend indicators |
+| `ChartShell` + inline SVG | Monthly revenue bar chart |
+| `Table` | Recent orders snapshot |
+| `Card` + progress bars | Top products ranking |
+| `Skeleton` | Loading state demo |
+| `Accordion` | Expandable activity log |
+| `Breadcrumb` | Navigation context |
+
+---
+
+### `/analytics` — Analytics
+
+Traffic and engagement metrics with period filtering.
+
+| Component | Usage |
+|-----------|-------|
+| `Combobox` | Period selector with live search |
+| `Alert` | Data freshness notification |
+| `MetricGrid` + `StatCard` | 3 analytics KPIs |
+| `ChartShell` + area SVG | Monthly visits area chart |
+| `ChartShell` + donut SVG | Traffic source breakdown |
+| `EmptyState` | Zero-data pattern |
+
+---
+
+### `/users` — Usuários
+
+User management with filtering, detail panel and confirmation dialogs.
+
+| Component | Usage |
+|-----------|-------|
+| `Dialog` | New user modal |
+| `Combobox` | Role filter with server search |
+| `MetricGrid` + `StatCard` | Status counters |
+| `Alert` | Pending users warning |
+| `Table` + `Avatar` + `Badge` | Users list |
+| `DropdownMenu` | Row actions menu |
+| `Drawer` | User detail side panel |
+| `Pagination` | Page navigation |
+| `AlertDialog` | Confirm delete |
+| `Toast` | Action feedback |
+
+---
+
+### `/orders` — Pedidos
+
+Order table with status filters, export buttons and detail drawer.
+
+| Component | Usage |
+|-----------|-------|
+| `ButtonGroup` | CSV / PDF export actions |
+| `MetricGrid` + `StatCard` | Order counters + revenue |
+| `Collapsible` + `Badge` | Expandable status filters |
+| `Table` + `Tooltip` | Orders list with status tooltips |
+| `Drawer` | Order detail side panel |
+| `Pagination` | Page navigation |
+
+---
+
+### `/components` — Showcase
+
+Interactive gallery demonstrating every component added in v0.1.3.
+
+| Component | Usage |
+|-----------|-------|
+| `Carousel` | 4-slide feature tour |
+| `Combobox` | Full server-state demo (toggle / search / select) |
+| `Popover` | 3 variants: info, profile, quick settings |
+| `ContextMenu` | Right-click menu with checkbox state |
+| `Drawer` | 3 directions: right, left, bottom |
+| `Avatar` + `AvatarGroup` | All sizes and stacked overlap |
+| `Badge` | All 6 variants |
+| `Alert` | All 4 variants |
+| `Collapsible` | Expandable section |
+
+---
+
+### `/settings` — Configurações
+
+Settings page demonstrating form patterns, async save feedback and theme control.
+
+| Component | Usage |
+|-----------|-------|
+| `Accordion` | 4 collapsible sections (profile, notifications, appearance, security) |
+| `Alert` | Success banner + security warning |
+| `DarkModeToggle` | Theme control inside appearance section |
+| `ButtonGroup` | Save / Discard footer |
+| `Skeleton` | Inline loading state during async save |
+| `Toast` | Save confirmation + discard feedback |
+
+---
+
+## Theme
+
+Custom violet theme in `assets/css/app.css` using Tailwind CSS v4 `@theme` and OKLCH color tokens. Dark mode is toggled via `data-theme="dark"` on `<html>` — no page reload required.
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--color-primary` | `oklch(0.555 0.235 268)` | `oklch(0.73 0.195 268)` |
+| `--color-background` | `oklch(1 0 0)` | `oklch(0.13 0.03 265)` |
+| `--color-sidebar-background` | `oklch(0.975 0.018 268)` | `oklch(0.155 0.032 265)` |
+| `--color-foreground` | `oklch(0.145 0.03 265)` | `oklch(0.97 0.012 268)` |
+| `--color-muted-foreground` | `oklch(0.52 0.04 265)` | `oklch(0.60 0.04 268)` |
+
+---
+
+## JS Hooks
+
+PhiaUI interactive components require lightweight vanilla-JS hooks registered in `assets/js/phia_hooks/index.js`. Copy the hooks from `deps/phia_ui/priv/templates/js/hooks/` into your project.
+
+| File | Hook name | Component |
+|------|-----------|-----------|
+| `dialog.js` | `PhiaDialog` | Dialog, AlertDialog |
+| `dropdown_menu.js` | `PhiaDropdownMenu` | DropdownMenu |
+| `tooltip.js` | `PhiaTooltip` | Tooltip |
+| `dark_mode.js` | `PhiaDarkMode` | DarkModeToggle |
+| `toast.js` | `PhiaToast` | Toast |
+| `carousel.js` | `PhiaCarousel` | Carousel |
+| `drawer.js` | `PhiaDrawer` | Drawer |
+| `popover.js` | `PhiaPopover` | Popover |
+| `context_menu.js` | `PhiaContextMenu` | ContextMenu |
+
+Register all hooks in `app.js`:
+
+```js
+import PhiaHooks from './phia_hooks'
+
+let liveSocket = new LiveSocket('/live', Socket, {
+  hooks: PhiaHooks,
+  // ...
+})
 ```
-
-### 4. Open the app
-
-Navigate to [http://localhost:4000](http://localhost:4000)
 
 ---
 
 ## Project Structure
 
 ```
-PhiaUI-samples/
-├── assets/
-│   ├── css/app.css                     # Tailwind entry — PhiaUI theme inline, @source for class scanning
-│   └── js/
-│       ├── app.js                      # LiveSocket registration with PhiaHooks
-│       └── phia_hooks/
-│           ├── index.js                # Exports all PhiaUI JS hooks
-│           ├── dialog.js               # PhiaDialog — focus trap, scroll lock, keyboard
-│           ├── dropdown_menu.js        # PhiaDropdownMenu — positioning, click-outside, keyboard nav
-│           ├── tooltip.js              # PhiaTooltip — smart positioning, delay, viewport flip
-│           ├── dark_mode.js            # PhiaDarkMode — .dark class toggle, localStorage
-│           └── toast.js               # PhiaToast — dynamic DOM creation, auto-dismiss
-├── lib/
-│   ├── phia_demo/
-│   │   └── fake_data.ex               # All hardcoded demo data
-│   └── phia_demo_web/
-│       ├── components/
-│       │   ├── core_components.ex     # Phoenix defaults (button/table overridden by PhiaUI)
-│       │   └── layouts/
-│       │       ├── root.html.heex     # HTML skeleton + anti-FOUC script + toast viewport
-│       │       └── app.html.heex      # App layout (passthrough)
-│       ├── live/
-│       │   ├── components/
-│       │   │   └── dashboard_layout.ex  # Shared shell with dark mode toggle + sidebar tooltips
-│       │   └── dashboard_live/
-│       │       ├── overview.ex        # / — KPIs, chart, skeleton, accordion
-│       │       ├── analytics.ex       # /analytics — traffic metrics, collapsible, empty state
-│       │       ├── users.ex           # /users — dialog, dropdown, pagination, toast
-│       │       └── orders.ex          # /orders — button group, tooltip, collapsible, pagination
-│       ├── phia_demo_web.ex           # Global PhiaUI imports
-│       └── router.ex                  # 4 live routes
-├── mix.exs                            # {:phia_ui, "~> 0.1.2"}
-└── mix.lock
+lib/
+├── phia_demo/
+│   └── fake_data.ex                   # All hardcoded demo data
+└── phia_demo_web/
+    ├── phia_demo_web.ex                # Global PhiaUI imports
+    ├── router.ex                       # 6 live routes
+    ├── components/
+    │   └── layouts.ex                  # Root layout + flash group
+    └── live/
+        ├── components/
+        │   └── dashboard_layout.ex     # Shared sidebar shell
+        └── dashboard_live/
+            ├── overview.ex
+            ├── analytics.ex
+            ├── users.ex
+            ├── orders.ex
+            ├── components.ex           # Component showcase page
+            └── settings.ex             # Settings page
+
+assets/
+├── css/app.css                         # Violet OKLCH theme
+└── js/phia_hooks/
+    ├── index.js
+    ├── carousel.js
+    ├── context_menu.js
+    ├── dark_mode.js
+    ├── dialog.js
+    ├── drawer.js
+    ├── dropdown_menu.js
+    ├── popover.js
+    ├── toast.js
+    └── tooltip.js
 ```
 
 ---
 
-## Architecture Decisions
+## Architecture Notes
 
-### PhiaUI as a Hex Dependency
-
-PhiaUI is consumed as a standard Hex dependency (`{:phia_ui, "~> 0.1.2"}`). This means:
-
-- **`@source "../../deps/phia_ui/lib"`** in `app.css` — correct for Tailwind class scanning at build time.
-- **`@import "../../../deps/phia_ui/priv/static/theme.css"` is PROHIBITED** — relative paths only work in local development, not in production builds. The theme CSS is inlined directly in `app.css`.
-
-### JS Hooks Registration
-
-PhiaUI interactive components require JavaScript hooks (PhiaDialog, PhiaDropdownMenu, PhiaTooltip, PhiaDarkMode, PhiaToast). These are stored in `assets/js/phia_hooks/` and registered via:
-
-```js
-// app.js
-hooks: {...PhiaHooks, ...colocatedHooks}
-```
-
-### Global Component Imports
-
-All PhiaUI components are imported globally in `phia_demo_web.ex` so every LiveView can use them without per-file imports. Exception: `PhiaUi.Components.Icon` is NOT imported globally because it conflicts with `CoreComponents.icon` (used by `flash_group`). It is imported locally only in `DashboardLayout`.
-
-### CoreComponents Overrides
-
-Phoenix's default `button/1` and `table/1` from `CoreComponents` are excluded:
-
-```elixir
-import PhiaDemoWeb.CoreComponents, except: [button: 1, table: 1]
-```
-
-PhiaUI's `Button` and `Table` components take their place.
-
-### Dark Mode
-
-PhiaDarkMode hook toggles the `.dark` CSS class on `<html>` and persists to `localStorage['phia-theme']`. An anti-FOUC inline script in `root.html.heex` reads the preference before any stylesheet loads, preventing the theme flash on page load.
-
-### Toast Notifications
-
-The `<.toast id="phia-toast-viewport" />` is placed once in `root.html.heex`. Server-side LiveViews trigger toasts via `push_event/3`:
-
-```elixir
-push_event(socket, "phia-toast", %{
-  title: "Usuário removido",
-  description: "O usuário foi desativado com sucesso.",
-  variant: "destructive",
-  duration_ms: 4000
-})
-```
-
----
-
-## Useful Mix Aliases
-
-| Alias | Description |
-|---|---|
-| `mix setup` | First-time setup: deps + assets |
-| `mix phx.server` | Start dev server with live reload |
-| `mix assets.build` | Compile Tailwind + ESBuild |
-| `mix assets.deploy` | Minified production build + digest |
-| `mix precommit` | Compile (warnings-as-errors) + unused deps + format + test |
-
----
-
-## Learn More
-
-- [PhiaUI on Hex.pm](https://hex.pm/packages/phia_ui)
-- [Phoenix Framework](https://www.phoenixframework.org/)
-- [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html)
-- [Tailwind CSS v4](https://tailwindcss.com/docs)
+- **No Ecto, no Mailer** — all data is generated in `PhiaDemo.FakeData`
+- **Global imports** — all PhiaUI components are imported once in `phia_demo_web.ex`; `PhiaUi.Components.Icon` overrides `CoreComponents.icon` (Lucide sprites instead of Heroicons)
+- **Icon conflict** — `CoreComponents.icon` is excluded from the global import; `layouts.ex` uses `PhiaDemoWeb.CoreComponents.icon` directly for the `hero-arrow-path` spinner
+- **Drawer pattern** — `DrawerContent` placed at page root; any element with `data-drawer-trigger={content_id}` opens it without server state
+- **Combobox pattern** — requires 3 `handle_event` callbacks: `on_toggle`, `on_search`, `on_change`; state lives entirely on the server
+- **SVG charts** — inline SVG inside `ChartShell`, computed with `Enum.with_index`; no JS chart library required
+- **Toast** — triggered via `push_event(socket, "phia-toast", %{title: ..., variant: ..., duration_ms: ...})`
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT

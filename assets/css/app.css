@@ -1,124 +1,155 @@
 /* PhiaUI Theme — do not remove this line */
 /*
- * PhiaUI — TailwindCSS v4 Theme
+ * PhiaUI — TailwindCSS v4 Theme: Violet
  *
+ * A modern violet/indigo theme with vibrant brand color and clean surfaces.
  * CSS custom properties registered via @theme for automatic utility generation.
  * All color values use the oklch() color space for wide-gamut support.
  *
- * Light mode is the default. Dark mode overrides are applied automatically
- * via the prefers-color-scheme media query — no JavaScript required.
+ * Light mode is the default. Dark mode is applied via `data-theme="dark"` attribute
+ * (managed by the DarkModeToggle component) and the media query as fallback.
  *
- * Generated utilities examples:
- *   bg-primary, text-foreground, border-border, ring-ring, bg-muted, etc.
+ * Generated utilities: bg-primary, text-foreground, border-border, ring-ring, etc.
  */
 
 @theme {
-  /* ── Spacing & Shape ────────────────────────────────────────────────────── */
-  --radius: 0.625rem;
+  /* ── Spacing & Shape ─────────────────────────────────────────────────────── */
+  --radius: 0.5rem;
 
-  /* ── Semantic Color Tokens — Light Mode ─────────────────────────────────── */
+  /* ── Semantic Color Tokens — Light Mode ──────────────────────────────────── */
 
   /* Page surface */
   --color-background:             oklch(1 0 0);
-  --color-foreground:             oklch(0.141 0.004 285.82);
+  --color-foreground:             oklch(0.145 0.028 264);
 
-  /* Card surface */
-  --color-card:                   oklch(1 0 0);
-  --color-card-foreground:        oklch(0.141 0.004 285.82);
+  /* Card surface — subtle warm-violet tint */
+  --color-card:                   oklch(0.988 0.006 268);
+  --color-card-foreground:        oklch(0.145 0.028 264);
 
-  /* Popover / dropdown surface */
+  /* Popover / dropdown */
   --color-popover:                oklch(1 0 0);
-  --color-popover-foreground:     oklch(0.141 0.004 285.82);
+  --color-popover-foreground:     oklch(0.145 0.028 264);
 
-  /* Primary action */
-  --color-primary:                oklch(0.211 0.005 285.82);
+  /* Primary — rich violet */
+  --color-primary:                oklch(0.555 0.235 268);
   --color-primary-foreground:     oklch(0.985 0 0);
 
-  /* Secondary / ghost */
-  --color-secondary:              oklch(0.967 0.001 286.38);
-  --color-secondary-foreground:   oklch(0.211 0.005 285.82);
+  /* Secondary — soft violet tint */
+  --color-secondary:              oklch(0.94 0.05 268);
+  --color-secondary-foreground:   oklch(0.38 0.1 268);
 
-  /* Muted / disabled */
-  --color-muted:                  oklch(0.967 0.001 286.38);
-  --color-muted-foreground:       oklch(0.552 0.016 286.07);
+  /* Muted — light gray-violet */
+  --color-muted:                  oklch(0.955 0.015 267);
+  --color-muted-foreground:       oklch(0.545 0.025 267);
 
-  /* Accent / hover highlight */
-  --color-accent:                 oklch(0.967 0.001 286.38);
-  --color-accent-foreground:      oklch(0.211 0.005 285.82);
+  /* Accent — matches secondary */
+  --color-accent:                 oklch(0.94 0.05 268);
+  --color-accent-foreground:      oklch(0.38 0.1 268);
 
-  /* Destructive / error */
+  /* Destructive */
   --color-destructive:            oklch(0.577 0.245 27.325);
   --color-destructive-foreground: oklch(0.985 0 0);
 
   /* Structural */
-  --color-border:                 oklch(0.929 0.004 286.32);
-  --color-input:                  oklch(0.929 0.004 286.32);
-  --color-ring:                   oklch(0.141 0.004 285.82);
+  --color-border:                 oklch(0.91 0.012 267);
+  --color-input:                  oklch(0.91 0.012 267);
+  --color-ring:                   oklch(0.555 0.235 268);
 
-  /* ── Dashboard Shell ────────────────────────────────────────────────────── */
-  --color-sidebar-background:     oklch(0.985 0.001 286.38);
+  /* ── Status Colors ────────────────────────────────────────────────────────── */
+  --color-success:                oklch(0.53 0.14 143);
+  --color-success-foreground:     oklch(0.985 0 0);
+  --color-warning:                oklch(0.72 0.17 58);
+  --color-warning-foreground:     oklch(0.985 0 0);
+
+  /* ── Dashboard Shell ─────────────────────────────────────────────────────── */
+  --color-sidebar-background:     oklch(0.975 0.018 268);
 }
 
 /* ── CSS Variable Aliases ─────────────────────────────────────────────────── */
-/*
- * Short-form aliases for direct CSS custom property references in components
- * (e.g. bg-[--background], bg-[--sidebar-background]).
- * These always resolve to the @theme-managed --color-* tokens, so they
- * automatically pick up dark mode values without any extra overrides.
- */
 :root {
   --background: var(--color-background);
   --sidebar-background: var(--color-sidebar-background);
 }
 
-/* ── Dark Mode Overrides ──────────────────────────────────────────────────── */
+/* ── Dark Mode — data-theme attribute (DarkModeToggle component) ──────────── */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   @theme {
-    /* Page surface */
-    --color-background:             oklch(0.141 0.004 285.82);
-    --color-foreground:             oklch(0.985 0 0);
+    /* Page surface — deep slate with violet undertone */
+    --color-background:             oklch(0.13 0.03 265);
+    --color-foreground:             oklch(0.96 0.005 265);
 
     /* Card surface */
-    --color-card:                   oklch(0.211 0.005 285.82);
-    --color-card-foreground:        oklch(0.985 0 0);
+    --color-card:                   oklch(0.185 0.032 265);
+    --color-card-foreground:        oklch(0.96 0.005 265);
 
-    /* Popover / dropdown surface */
-    --color-popover:                oklch(0.211 0.005 285.82);
-    --color-popover-foreground:     oklch(0.985 0 0);
+    /* Popover */
+    --color-popover:                oklch(0.185 0.032 265);
+    --color-popover-foreground:     oklch(0.96 0.005 265);
 
-    /* Primary action */
-    --color-primary:                oklch(0.985 0 0);
-    --color-primary-foreground:     oklch(0.211 0.005 285.82);
+    /* Primary — softened violet for dark */
+    --color-primary:                oklch(0.73 0.195 268);
+    --color-primary-foreground:     oklch(0.145 0.028 264);
 
-    /* Secondary / ghost */
-    --color-secondary:              oklch(0.279 0.007 285.82);
-    --color-secondary-foreground:   oklch(0.985 0 0);
+    /* Secondary */
+    --color-secondary:              oklch(0.255 0.032 265);
+    --color-secondary-foreground:   oklch(0.96 0.005 265);
 
-    /* Muted / disabled */
-    --color-muted:                  oklch(0.279 0.007 285.82);
-    --color-muted-foreground:       oklch(0.71 0.01 286.07);
+    /* Muted */
+    --color-muted:                  oklch(0.255 0.032 265);
+    --color-muted-foreground:       oklch(0.655 0.04 267);
 
-    /* Accent / hover highlight */
-    --color-accent:                 oklch(0.279 0.007 285.82);
-    --color-accent-foreground:      oklch(0.985 0 0);
+    /* Accent */
+    --color-accent:                 oklch(0.255 0.032 265);
+    --color-accent-foreground:      oklch(0.96 0.005 265);
 
-    /* Destructive / error */
+    /* Destructive */
     --color-destructive:            oklch(0.704 0.191 22.216);
     --color-destructive-foreground: oklch(0.985 0 0);
 
     /* Structural */
     --color-border:                 oklch(1 0 0 / 10%);
     --color-input:                  oklch(1 0 0 / 15%);
-    --color-ring:                   oklch(0.552 0.016 286.07);
+    --color-ring:                   oklch(0.56 0.022 266);
 
-    /* ── Dashboard Shell ──────────────────────────────────────────────────── */
-    --color-sidebar-background:     oklch(0.211 0.005 285.82);
+    /* ── Status Colors ────────────────────────────────────────────────────── */
+    --color-success:                oklch(0.62 0.14 145);
+    --color-warning:                oklch(0.78 0.16 60);
+
+    /* ── Dashboard Shell ────────────────────────────────────────────────── */
+    --color-sidebar-background:     oklch(0.155 0.032 265);
   }
+  --sidebar-background: var(--color-sidebar-background);
 }
 
-/* See the Tailwind configuration guide for advanced usage
-   https://tailwindcss.com/docs/configuration */
+/* ── Media query dark fallback ────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @theme {
+      --color-background:             oklch(0.13 0.03 265);
+      --color-foreground:             oklch(0.96 0.005 265);
+      --color-card:                   oklch(0.185 0.032 265);
+      --color-card-foreground:        oklch(0.96 0.005 265);
+      --color-popover:                oklch(0.185 0.032 265);
+      --color-popover-foreground:     oklch(0.96 0.005 265);
+      --color-primary:                oklch(0.73 0.195 268);
+      --color-primary-foreground:     oklch(0.145 0.028 264);
+      --color-secondary:              oklch(0.255 0.032 265);
+      --color-secondary-foreground:   oklch(0.96 0.005 265);
+      --color-muted:                  oklch(0.255 0.032 265);
+      --color-muted-foreground:       oklch(0.655 0.04 267);
+      --color-accent:                 oklch(0.255 0.032 265);
+      --color-accent-foreground:      oklch(0.96 0.005 265);
+      --color-destructive:            oklch(0.704 0.191 22.216);
+      --color-destructive-foreground: oklch(0.985 0 0);
+      --color-border:                 oklch(1 0 0 / 10%);
+      --color-input:                  oklch(1 0 0 / 15%);
+      --color-ring:                   oklch(0.56 0.022 266);
+      --color-sidebar-background:     oklch(0.155 0.032 265);
+    }
+  }
+}
 
 @import "tailwindcss" source(none);
 @source "../css";
@@ -126,20 +157,13 @@
 @source "../../lib/phia_demo_web";
 @source "../../deps/phia_ui/lib";
 
-/* A Tailwind plugin that makes "hero-#{ICON}" classes available.
-   The heroicons installation itself is managed by your mix.exs */
+/* Heroicons plugin */
 @plugin "../vendor/heroicons";
 
-
-/* Add variants based on LiveView classes */
+/* LiveView loading variants */
 @custom-variant phx-click-loading (.phx-click-loading&, .phx-click-loading &);
 @custom-variant phx-submit-loading (.phx-submit-loading&, .phx-submit-loading &);
 @custom-variant phx-change-loading (.phx-change-loading&, .phx-change-loading &);
 
-/* Use the data attribute for dark mode  */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
 /* Make LiveView wrapper divs transparent for layout */
 [data-phx-session], [data-phx-teleported-src] { display: contents }
-
-/* This file is for your main application CSS */
