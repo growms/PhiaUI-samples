@@ -6,164 +6,162 @@
  * CSS custom properties registered via @theme for automatic utility generation.
  * All color values use the oklch() color space for wide-gamut support.
  *
- * Light mode is the default. Dark mode is applied via `data-theme="dark"` attribute
- * (managed by the DarkModeToggle component) and the media query as fallback.
- *
- * Generated utilities: bg-primary, text-foreground, border-border, ring-ring, etc.
+ * Light mode is the default. Dark mode is applied via `.dark` class on <html>
+ * (managed by PhiaDarkMode JS hook) — class is toggled by DarkModeToggle component.
  */
 
+@import "tailwindcss" source(none);
+@source "../css";
+@source "../js";
+@source "../../lib/phia_demo_web";
+@source "../../../phiaui/lib";
+
+/* Heroicons plugin */
+@plugin "../vendor/heroicons";
+
+/* ── Custom Variants ──────────────────────────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant phx-click-loading (.phx-click-loading&, .phx-click-loading &);
+@custom-variant phx-submit-loading (.phx-submit-loading&, .phx-submit-loading &);
+@custom-variant phx-change-loading (.phx-change-loading&, .phx-change-loading &);
+
+/* ── Theme Tokens — Light Mode (default) ─────────────────────────────────── */
 @theme {
+  /* ── Typography ───────────────────────────────────────────────────────────── */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Fira Code", Menlo, Monaco, monospace;
+
   /* ── Spacing & Shape ─────────────────────────────────────────────────────── */
   --radius: 0.5rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 
-  /* ── Semantic Color Tokens — Light Mode ──────────────────────────────────── */
+  /* ── Shadows ─────────────────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
-  /* Page surface */
-  --color-background:             oklch(1 0 0);
+  /* ── Page surface ────────────────────────────────────────────────────────── */
+  --color-background:             oklch(0.98 0.004 268);
   --color-foreground:             oklch(0.145 0.028 264);
 
-  /* Card surface — subtle warm-violet tint */
-  --color-card:                   oklch(0.988 0.006 268);
+  /* ── Card surface — white with subtle shadow ─────────────────────────────── */
+  --color-card:                   oklch(1 0 0);
   --color-card-foreground:        oklch(0.145 0.028 264);
 
-  /* Popover / dropdown */
+  /* ── Popover / dropdown ──────────────────────────────────────────────────── */
   --color-popover:                oklch(1 0 0);
   --color-popover-foreground:     oklch(0.145 0.028 264);
 
-  /* Primary — rich violet */
+  /* ── Primary — rich violet ───────────────────────────────────────────────── */
   --color-primary:                oklch(0.555 0.235 268);
   --color-primary-foreground:     oklch(0.985 0 0);
 
-  /* Secondary — soft violet tint */
+  /* ── Secondary — soft violet tint ───────────────────────────────────────── */
   --color-secondary:              oklch(0.94 0.05 268);
   --color-secondary-foreground:   oklch(0.38 0.1 268);
 
-  /* Muted — light gray-violet */
+  /* ── Muted — light gray-violet ───────────────────────────────────────────── */
   --color-muted:                  oklch(0.955 0.015 267);
-  --color-muted-foreground:       oklch(0.545 0.025 267);
+  --color-muted-foreground:       oklch(0.50 0.03 267);
 
-  /* Accent — matches secondary */
+  /* ── Accent — matches secondary ──────────────────────────────────────────── */
   --color-accent:                 oklch(0.94 0.05 268);
   --color-accent-foreground:      oklch(0.38 0.1 268);
 
-  /* Destructive */
+  /* ── Destructive ─────────────────────────────────────────────────────────── */
   --color-destructive:            oklch(0.577 0.245 27.325);
   --color-destructive-foreground: oklch(0.985 0 0);
 
-  /* Structural */
+  /* ── Structural ──────────────────────────────────────────────────────────── */
   --color-border:                 oklch(0.91 0.012 267);
   --color-input:                  oklch(0.91 0.012 267);
   --color-ring:                   oklch(0.555 0.235 268);
 
-  /* ── Status Colors ────────────────────────────────────────────────────────── */
+  /* ── Status Colors ───────────────────────────────────────────────────────── */
   --color-success:                oklch(0.53 0.14 143);
   --color-success-foreground:     oklch(0.985 0 0);
   --color-warning:                oklch(0.72 0.17 58);
   --color-warning-foreground:     oklch(0.985 0 0);
 
   /* ── Dashboard Shell ─────────────────────────────────────────────────────── */
-  --color-sidebar-background:     oklch(0.975 0.018 268);
+  --color-sidebar-background:     oklch(1 0 0);
+  --color-sidebar-foreground:     oklch(0.145 0.028 264);
+  --color-sidebar-border:         oklch(0.91 0.012 267);
 }
 
-/* ── CSS Variable Aliases ─────────────────────────────────────────────────── */
+/* ── CSS Variable Aliases (raw CSS, for bg-[--background] syntax) ─────────── */
 :root {
   --background: var(--color-background);
   --sidebar-background: var(--color-sidebar-background);
 }
 
-/* ── Dark Mode — data-theme attribute (DarkModeToggle component) ──────────── */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* ── Dark Mode — .dark class on <html> (toggled by PhiaDarkMode JS hook) ──── */
+.dark {
+  /* Page surface */
+  --color-background:             oklch(0.13 0.03 265);
+  --color-foreground:             oklch(0.96 0.005 265);
 
-[data-theme="dark"] {
-  @theme {
-    /* Page surface — deep slate with violet undertone */
-    --color-background:             oklch(0.13 0.03 265);
-    --color-foreground:             oklch(0.96 0.005 265);
+  /* Card surface */
+  --color-card:                   oklch(0.185 0.032 265);
+  --color-card-foreground:        oklch(0.96 0.005 265);
 
-    /* Card surface */
-    --color-card:                   oklch(0.185 0.032 265);
-    --color-card-foreground:        oklch(0.96 0.005 265);
+  /* Popover */
+  --color-popover:                oklch(0.185 0.032 265);
+  --color-popover-foreground:     oklch(0.96 0.005 265);
 
-    /* Popover */
-    --color-popover:                oklch(0.185 0.032 265);
-    --color-popover-foreground:     oklch(0.96 0.005 265);
+  /* Primary — softened violet */
+  --color-primary:                oklch(0.73 0.195 268);
+  --color-primary-foreground:     oklch(0.145 0.028 264);
 
-    /* Primary — softened violet for dark */
-    --color-primary:                oklch(0.73 0.195 268);
-    --color-primary-foreground:     oklch(0.145 0.028 264);
+  /* Secondary */
+  --color-secondary:              oklch(0.255 0.032 265);
+  --color-secondary-foreground:   oklch(0.96 0.005 265);
 
-    /* Secondary */
-    --color-secondary:              oklch(0.255 0.032 265);
-    --color-secondary-foreground:   oklch(0.96 0.005 265);
+  /* Muted */
+  --color-muted:                  oklch(0.255 0.032 265);
+  --color-muted-foreground:       oklch(0.655 0.04 267);
 
-    /* Muted */
-    --color-muted:                  oklch(0.255 0.032 265);
-    --color-muted-foreground:       oklch(0.655 0.04 267);
+  /* Accent */
+  --color-accent:                 oklch(0.255 0.032 265);
+  --color-accent-foreground:      oklch(0.96 0.005 265);
 
-    /* Accent */
-    --color-accent:                 oklch(0.255 0.032 265);
-    --color-accent-foreground:      oklch(0.96 0.005 265);
+  /* Destructive */
+  --color-destructive:            oklch(0.704 0.191 22.216);
+  --color-destructive-foreground: oklch(0.985 0 0);
 
-    /* Destructive */
-    --color-destructive:            oklch(0.704 0.191 22.216);
-    --color-destructive-foreground: oklch(0.985 0 0);
+  /* Structural */
+  --color-border:                 oklch(1 0 0 / 10%);
+  --color-input:                  oklch(1 0 0 / 15%);
+  --color-ring:                   oklch(0.56 0.022 266);
 
-    /* Structural */
-    --color-border:                 oklch(1 0 0 / 10%);
-    --color-input:                  oklch(1 0 0 / 15%);
-    --color-ring:                   oklch(0.56 0.022 266);
+  /* Status */
+  --color-success:                oklch(0.62 0.14 145);
+  --color-warning:                oklch(0.78 0.16 60);
 
-    /* ── Status Colors ────────────────────────────────────────────────────── */
-    --color-success:                oklch(0.62 0.14 145);
-    --color-warning:                oklch(0.78 0.16 60);
+  /* Shell */
+  --color-sidebar-background:     oklch(0.155 0.032 265);
+  --color-sidebar-foreground:     oklch(0.96 0.005 265);
+  --color-sidebar-border:         oklch(1 0 0 / 10%);
 
-    /* ── Dashboard Shell ────────────────────────────────────────────────── */
-    --color-sidebar-background:     oklch(0.155 0.032 265);
-  }
+  --background: var(--color-background);
   --sidebar-background: var(--color-sidebar-background);
 }
 
-/* ── Media query dark fallback ────────────────────────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    @theme {
-      --color-background:             oklch(0.13 0.03 265);
-      --color-foreground:             oklch(0.96 0.005 265);
-      --color-card:                   oklch(0.185 0.032 265);
-      --color-card-foreground:        oklch(0.96 0.005 265);
-      --color-popover:                oklch(0.185 0.032 265);
-      --color-popover-foreground:     oklch(0.96 0.005 265);
-      --color-primary:                oklch(0.73 0.195 268);
-      --color-primary-foreground:     oklch(0.145 0.028 264);
-      --color-secondary:              oklch(0.255 0.032 265);
-      --color-secondary-foreground:   oklch(0.96 0.005 265);
-      --color-muted:                  oklch(0.255 0.032 265);
-      --color-muted-foreground:       oklch(0.655 0.04 267);
-      --color-accent:                 oklch(0.255 0.032 265);
-      --color-accent-foreground:      oklch(0.96 0.005 265);
-      --color-destructive:            oklch(0.704 0.191 22.216);
-      --color-destructive-foreground: oklch(0.985 0 0);
-      --color-border:                 oklch(1 0 0 / 10%);
-      --color-input:                  oklch(1 0 0 / 15%);
-      --color-ring:                   oklch(0.56 0.022 266);
-      --color-sidebar-background:     oklch(0.155 0.032 265);
-    }
+/* ── Layout helpers ───────────────────────────────────────────────────────── */
+[data-phx-session], [data-phx-teleported-src] { display: contents }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
-
-@import "tailwindcss" source(none);
-@source "../css";
-@source "../js";
-@source "../../lib/phia_demo_web";
-@source "../../deps/phia_ui/lib";
-
-/* Heroicons plugin */
-@plugin "../vendor/heroicons";
-
-/* LiveView loading variants */
-@custom-variant phx-click-loading (.phx-click-loading&, .phx-click-loading &);
-@custom-variant phx-submit-loading (.phx-submit-loading&, .phx-submit-loading &);
-@custom-variant phx-change-loading (.phx-change-loading&, .phx-change-loading &);
-
-/* Make LiveView wrapper divs transparent for layout */
-[data-phx-session], [data-phx-teleported-src] { display: contents }

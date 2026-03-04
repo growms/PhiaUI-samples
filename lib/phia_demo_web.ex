@@ -17,7 +17,7 @@ defmodule PhiaDemoWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images icons favicon.ico robots.txt)
 
   def router do
     quote do
@@ -106,6 +106,10 @@ defmodule PhiaDemoWeb do
       import PhiaUi.Components.Pagination
       import PhiaUi.Components.EmptyState
       import PhiaUi.Components.Accordion
+
+      # PhiaUI — Form Inputs
+      import PhiaUi.Components.TagsInput
+      import PhiaUi.Components.DateRangePicker
 
       # PhiaUI — Interactive
       import PhiaUi.Components.Tooltip

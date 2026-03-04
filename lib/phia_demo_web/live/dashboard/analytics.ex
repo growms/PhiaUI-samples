@@ -1,8 +1,8 @@
-defmodule PhiaDemoWeb.DashboardLive.Analytics do
+defmodule PhiaDemoWeb.Demo.Dashboard.Analytics do
   use PhiaDemoWeb, :live_view
 
   alias PhiaDemo.FakeData
-  alias PhiaDemoWeb.DashboardLayout
+  alias PhiaDemoWeb.Demo.Dashboard.Layout
 
   @impl true
   def mount(_params, _session, socket) do
@@ -36,26 +36,14 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
   @impl true
   def render(assigns) do
     ~H"""
-    <DashboardLayout.layout current_path="/analytics">
-      <div class="p-6 space-y-6">
-        <%!-- Breadcrumb --%>
-        <.breadcrumb>
-          <.breadcrumb_list>
-            <.breadcrumb_item>
-              <.breadcrumb_link href="/">Dashboard</.breadcrumb_link>
-            </.breadcrumb_item>
-            <.breadcrumb_separator />
-            <.breadcrumb_item>
-              <.breadcrumb_page>Analytics</.breadcrumb_page>
-            </.breadcrumb_item>
-          </.breadcrumb_list>
-        </.breadcrumb>
+    <Layout.layout current_path="/dashboard/analytics">
+      <div class="p-6 space-y-6 max-w-screen-2xl mx-auto">
 
-        <%!-- Header + Combobox period filter --%>
+        <%!-- Header + period filter --%>
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 class="text-2xl font-bold text-foreground tracking-tight">Analytics</h1>
-            <p class="text-sm text-muted-foreground mt-1">Métricas de tráfego e engajamento</p>
+            <h1 class="text-xl font-bold text-foreground tracking-tight">Analytics</h1>
+            <p class="text-sm text-muted-foreground mt-0.5">Traffic and engagement metrics</p>
           </div>
           <div class="w-full sm:w-56">
             <.combobox
@@ -64,8 +52,8 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
               value={@period}
               open={@period_open}
               search={@period_search}
-              placeholder="Selecionar período..."
-              search_placeholder="Buscar período..."
+              placeholder="Select period..."
+              search_placeholder="Search period..."
               on_change="period-change"
               on_search="period-search"
               on_toggle="period-toggle"
@@ -75,9 +63,9 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
 
         <%!-- Info Alert --%>
         <.alert variant={:default}>
-          <.alert_title>Dados atualizados</.alert_title>
+          <.alert_title>Data updated</.alert_title>
           <.alert_description>
-            Exibindo: <strong>{period_label(@period, @period_options)}</strong> — Última sincronização: 03/03/2026 às 08:00
+            Showing: <strong>{period_label(@period, @period_options)}</strong> — Last sync: Mar 3, 2026 at 08:00
           </.alert_description>
         </.alert>
 
@@ -90,51 +78,44 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
             trend={s.trend}
             trend_value={s.trend_value}
             description={s.description}
+            class="border-border/60 shadow-sm"
           />
         </.metric_grid>
 
         <%!-- Charts row --%>
         <div class="grid gap-6 lg:grid-cols-2">
           <.chart_shell
-            title="Visitas Mensais"
-            description="Visitantes únicos por mês"
-            period="Últimos 12 meses"
+            title="Monthly Visitors"
+            description="Unique visitors per month"
+            period="Last 12 months"
             min_height="240px"
           >
             <svg viewBox="0 0 420 210" class="w-full h-full">
               <% max_val = Enum.max(Enum.map(@visits, & &1.value)) %>
-              <% coords =
-                @visits
-                |> Enum.with_index()
-                |> Enum.map(fn {item, i} ->
-                  x = i * 35 + 18
-                  y = 175 - trunc(item.value / max_val * 160)
-                  {x, y}
-                end) %>
-              <% points = Enum.map_join(coords, " ", fn {x, y} -> "#{x},#{y}" end) %>
-              <% {first_x, _} = List.first(coords) %>
-              <% {last_x, _} = List.last(coords) %>
-              <% area_points = "#{first_x},175 #{points} #{last_x},175" %>
-              <polygon points={area_points} class="fill-primary opacity-15" />
-              <polyline
-                points={points}
-                class="stroke-primary fill-none"
-                stroke-width="2.5"
-                stroke-linejoin="round"
-                stroke-linecap="round"
-              />
+              <% n = length(@visits) - 1 %>
+              <% coords = Enum.with_index(@visits) |> Enum.map(fn {item, i} ->
+                x = Float.round(18.0 + i * (384.0 / n), 1)
+                y = Float.round(175.0 - item.value / max_val * 155.0, 1)
+                {x, y}
+              end) %>
+              <% line_pts = Enum.map_join(coords, " ", fn {x, y} -> "#{x},#{y}" end) %>
+              <% {fx, _} = List.first(coords) %>
+              <% {lx, _} = List.last(coords) %>
+              <% area_pts = "#{fx},175 #{line_pts} #{lx},175" %>
+              <polygon points={area_pts} class="fill-primary" fill-opacity="0.08" />
+              <polyline points={line_pts} class="stroke-primary fill-none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
               <%= for {item, {x, y}} <- Enum.zip(@visits, coords) do %>
-                <circle cx={x} cy={y} r="3.5" class="fill-primary" />
-                <text x={x} y="195" text-anchor="middle" class="fill-muted-foreground" style="font-size:9px">
-                  {item.mes}
+                <circle cx={x} cy={y} r="3" class="fill-background stroke-primary" stroke-width="1.5" />
+                <text x={x} y="197" text-anchor="middle" class="fill-muted-foreground" style="font-size:9px">
+                  {item.month}
                 </text>
               <% end %>
             </svg>
           </.chart_shell>
 
           <.chart_shell
-            title="Fonte de Tráfego"
-            description="Distribuição por canal de aquisição"
+            title="Traffic by Source"
+            description="Distribution by acquisition channel"
             min_height="240px"
           >
             <div class="flex gap-6 items-center h-full py-2">
@@ -148,14 +129,11 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
                     end) %>
                   <%= for {item, offset, pct} <- Enum.reverse(slices) do %>
                     <circle
-                      cx="60"
-                      cy="60"
-                      r="40"
-                      fill="none"
+                      cx="60" cy="60" r="40" fill="none"
                       class={"stroke-current #{String.replace(item.color, "fill-", "text-")}"}
                       stroke-width="20"
-                      stroke-dasharray={"#{pct * 2.513} #{100 * 2.513}"}
-                      stroke-dashoffset={"-#{offset * 2.513}"}
+                      stroke-dasharray={"#{Float.round(pct * 2.513, 1)} #{100 * 2.513}"}
+                      stroke-dashoffset={"-#{Float.round(offset * 2.513, 1)}"}
                       transform="rotate(-90 60 60)"
                     />
                   <% end %>
@@ -163,7 +141,7 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
                     {total}k
                   </text>
                   <text x="60" y="69" text-anchor="middle" class="fill-muted-foreground" style="font-size:8px">
-                    visitas
+                    visits
                   </text>
                 </svg>
               </div>
@@ -171,7 +149,7 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
                 <%= for item <- @traffic do %>
                   <li class="flex items-center justify-between gap-2">
                     <span class="flex items-center gap-2">
-                      <span class={"inline-block w-2.5 h-2.5 rounded-full #{item.color}"} />
+                      <span class={"inline-block w-2 h-2 rounded-full #{item.color}"} />
                       <span class="text-foreground">{item.source}</span>
                     </span>
                     <span class="font-semibold text-muted-foreground">{item.value}%</span>
@@ -183,24 +161,21 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
         </div>
 
         <%!-- Conversion by channel --%>
-        <.card>
+        <.card class="border-border/60 shadow-sm">
           <.card_header>
-            <.card_title>Conversão por Canal</.card_title>
-            <.card_description>Taxa de conversão relativa por fonte de tráfego</.card_description>
+            <.card_title>Conversion by Channel</.card_title>
+            <.card_description>Relative conversion rate by traffic source</.card_description>
           </.card_header>
-          <.card_content>
+          <.card_content class="pt-0">
             <div class="space-y-4">
               <%= for {item, conv} <- Enum.zip(@traffic, [5.2, 3.8, 2.1, 7.4, 1.3]) do %>
-                <div class="space-y-1">
+                <div class="space-y-1.5">
                   <div class="flex justify-between text-sm">
                     <span class="font-medium text-foreground">{item.source}</span>
                     <span class="font-semibold text-primary">{conv}%</span>
                   </div>
-                  <div class="h-2 w-full rounded-full bg-secondary">
-                    <div
-                      class="h-2 rounded-full bg-primary transition-all"
-                      style={"width: #{Float.round(conv / 8 * 100, 1)}%"}
-                    />
+                  <div class="h-1.5 w-full rounded-full bg-muted">
+                    <div class="h-1.5 rounded-full bg-primary transition-all" style={"width: #{Float.round(conv / 8 * 100, 1)}%"} />
                   </div>
                 </div>
               <% end %>
@@ -208,13 +183,13 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
           </.card_content>
         </.card>
 
-        <%!-- Empty state demo --%>
-        <.card>
+        <%!-- Empty state --%>
+        <.card class="border-border/60 shadow-sm">
           <.card_header>
-            <.card_title>Dados por Canal</.card_title>
-            <.card_description>Selecione um canal para ver o detalhamento completo</.card_description>
+            <.card_title>Data by Channel</.card_title>
+            <.card_description>Select a channel to view the full breakdown</.card_description>
           </.card_header>
-          <.card_content>
+          <.card_content class="pt-0">
             <.empty>
               <:icon>
                 <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
@@ -223,16 +198,17 @@ defmodule PhiaDemoWeb.DashboardLive.Analytics do
                   </svg>
                 </div>
               </:icon>
-              <:title>Selecione um canal</:title>
-              <:description>Clique em um dos canais na lista acima para visualizar o detalhamento completo de conversão.</:description>
+              <:title>Select a channel</:title>
+              <:description>Click on one of the channels in the list above to view the full conversion breakdown.</:description>
               <:action>
-                <.button variant={:outline} size={:sm}>Ver Todos os Canais</.button>
+                <.button variant={:outline} size={:sm}>View All Channels</.button>
               </:action>
             </.empty>
           </.card_content>
         </.card>
+
       </div>
-    </DashboardLayout.layout>
+    </Layout.layout>
     """
   end
 

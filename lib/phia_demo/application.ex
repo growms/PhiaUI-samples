@@ -11,8 +11,7 @@ defmodule PhiaDemo.Application do
       PhiaDemoWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:phia_demo, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PhiaDemo.PubSub},
-      # Start a worker by calling: PhiaDemo.Worker.start_link(arg)
-      # {PhiaDemo.Worker, arg},
+      PhiaDemo.ChatStore,
       # Start to serve requests, typically the last entry
       PhiaDemoWeb.Endpoint
     ]

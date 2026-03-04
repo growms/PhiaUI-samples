@@ -17,12 +17,26 @@ defmodule PhiaDemoWeb.Router do
   scope "/", PhiaDemoWeb do
     pipe_through :browser
 
-    live "/",           DashboardLive.Overview,    :index
-    live "/analytics",  DashboardLive.Analytics,   :index
-    live "/users",      DashboardLive.Users,        :index
-    live "/orders",     DashboardLive.Orders,       :index
-    live "/components", DashboardLive.Components,   :index
-    live "/settings",   DashboardLive.Settings,     :index
+    # Root redirects to Dashboard
+    get "/", PageController, :home
+
+    # Dashboard demo
+    live "/dashboard",            Demo.Dashboard.Overview,  :index
+    live "/dashboard/analytics",  Demo.Dashboard.Analytics, :index
+    live "/dashboard/users",      Demo.Dashboard.Users,     :index
+    live "/dashboard/orders",     Demo.Dashboard.Orders,    :index
+    live "/dashboard/settings",   Demo.Dashboard.Settings,  :index
+
+    # Showcase demo
+    live "/showcase",             Demo.Showcase.IndexLive,    :index
+    live "/showcase/inputs",      Demo.Showcase.InputsLive,   :index
+    live "/showcase/display",     Demo.Showcase.DisplayLive,  :index
+    live "/showcase/feedback",    Demo.Showcase.FeedbackLive, :index
+    live "/showcase/charts",      Demo.Showcase.ChartsLive,   :index
+
+    # Chat demo
+    live "/chat",                 Demo.Chat.RoomLive, :index
+    live "/chat/:room_id",        Demo.Chat.RoomLive, :show
   end
 
   # Enable LiveDashboard in development
