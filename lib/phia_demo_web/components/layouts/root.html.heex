@@ -15,8 +15,8 @@
           document.documentElement.classList.add('dark');
         }
         var colorTheme = localStorage.getItem('phia-color-theme');
-        if (colorTheme && colorTheme !== 'violet') {
-          document.documentElement.setAttribute('data-theme', colorTheme);
+        if (colorTheme) {
+          document.documentElement.setAttribute('data-phia-theme', colorTheme);
         }
       })();
     </script>

@@ -14,6 +14,16 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
       description: "StatCard, MetricGrid, ChartShell, AreaChart, BarChart, DonutChart, SparklineCard, GaugeChart, UptimeBar, FilterBar, DataGrid, Resizable"},
     %{name: "Calendar", href: "/showcase/calendar", icon: "calendar", count: 22,
       description: "Calendar, BigCalendar, EventCalendar, HeatmapCalendar, WeekCalendar, RangeCalendar, MultiSelectCalendar, BadgeCalendar, StreakCalendar, BookingCalendar, DateRangePresets, DateCard, DateStrip, CountdownTimer, TimePicker, DateField, DateTimePicker, MonthPicker, YearPicker, WeekPicker, WeekDayPicker e mais"},
+    %{name: "Cards", href: "/showcase/cards", icon: "layers", count: 18,
+      description: "Card, SelectableCard, ReceiptCard, ProfileCard, StatCard, SparklineCard, MetricGrid — all card variants with headers, footers, and action areas"},
+    %{name: "Navigation", href: "/showcase/navigation", icon: "list", count: 12,
+      description: "Breadcrumb, Tabs, TabsNav, Separator, Pagination, StepTracker, Accordion, Kbd — core navigation and structure components"},
+    %{name: "Tables", href: "/showcase/tables", icon: "list-ordered", count: 15,
+      description: "Table, DataGrid, FilterBar, Tree, BulkActionBar — sortable tables, filterable grids, and hierarchical trees"},
+    %{name: "Upload", href: "/showcase/upload", icon: "upload", count: 8,
+      description: "ImageUpload, FileUpload, CopyButton, DropZone — all file upload patterns including drag-and-drop and progress indicators"},
+    %{name: "Media", href: "/showcase/media", icon: "image", count: 7,
+      description: "Carousel, QrCode, AspectRatio, ScrollArea, Resizable, Direction — media display and layout utilities"},
   ]
 
   @impl true
@@ -39,11 +49,11 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
             Every PhiaUI component — live demos, fully interactive, dark-mode ready.
           </p>
           <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <.badge variant={:secondary}>v0.1.5</.badge>
+            <.badge variant={:secondary}>v0.1.11</.badge>
             <span>·</span>
-            <span>119 componentes</span>
+            <span>534 components</span>
             <span>·</span>
-            <span>5 categorias</span>
+            <span>10 categories</span>
           </div>
         </div>
 

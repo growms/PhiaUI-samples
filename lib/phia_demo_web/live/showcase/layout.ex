@@ -31,13 +31,20 @@ defmodule PhiaDemoWeb.Demo.Showcase.Layout do
             </div>
           </:brand>
           <:nav_items>
-            <.nav_section label="Showcase">
+            <.nav_section label="Core">
               <.nav_item current_path={@current_path} href="/showcase" icon="layout-grid" label="Overview" />
               <.nav_item current_path={@current_path} href="/showcase/inputs" icon="keyboard" label="Inputs" />
               <.nav_item current_path={@current_path} href="/showcase/display" icon="eye" label="Display" />
               <.nav_item current_path={@current_path} href="/showcase/feedback" icon="bell" label="Feedback" />
               <.nav_item current_path={@current_path} href="/showcase/charts" icon="chart-bar" label="Data & Charts" />
               <.nav_item current_path={@current_path} href="/showcase/calendar" icon="calendar" label="Calendar" />
+            </.nav_section>
+            <.nav_section label="Extended">
+              <.nav_item current_path={@current_path} href="/showcase/cards" icon="layers" label="Cards" />
+              <.nav_item current_path={@current_path} href="/showcase/navigation" icon="list" label="Navigation" />
+              <.nav_item current_path={@current_path} href="/showcase/tables" icon="list-ordered" label="Tables" />
+              <.nav_item current_path={@current_path} href="/showcase/upload" icon="upload" label="Upload" />
+              <.nav_item current_path={@current_path} href="/showcase/media" icon="image" label="Media" />
             </.nav_section>
           </:nav_items>
           <:footer_items>

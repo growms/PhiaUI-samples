@@ -1,6 +1,6 @@
 # PhiaUI Samples
 
-Three independent **Phoenix LiveView** demo apps in a single repo, each showcasing the [PhiaUI](https://hex.pm/packages/phia_ui) component library from a different angle.
+**16 complete Phoenix LiveView demo apps** in a single repo, each built with the [PhiaUI](https://hex.pm/packages/phia_ui) component library — featuring CSS-first theming, 534 components, and full dark mode support.
 
 ---
 
@@ -10,9 +10,9 @@ Three independent **Phoenix LiveView** demo apps in a single repo, each showcasi
 |---|---|
 | **Repository** | [github.com/charlenopires/PhiaUI-samples](https://github.com/charlenopires/PhiaUI-samples) |
 | **Framework** | Phoenix `~> 1.8.3` + LiveView `~> 1.1.0` |
-| **UI Library** | [PhiaUI](https://hex.pm/packages/phia_ui) `v0.1.5` |
-| **CSS** | Tailwind CSS v4 (`@theme` directive, OKLCH colors) |
-| **Themes** | Violet, Blue, Green, Rose, Amber, Slate — light + dark mode |
+| **UI Library** | [PhiaUI](https://hex.pm/packages/phia_ui) `v0.1.11` |
+| **CSS** | Tailwind CSS v4 (CSS-first `@theme`, OKLCH colors) |
+| **Themes** | Violet, Blue, Green, Rose, Orange, Slate, Zinc, Neutral — light + dark mode |
 | **Language** | Elixir `~> 1.15` |
 | **Data** | Hardcoded via `PhiaDemo.FakeData` + `PhiaDemo.ChatStore` (no Ecto) |
 
@@ -27,90 +27,111 @@ mix setup
 mix phx.server
 ```
 
-Open **http://localhost:4000** — renders the home page with a live theme picker and links to all three demos.
+Open **http://localhost:4000** — home page with live theme picker and links to all 16 demos.
 
 ---
 
 ## Home Page `/`
 
-Landing page (`HomeLive`) with:
-
-- **Live theme picker** — switch between Violet, Blue, Green, Rose, Amber, Slate; changes apply instantly via CSS custom properties and persist across pages via `localStorage`
-- **Component preview** — buttons and badges update in real-time as you pick a theme
-- **Project cards** — direct links to Dashboard, Showcase, and Chat demos
-
----
-
-## Demo Projects
-
-### Dashboard `/dashboard`
-
-Analytics dashboard with real-time KPIs, charts, user management and order tracking.
-
-| Route | Description |
-|-------|-------------|
-| `/dashboard` | Overview — KPIs, revenue area chart, recent orders, activity feed |
-| `/dashboard/analytics` | Traffic metrics, area + donut charts, period filter |
-| `/dashboard/users` | User table, role filter, drawer detail, confirm-delete dialog |
-| `/dashboard/orders` | Order table, collapsible filters, tooltip statuses, drawer detail |
-| `/dashboard/settings` | Accordion-based settings form with async save, dark mode toggle |
-
-**Components used:**
-`MetricGrid`, `StatCard`, `ChartShell`, `Card`, `Table`, `Avatar`, `Badge`,
-`Combobox`, `Dialog`, `AlertDialog`, `DropdownMenu`, `Drawer`, `Collapsible`,
-`Tooltip`, `Alert`, `Accordion`, `Breadcrumb`, `Skeleton`, `ButtonGroup`,
-`Pagination`, `Toast`, `DarkModeToggle`
+- **Aurora hero** — animated gradient background with component count stats (`NumberTicker`)
+- **Live theme picker** — switch between 8 color palettes instantly via `PhiaTheme` JS hook; persists via `localStorage`
+- **Multi-theme preview** — all 8 themes rendered simultaneously via CSS-first `theme_provider` scoping
+- **16 project cards** — grouped by category with icons and descriptions
 
 ---
 
-### Showcase `/showcase`
+## Demo Apps
 
-Full component library reference — every PhiaUI component with a live demo.
+### Core Demos
+
+| App | Route | Description |
+|-----|-------|-------------|
+| **Dashboard** | `/dashboard` | Admin panel — KPIs, SVG charts, user/order management, settings |
+| **Showcase** | `/showcase` | Interactive gallery of 534 PhiaUI components across 11 pages |
+| **Chat** | `/chat` | Real-time chat rooms with PubSub, polls, reactions, typing indicators |
+
+### Productivity
+
+| App | Route | Description |
+|-----|-------|-------------|
+| **Kanban** | `/kanban` | Drag-and-drop board — 4 columns, card add/move/delete, priority indicators |
+| **Notes** | `/notes` | Google Keep-style masonry grid — 8 note colors, search, pin, tags |
+| **Todo** | `/todo` | Personal task manager — 4 lists, circular checkboxes, per-list progress |
+| **Tasks** | `/tasks` | Issue tracker — table with filters, status/priority badges, bulk actions |
+
+### Communication
+
+| App | Route | Description |
+|-----|-------|-------------|
+| **Mail** | `/mail` | Email client — inbox/sent/drafts, thread view, compose dialog |
+| **Social** | `/social` | Community feed — posts, reactions, follow, trending topics |
+
+### Business
+
+| App | Route | Description |
+|-----|-------|-------------|
+| **File Manager** | `/files` | File browser — grid/list views, folder tree, upload drop zone |
+| **API Keys** | `/api-keys` | Key management — masked display, copy, reveal, revoke, scopes |
+| **Point of Sale** | `/pos` | POS terminal — product grid, cart, tax calculation, checkout dialog |
+| **Courses** | `/courses` | Learning platform — catalog, enrollment, module accordion, progress |
+
+### AI Tools
+
+| App | Route | Description |
+|-----|-------|-------------|
+| **AI Chat** | `/ai-chat` | Conversational UI — typing indicator, suggestions, mock responses |
+| **AI Chat v2** | `/ai-chat-v2` | Advanced chat — model selection, temperature slider, conversation history |
+| **Image Generator** | `/image-generator` | AI image studio — prompt editor, style selection, mock gallery |
+
+---
+
+## Showcase Pages
 
 | Route | Components |
 |-------|------------|
-| `/showcase` | Landing — category cards overview |
-| `/showcase/inputs` | Input, Textarea, Combobox, DateRangePicker, Select, TagsInput, Checkbox, RadioGroup |
+| `/showcase` | Category overview — 534 components across 11 sections |
+| `/showcase/inputs` | Input, Textarea, Select, Combobox, DateRangePicker, TagsInput, Checkbox, RadioGroup |
 | `/showcase/display` | Badge, Avatar, Card, Skeleton, Accordion, Table, Pagination, EmptyState |
-| `/showcase/feedback` | Alert (4 variants), Toast, Dialog, AlertDialog, Tooltip, Popover, DropdownMenu, Drawer, Progress |
-| `/showcase/charts` | StatCard + MetricGrid, Area chart, Bar chart, Donut chart, ChartShell |
-| `/showcase/calendar` | Calendar (monthly, weekly, range), DateStrip, event markers |
+| `/showcase/feedback` | Alert, Toast, Dialog, AlertDialog, Tooltip, Popover, DropdownMenu, Drawer, Progress |
+| `/showcase/charts` | StatCard, MetricGrid, Area, Bar, Donut charts via inline SVG |
+| `/showcase/calendar` | Monthly, weekly, range calendars; DateStrip; event markers |
+| `/showcase/cards` | ArticleCard, PricingCard, ProductCard, ProfileCard, FeatureCard, TestimonialCard |
+| `/showcase/navigation` | MegaMenu, Dock, CommandPalette, ChipNav, Stepper, Breadcrumb, Toolbar |
+| `/showcase/tables` | DataTable, FilterBar, BulkActionBar, ComparisonTable, ExpandableTable |
+| `/showcase/upload` | FileUpload, ImageUpload, DropZone, UploadProgress, UploadQueue |
+| `/showcase/media` | AudioPlayer, Carousel, ImageComparison, QrCode, Watermark |
 
 ---
 
-### Chat `/chat`
+## Theming (v0.1.11)
 
-Real-time chat with polls, emoji reactions and typing indicators — all server-side via PubSub.
+PhiaUI v0.1.11 introduces **CSS-first theming** with 8 built-in presets:
 
-| Feature | Implementation |
-|---------|----------------|
-| Real-time messages | `Phoenix.PubSub` + LiveView streams |
-| Emoji reactions | Toggle per user; counts updated live |
-| Polls | Dialog form → inline poll message → live vote bars |
-| Typing indicators | Keyup event → PubSub broadcast → "X is typing…" |
-| Room switching | Navigate `/chat/:room_id`, re-subscribe to PubSub topic |
-| Persistent state | `PhiaDemo.ChatStore` (Agent, seeded on startup) |
+```bash
+mix phia.theme install   # generates assets/css/phia-themes.css
+```
 
-Routes: `/chat`, `/chat/:room_id` (general, random, announcements, design, engineering)
+Themes are applied via `data-phia-theme` on `<html>`:
 
----
+```js
+// PhiaTheme hook (assets/js/phia_hooks/theme.js)
+document.documentElement.setAttribute('data-phia-theme', 'violet')
+localStorage.setItem('phia-color-theme', 'violet')
+```
 
-## Theme
+Scoped multi-theme preview on the same page:
 
-Custom themes defined in `assets/css/app.css` using Tailwind v4 `@theme` and OKLCH color tokens. The active theme is set via a CSS class on `<html>` (e.g. `.theme-violet`) — no page reload required. Dark mode uses the `.dark` class.
-
-| Token | Light | Dark |
-|-------|-------|------|
-| `--color-primary` | `oklch(0.555 0.235 268)` | `oklch(0.73 0.195 268)` |
-| `--color-background` | `oklch(1 0 0)` | `oklch(0.13 0.03 265)` |
-| `--color-sidebar-background` | `oklch(0.975 0.018 268)` | `oklch(0.155 0.032 265)` |
-| `--color-foreground` | `oklch(0.145 0.03 265)` | `oklch(0.97 0.012 268)` |
+```heex
+<.theme_provider theme={:blue}>
+  <.button>Primary</.button>
+</.theme_provider>
+```
 
 ---
 
 ## JS Hooks
 
-PhiaUI interactive components require lightweight vanilla-JS hooks registered in `assets/js/phia_hooks/index.js`. Copy from `deps/phia_ui/priv/templates/js/hooks/`.
+All PhiaUI interactive components use lightweight vanilla-JS hooks registered in `assets/js/phia_hooks/index.js`.
 
 | Hook | Component |
 |------|-----------|
@@ -123,22 +144,10 @@ PhiaUI interactive components require lightweight vanilla-JS hooks registered in
 | `PhiaDrawer` | Drawer |
 | `PhiaPopover` | Popover |
 | `PhiaContextMenu` | ContextMenu |
-| `PhiaBackTop` | BackTop (scroll-to-top button) |
-| `PhiaHoverCard` | HoverCard (open/close delay, smart positioning) |
-| `PhiaCopyButton` | CopyButton (clipboard copy with feedback) |
-| `PhiaResizable` | Resizable panels |
-| `PhiaSonner` | Sonner toast notifications |
-| `PhiaDataGrid` | DataGrid (client-side sort/filter) |
-| `PhiaCalendar` | Calendar (month/week/range navigation) |
-
-```js
-import PhiaHooks from './phia_hooks'
-
-let liveSocket = new LiveSocket('/live', Socket, {
-  hooks: PhiaHooks,
-  // ...
-})
-```
+| `PhiaBackTop` | BackTop |
+| `PhiaHoverCard` | HoverCard |
+| `PhiaTheme` | Theme palette switcher |
+| `PhiaNumberTicker` | Animated number count-up |
 
 ---
 
@@ -147,76 +156,58 @@ let liveSocket = new LiveSocket('/live', Socket, {
 ```
 lib/
 ├── phia_demo/
-│   ├── application.ex              # Supervision tree (includes ChatStore)
+│   ├── application.ex
 │   ├── chat_store.ex               # Agent — messages, reactions, typing, polls
-│   └── fake_data.ex                # All demo data (dashboard + chat)
+│   └── fake_data.ex                # All demo data (no Ecto)
 └── phia_demo_web/
-    ├── phia_demo_web.ex            # Global PhiaUI imports
-    ├── router.ex                   # All routes for 3 demo projects
+    ├── phia_demo_web.ex            # Global PhiaUI component imports
+    ├── router.ex                   # ~30 routes across 16 demo apps
     ├── components/
-    │   └── project_nav.ex          # Shared top nav bar (logo, project switcher, dark mode)
+    │   └── project_nav.ex          # Shared top nav (logo, project switcher, dark mode)
     └── live/
-        ├── home_live.ex            # Landing — theme picker + project cards
-        ├── dashboard/
-        │   ├── layout.ex           # Sidebar shell for Dashboard
-        │   ├── overview.ex
-        │   ├── analytics.ex
-        │   ├── users.ex
-        │   ├── orders.ex
-        │   └── settings.ex
-        ├── showcase/
-        │   ├── layout.ex           # Sidebar shell for Showcase
-        │   ├── index_live.ex
-        │   ├── inputs_live.ex
-        │   ├── display_live.ex
-        │   ├── feedback_live.ex
-        │   ├── charts_live.ex
-        │   └── calendar_live.ex    # Calendar, WeekCalendar, RangeCalendar demos
-        └── chat/
-            ├── layout.ex           # Channels + members sidebar
-            └── room_live.ex        # Full-featured chat room
+        ├── home_live.ex            # Landing — aurora hero, theme picker, 16 project cards
+        ├── dashboard/              # Overview, Analytics, Users, Orders, Settings
+        ├── showcase/               # 11 showcase pages
+        ├── chat/                   # RoomLive with PubSub
+        ├── kanban/                 # Kanban board
+        ├── notes/                  # Google Keep-style notes
+        ├── mail/                   # Email client
+        ├── todo/                   # Personal todo lists
+        ├── tasks/                  # Issue tracker table
+        ├── social/                 # Community feed
+        ├── files/                  # File manager
+        ├── api_keys/               # API key management
+        ├── pos/                    # Point of sale
+        ├── courses/                # Learning platform
+        ├── ai_chat/                # AI chat UI
+        ├── ai_chat_v2/             # Advanced AI chat
+        └── image_gen/              # Image generator UI
 
 priv/static/icons/
-└── lucide-sprite.svg               # Lucide icons (SVG sprite, no npm)
+└── lucide-sprite.svg               # Lucide icon sprite (no npm)
 
 assets/
-├── css/app.css                     # OKLCH themes (violet, blue, green, rose, amber, slate)
+├── css/
+│   ├── app.css                     # Tailwind v4 @theme tokens
+│   └── phia-themes.css             # 8 color theme presets (via mix phia.theme install)
 └── js/phia_hooks/
     ├── index.js
-    ├── back_top.js
-    ├── calendar.js
-    ├── carousel.js
-    ├── context_menu.js
-    ├── copy_button.js
-    ├── dark_mode.js
-    ├── data_grid.js
-    ├── dialog.js
-    ├── drawer.js
-    ├── dropdown_menu.js
-    ├── hover_card.js
-    ├── popover.js
-    ├── resizable.js
-    ├── sonner.js
-    ├── toast.js
-    └── tooltip.js
+    ├── theme.js
+    ├── number_ticker.js
+    └── ...                         # One file per hook
 ```
 
 ---
 
 ## Architecture Notes
 
-- **No Ecto, no Mailer** — all data in `PhiaDemo.FakeData`; chat state in `PhiaDemo.ChatStore`
-- **3 independent layouts** — each demo has its own `Layout` module under `live/{project}/layout.ex`
-- **Shared top nav** — `PhiaDemoWeb.ProjectNav` renders the cross-project navigation bar (logo, switcher tabs, dark mode toggle) used in all layouts and the home page
-- **Global component imports** — all PhiaUI components imported once in `phia_demo_web.ex`; `Icon` overrides `CoreComponents.icon` (Lucide sprites instead of Heroicons)
-- **Lucide icons** — SVG sprite at `priv/static/icons/lucide-sprite.svg`, no npm required; add new icons by downloading the SVG from `lucide-icons/lucide` and appending a `<symbol>` entry
+- **No Ecto, no Mailer** — all data in `PhiaDemo.FakeData`; chat state in `PhiaDemo.ChatStore` (Agent)
+- **16 independent layouts** — each app has its own `Layout` module under `live/{app}/layout.ex`
+- **Shared top nav** — `PhiaDemoWeb.ProjectNav` renders the cross-project navigation bar
+- **Global component imports** — all PhiaUI components imported once in `phia_demo_web.ex`
+- **Lucide icons** — SVG sprite at `priv/static/icons/lucide-sprite.svg`, no npm; add icons by appending a `<symbol>` entry
 - **SVG charts** — inline SVG computed server-side with `Enum.with_index`; no JS chart library
-- **Multi-theme** — CSS custom properties swap on `<html>` class change; active theme persists via `localStorage`; implemented in `HomeLive` via `push_event("phx:set-color-theme", ...)`
-- **Toast** — `push_event(socket, "phia-toast", %{title: ..., variant: ..., duration_ms: ...})`
-- **Combobox** — requires 3 event handlers: `on_toggle`, `on_search`, `on_change`; state on server
-- **Drawer** — `<.drawer_content>` at page root; any element with `data-drawer-trigger={id}` opens it
-- **TagsInput** — requires `Phoenix.HTML.FormField`; must be used inside a `<.form>` component
-- **DateRangePicker** — requires `view_month` (Date), `on_change`, and `on_month_change` attrs
+- **CSS-first theming** — `data-phia-theme` attribute on `<html>`; theme persists via `localStorage['phia-color-theme']`
 
 ---
 

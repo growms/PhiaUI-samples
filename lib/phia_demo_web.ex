@@ -222,6 +222,14 @@ defmodule PhiaDemoWeb do
       import PhiaUi.Components.DateField
       import PhiaUi.Components.DateTimePicker
 
+      # v0.1.11 new components
+      import PhiaUi.Components.Animation
+      import PhiaUi.Components.ThemeProvider
+      import PhiaUi.Components.Glass
+      import PhiaUi.Components.Background
+      import PhiaUi.Components.ProfileCard
+      import PhiaUi.Components.FeatureCard
+
       # Common modules used in templates
       alias Phoenix.LiveView.JS
       alias PhiaDemoWeb.Layouts

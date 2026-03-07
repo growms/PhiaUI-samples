@@ -16,6 +16,8 @@ import PhiaResizable from './resizable.js'
 import PhiaSonner from './sonner.js'
 import PhiaDataGrid from './data_grid.js'
 import PhiaCalendar from './calendar.js'
+import PhiaTheme from './theme.js'
+import PhiaNumberTicker from './number_ticker.js'
 
 const PhiaHooks = {
   PhiaDialog,
@@ -34,6 +36,8 @@ const PhiaHooks = {
   PhiaSonner,
   PhiaDataGrid,
   PhiaCalendar,
+  PhiaTheme,
+  PhiaNumberTicker,
 }
 
 export default PhiaHooks

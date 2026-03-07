@@ -34,10 +34,54 @@ defmodule PhiaDemoWeb.Router do
     live "/showcase/feedback",    Demo.Showcase.FeedbackLive, :index
     live "/showcase/charts",      Demo.Showcase.ChartsLive,    :index
     live "/showcase/calendar",    Demo.Showcase.CalendarLive,  :index
+    live "/showcase/cards",       Demo.Showcase.CardsLive,     :index
+    live "/showcase/navigation",  Demo.Showcase.NavigationLive, :index
+    live "/showcase/tables",      Demo.Showcase.TablesLive,    :index
+    live "/showcase/upload",      Demo.Showcase.UploadLive,    :index
+    live "/showcase/media",       Demo.Showcase.MediaLive,     :index
 
     # Chat demo
     live "/chat",                 Demo.Chat.RoomLive, :index
     live "/chat/:room_id",        Demo.Chat.RoomLive, :show
+
+    # Kanban demo
+    live "/kanban",               Demo.Kanban.IndexLive, :index
+
+    # Notes demo
+    live "/notes",                Demo.Notes.IndexLive, :index
+
+    # Mail demo
+    live "/mail",                 Demo.Mail.IndexLive, :index
+
+    # Todo demo
+    live "/todo",                 Demo.Todo.IndexLive, :index
+
+    # Tasks demo
+    live "/tasks",                Demo.Tasks.IndexLive, :index
+
+    # Social demo
+    live "/social",               Demo.Social.IndexLive, :index
+
+    # File Manager demo
+    live "/files",                Demo.FileManager.IndexLive, :index
+
+    # API Keys demo
+    live "/api-keys",             Demo.ApiKeys.IndexLive, :index
+
+    # POS demo
+    live "/pos",                  Demo.Pos.IndexLive, :index
+
+    # Courses demo
+    live "/courses",              Demo.Courses.IndexLive, :index
+
+    # AI Chat demo
+    live "/ai-chat",              Demo.AiChat.IndexLive, :index
+
+    # AI Chat V2 demo
+    live "/ai-chat-v2",           Demo.AiChatV2.IndexLive, :index
+
+    # Image Generator demo
+    live "/image-generator",      Demo.ImageGenerator.IndexLive, :index
   end
 
   # Enable LiveDashboard in development

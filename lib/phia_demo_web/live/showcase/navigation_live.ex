@@ -1,0 +1,280 @@
+defmodule PhiaDemoWeb.Demo.Showcase.NavigationLive do
+  use PhiaDemoWeb, :live_view
+
+  alias PhiaDemoWeb.Demo.Showcase.Layout
+
+  @impl true
+  def mount(_params, _session, socket) do
+    {:ok,
+     socket
+     |> assign(:page_title, "Navigation Showcase")
+     |> assign(:active_tab, "overview")
+     |> assign(:active_step, 2)}
+  end
+
+  @impl true
+  def handle_event("set-tab", %{"tab" => tab}, socket) do
+    {:noreply, assign(socket, :active_tab, tab)}
+  end
+
+  def handle_event("set-step", %{"step" => step}, socket) do
+    {:noreply, assign(socket, :active_step, String.to_integer(step))}
+  end
+
+  @impl true
+  def render(assigns) do
+    ~H"""
+    <Layout.layout current_path="/showcase/navigation">
+      <div class="p-6 space-y-10 max-w-screen-xl mx-auto">
+
+        <div>
+          <h1 class="text-2xl font-bold text-foreground tracking-tight">Navigation</h1>
+          <p class="text-muted-foreground mt-1">Tabs, breadcrumbs, pagination, separators, and step trackers.</p>
+        </div>
+
+        <%!-- Breadcrumb --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Breadcrumb</h2>
+          <div class="space-y-3">
+            <.breadcrumb>
+              <.breadcrumb_list>
+                <.breadcrumb_item>
+                  <.breadcrumb_link href="/">Home</.breadcrumb_link>
+                </.breadcrumb_item>
+                <.breadcrumb_separator />
+                <.breadcrumb_item>
+                  <.breadcrumb_link href="/showcase">Showcase</.breadcrumb_link>
+                </.breadcrumb_item>
+                <.breadcrumb_separator />
+                <.breadcrumb_item>
+                  <.breadcrumb_page>Navigation</.breadcrumb_page>
+                </.breadcrumb_item>
+              </.breadcrumb_list>
+            </.breadcrumb>
+
+            <.breadcrumb>
+              <.breadcrumb_list>
+                <.breadcrumb_item>
+                  <.breadcrumb_link href="/">PhiaUI</.breadcrumb_link>
+                </.breadcrumb_item>
+                <.breadcrumb_separator>
+                  <.icon name="chevron-right" size={:xs} />
+                </.breadcrumb_separator>
+                <.breadcrumb_item>
+                  <.breadcrumb_link href="/showcase">Components</.breadcrumb_link>
+                </.breadcrumb_item>
+                <.breadcrumb_separator>
+                  <.icon name="chevron-right" size={:xs} />
+                </.breadcrumb_separator>
+                <.breadcrumb_item>
+                  <.breadcrumb_link href="/showcase/navigation">Navigation</.breadcrumb_link>
+                </.breadcrumb_item>
+                <.breadcrumb_separator>
+                  <.icon name="chevron-right" size={:xs} />
+                </.breadcrumb_separator>
+                <.breadcrumb_item>
+                  <.breadcrumb_page>Breadcrumb</.breadcrumb_page>
+                </.breadcrumb_item>
+              </.breadcrumb_list>
+            </.breadcrumb>
+          </div>
+        </section>
+
+        <%!-- Tabs (server-driven) --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Tabs (Server-driven)</h2>
+          <.tabs default_value={@active_tab}>
+            <.tabs_list>
+              <.tabs_trigger value="overview" phx-click="set-tab" phx-value-tab="overview">Overview</.tabs_trigger>
+              <.tabs_trigger value="analytics" phx-click="set-tab" phx-value-tab="analytics">Analytics</.tabs_trigger>
+              <.tabs_trigger value="reports" phx-click="set-tab" phx-value-tab="reports">Reports</.tabs_trigger>
+              <.tabs_trigger value="settings" phx-click="set-tab" phx-value-tab="settings">Settings</.tabs_trigger>
+            </.tabs_list>
+            <.tabs_content value="overview">
+              <div class="p-4 rounded-lg bg-muted/30 border border-border/60 mt-4">
+                <p class="text-sm text-foreground font-medium">Overview Panel</p>
+                <p class="text-sm text-muted-foreground mt-1">Content for the overview tab. Tabs manage state via server-side assigns.</p>
+              </div>
+            </.tabs_content>
+            <.tabs_content value="analytics">
+              <div class="p-4 rounded-lg bg-muted/30 border border-border/60 mt-4">
+                <p class="text-sm text-foreground font-medium">Analytics Panel</p>
+                <p class="text-sm text-muted-foreground mt-1">Analytics content goes here. Each tab panel is rendered server-side.</p>
+              </div>
+            </.tabs_content>
+            <.tabs_content value="reports">
+              <div class="p-4 rounded-lg bg-muted/30 border border-border/60 mt-4">
+                <p class="text-sm text-foreground font-medium">Reports Panel</p>
+                <p class="text-sm text-muted-foreground mt-1">Download and schedule reports from this panel.</p>
+              </div>
+            </.tabs_content>
+            <.tabs_content value="settings">
+              <div class="p-4 rounded-lg bg-muted/30 border border-border/60 mt-4">
+                <p class="text-sm text-foreground font-medium">Settings Panel</p>
+                <p class="text-sm text-muted-foreground mt-1">Configure your preferences and account settings.</p>
+              </div>
+            </.tabs_content>
+          </.tabs>
+        </section>
+
+        <%!-- TabsNav --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">TabsNav</h2>
+          <.tabs_nav>
+            <.tabs_nav_item href="#" active={@active_tab == "overview"} phx-click="set-tab" phx-value-tab="overview">Overview</.tabs_nav_item>
+            <.tabs_nav_item href="#" active={@active_tab == "analytics"} phx-click="set-tab" phx-value-tab="analytics">Analytics</.tabs_nav_item>
+            <.tabs_nav_item href="#" active={@active_tab == "reports"} phx-click="set-tab" phx-value-tab="reports">Reports</.tabs_nav_item>
+            <.tabs_nav_item href="#" active={@active_tab == "settings"} phx-click="set-tab" phx-value-tab="settings">Settings</.tabs_nav_item>
+          </.tabs_nav>
+          <div class="p-4 rounded-lg bg-muted/30 border border-border/60">
+            <p class="text-sm text-muted-foreground">Active tab: <strong class="text-foreground">{@active_tab}</strong></p>
+          </div>
+        </section>
+
+        <%!-- Separator --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Separator</h2>
+          <div class="space-y-3 max-w-md">
+            <p class="text-sm text-foreground">Content above separator</p>
+            <.separator />
+            <p class="text-sm text-foreground">Content below separator</p>
+            <div class="relative flex items-center">
+              <.separator />
+              <span class="absolute left-1/2 -translate-x-1/2 bg-background px-2 text-xs text-muted-foreground">Or continue with</span>
+            </div>
+            <p class="text-sm text-foreground">Content after labeled separator</p>
+          </div>
+          <div class="flex items-center gap-3 max-w-xs h-5">
+            <span class="text-sm text-foreground">Left</span>
+            <.separator orientation="vertical" />
+            <span class="text-sm text-foreground">Center</span>
+            <.separator orientation="vertical" />
+            <span class="text-sm text-foreground">Right</span>
+          </div>
+        </section>
+
+        <%!-- Pagination --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Pagination</h2>
+          <div class="space-y-4">
+            <.pagination>
+              <.pagination_content>
+                <.pagination_item>
+                  <.pagination_previous current_page={3} total_pages={10} on_change="noop" />
+                </.pagination_item>
+                <%= for page <- [1, 2, 3, 4, 5] do %>
+                  <.pagination_item>
+                    <.pagination_link page={page} current_page={3} on_change="noop">{page}</.pagination_link>
+                  </.pagination_item>
+                <% end %>
+                <.pagination_item>
+                  <.pagination_next current_page={3} total_pages={10} on_change="noop" />
+                </.pagination_item>
+              </.pagination_content>
+            </.pagination>
+
+            <.pagination>
+              <.pagination_content>
+                <.pagination_item>
+                  <.pagination_previous current_page={1} total_pages={5} on_change="noop" />
+                </.pagination_item>
+                <%= for page <- [1, 2, 3, 4, 5] do %>
+                  <.pagination_item>
+                    <.pagination_link page={page} current_page={1} on_change="noop">{page}</.pagination_link>
+                  </.pagination_item>
+                <% end %>
+                <.pagination_item>
+                  <.pagination_next current_page={1} total_pages={5} on_change="noop" />
+                </.pagination_item>
+              </.pagination_content>
+            </.pagination>
+          </div>
+        </section>
+
+        <%!-- StepTracker --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">StepTracker</h2>
+          <.step_tracker>
+            <.step status={step_status(1, @active_step)} label="Account" description="Your credentials" step={1} />
+            <.step status={step_status(2, @active_step)} label="Profile" description="Personal details" step={2} />
+            <.step status={step_status(3, @active_step)} label="Plan" description="Choose subscription" step={3} />
+            <.step status={step_status(4, @active_step)} label="Payment" description="Billing info" step={4} />
+            <.step status={step_status(5, @active_step)} label="Confirm" description="Review & submit" step={5} />
+          </.step_tracker>
+          <div class="flex gap-2">
+            <.button variant={:outline} size={:sm} phx-click="set-step" phx-value-step={max(1, @active_step - 1)} :if={@active_step > 1}>
+              Previous
+            </.button>
+            <.button size={:sm} phx-click="set-step" phx-value-step={min(5, @active_step + 1)} :if={@active_step < 5}>
+              Next Step
+            </.button>
+          </div>
+        </section>
+
+        <%!-- Accordion --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Accordion</h2>
+          <div class="max-w-2xl">
+            <.accordion id="showcase-acc" type={:single}>
+              <.accordion_item value="a1" type={:single} accordion_id="showcase-acc">
+                <.accordion_trigger value="a1" type={:single} accordion_id="showcase-acc">
+                  What is PhiaUI?
+                </.accordion_trigger>
+                <.accordion_content value="a1">
+                  PhiaUI is a comprehensive Phoenix LiveView component library built on Tailwind CSS v4. It provides 534+ components covering all common UI patterns, from basic inputs to complex data visualization.
+                </.accordion_content>
+              </.accordion_item>
+              <.accordion_item value="a2" type={:single} accordion_id="showcase-acc">
+                <.accordion_trigger value="a2" type={:single} accordion_id="showcase-acc">
+                  How does dark mode work?
+                </.accordion_trigger>
+                <.accordion_content value="a2">
+                  Dark mode is implemented via CSS custom properties and the <code class="font-mono text-xs bg-muted px-1 rounded">.dark</code> class on the HTML element. The <code class="font-mono text-xs bg-muted px-1 rounded">PhiaDarkMode</code> JS hook handles toggling and persists preference to localStorage.
+                </.accordion_content>
+              </.accordion_item>
+              <.accordion_item value="a3" type={:single} accordion_id="showcase-acc">
+                <.accordion_trigger value="a3" type={:single} accordion_id="showcase-acc">
+                  Can I use it without JavaScript?
+                </.accordion_trigger>
+                <.accordion_content value="a3">
+                  Most components are fully server-rendered and work without JavaScript. Only a subset of interactive components (dialogs, dropdowns, tooltips) require the PhiaUI JS hooks for full functionality.
+                </.accordion_content>
+              </.accordion_item>
+              <.accordion_item value="a4" type={:single} accordion_id="showcase-acc">
+                <.accordion_trigger value="a4" type={:single} accordion_id="showcase-acc">
+                  Is TypeScript supported?
+                </.accordion_trigger>
+                <.accordion_content value="a4">
+                  PhiaUI targets Elixir/Phoenix projects. TypeScript support comes via LSP and the generated types from Phoenix LiveView. The JS hooks are plain JavaScript files.
+                </.accordion_content>
+              </.accordion_item>
+            </.accordion>
+          </div>
+        </section>
+
+        <%!-- Kbd --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Kbd</h2>
+          <div class="flex flex-wrap gap-3 items-center">
+            <.kbd>⌘K</.kbd>
+            <.kbd>Ctrl+C</.kbd>
+            <.kbd>Shift</.kbd>
+            <.kbd>Enter</.kbd>
+            <.kbd>Escape</.kbd>
+            <.kbd>Tab</.kbd>
+            <.kbd>↑ ↓ ← →</.kbd>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            Press <.kbd>⌘K</.kbd> to open the command palette, or <.kbd>?</.kbd> for help
+          </div>
+        </section>
+
+      </div>
+    </Layout.layout>
+    """
+  end
+
+  defp step_status(step_num, active) when step_num < active, do: "complete"
+  defp step_status(step_num, active) when step_num == active, do: "active"
+  defp step_status(_step_num, _active), do: "upcoming"
+end
