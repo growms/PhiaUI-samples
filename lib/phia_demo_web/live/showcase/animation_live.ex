@@ -12,7 +12,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.AnimationLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/showcase/animation">
-      <div class="p-6 space-y-12 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-12 max-w-screen-xl mx-auto phia-animate">
 
         <div>
           <h1 class="text-2xl font-bold text-foreground tracking-tight">Animation & Effects</h1>

@@ -38,7 +38,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.UploadLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/showcase/upload">
-      <div class="p-6 space-y-10 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-10 max-w-screen-xl mx-auto phia-animate">
 
         <div>
           <h1 class="text-2xl font-bold text-foreground tracking-tight">Upload</h1>

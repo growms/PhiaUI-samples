@@ -157,7 +157,7 @@ defmodule PhiaDemoWeb.Demo.Notes.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/notes">
-      <div class="h-full overflow-y-auto bg-background">
+      <div class="h-full overflow-y-auto bg-background phia-animate">
         <%!-- Top bar --%>
         <div class="sticky top-0 z-20 flex items-center gap-3 px-6 py-3 bg-background/95 backdrop-blur border-b border-border/60">
           <div class="relative flex-1 max-w-lg">

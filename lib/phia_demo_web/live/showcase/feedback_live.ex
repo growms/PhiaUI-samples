@@ -84,7 +84,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.FeedbackLive do
 
     ~H"""
     <Layout.layout current_path="/showcase/feedback">
-      <div class="p-6 space-y-8 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-8 max-w-screen-xl mx-auto phia-animate">
         <div>
           <h1 class="text-xl font-bold text-foreground tracking-tight">Feedback</h1>
           <p class="text-sm text-muted-foreground mt-0.5">Notification, progress, and overlay components</p>

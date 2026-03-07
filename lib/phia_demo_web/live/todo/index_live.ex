@@ -93,7 +93,7 @@ defmodule PhiaDemoWeb.Demo.Todo.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/todo">
-      <div class="h-full overflow-y-auto bg-background">
+      <div class="h-full overflow-y-auto bg-background phia-animate">
 
         <%!-- Header --%>
         <div class="px-6 pt-6 pb-4 max-w-3xl mx-auto">

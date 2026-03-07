@@ -84,7 +84,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Users do
       <div class="p-6 space-y-6 max-w-screen-2xl mx-auto">
 
         <%!-- Header --%>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 phia-animate">
           <div>
             <h1 class="text-xl font-bold text-foreground tracking-tight">Users</h1>
             <p class="text-sm text-muted-foreground mt-0.5">{length(@all_users)} registered users</p>
@@ -155,7 +155,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Users do
         <% end %>
 
         <%!-- Filter bar --%>
-        <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center justify-between gap-4 phia-animate-d1">
           <div class="w-56">
             <.combobox
               id="role-filter-combobox"

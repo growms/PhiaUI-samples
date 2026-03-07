@@ -148,7 +148,7 @@ defmodule PhiaDemoWeb.HomeLive do
       </section>
 
       <%!-- Theme Palette Picker --%>
-      <section class="px-6 pb-12 max-w-5xl mx-auto">
+      <section class="px-6 pb-12 max-w-5xl mx-auto phia-animate">
         <div class="rounded-2xl border border-border/60 bg-card shadow-sm overflow-hidden">
           <div class="px-6 pt-6 pb-4 border-b border-border/60 flex items-center justify-between">
             <div>
@@ -198,7 +198,7 @@ defmodule PhiaDemoWeb.HomeLive do
       </section>
 
       <%!-- Project groups --%>
-      <section class="px-6 pb-20 max-w-5xl mx-auto space-y-12">
+      <section class="px-6 pb-20 max-w-5xl mx-auto space-y-12 phia-animate-d1">
         <div class="flex items-center justify-between border-b border-border/60 pb-2">
           <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Explore demos

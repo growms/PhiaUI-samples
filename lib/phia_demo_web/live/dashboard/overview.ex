@@ -23,7 +23,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
       <div class="p-6 space-y-6 max-w-screen-2xl mx-auto">
 
         <%!-- Page Header --%>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between phia-animate">
           <div>
             <h1 class="text-xl font-bold text-foreground tracking-tight">Overview</h1>
             <p class="text-sm text-muted-foreground mt-0.5">February 2026 · performance summary</p>
@@ -37,7 +37,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
         </div>
 
         <%!-- KPI Stat Cards --%>
-        <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 phia-animate-d1">
           <.stat_card
             :for={s <- @stats}
             title={s.title}
@@ -56,7 +56,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
         </div>
 
         <%!-- Revenue Area Chart --%>
-        <.card class="border-border/60 shadow-sm">
+        <.card class="border-border/60 shadow-sm phia-animate-d2">
           <.card_header class="pb-4">
             <div class="flex items-start justify-between">
               <div>
@@ -110,7 +110,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
         </.card>
 
         <%!-- Two-column: Recent Orders + Right Panel --%>
-        <div class="grid gap-6 lg:grid-cols-5">
+        <div class="grid gap-6 lg:grid-cols-5 phia-animate-d3">
 
           <%!-- Recent Orders (wider) --%>
           <.card class="lg:col-span-3 border-border/60 shadow-sm">
@@ -228,7 +228,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
         </div>
 
         <%!-- Activity Feed --%>
-        <.card class="border-border/60 shadow-sm">
+        <.card class="border-border/60 shadow-sm phia-animate-d4">
           <.card_header class="pb-3">
             <.card_title>Recent Activity</.card_title>
             <.card_description>Latest platform events</.card_description>

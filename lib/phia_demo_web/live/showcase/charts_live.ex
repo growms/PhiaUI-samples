@@ -43,7 +43,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.ChartsLive do
 
     ~H"""
     <Layout.layout current_path="/showcase/charts">
-      <div class="p-6 space-y-8 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-8 max-w-screen-xl mx-auto phia-animate">
         <div>
           <h1 class="text-xl font-bold text-foreground tracking-tight">Data & Charts</h1>
           <p class="text-sm text-muted-foreground mt-0.5">SVG charts, data visualization and table components</p>

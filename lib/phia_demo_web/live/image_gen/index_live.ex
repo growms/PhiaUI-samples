@@ -99,7 +99,7 @@ defmodule PhiaDemoWeb.Demo.ImageGenerator.IndexLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/image-generator">
-      <div class="flex h-full">
+      <div class="flex h-full phia-animate">
 
         <%!-- Controls panel --%>
         <div class="w-80 shrink-0 border-r border-border/60 bg-card/50 flex flex-col overflow-y-auto">

@@ -40,7 +40,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Analytics do
       <div class="p-6 space-y-6 max-w-screen-2xl mx-auto">
 
         <%!-- Header + period filter --%>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 phia-animate">
           <div>
             <h1 class="text-xl font-bold text-foreground tracking-tight">Analytics</h1>
             <p class="text-sm text-muted-foreground mt-0.5">Traffic and engagement metrics</p>
@@ -83,7 +83,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Analytics do
         </.metric_grid>
 
         <%!-- Charts row --%>
-        <div class="grid gap-6 lg:grid-cols-2">
+        <div class="grid gap-6 lg:grid-cols-2 phia-animate-d1">
           <.chart_shell
             title="Monthly Visitors"
             description="Unique visitors per month"

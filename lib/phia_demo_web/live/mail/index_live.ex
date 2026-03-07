@@ -69,7 +69,7 @@ defmodule PhiaDemoWeb.Demo.Mail.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/mail">
-      <div class="flex h-full">
+      <div class="flex h-full phia-animate">
 
         <%!-- Email list --%>
         <div class="w-80 shrink-0 border-r border-border/60 flex flex-col">

@@ -73,7 +73,7 @@ defmodule PhiaDemoWeb.Demo.AiChat.IndexLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/ai-chat">
-      <div class="flex flex-col h-full bg-background">
+      <div class="flex flex-col h-full bg-background phia-animate">
 
         <%!-- Chat header --%>
         <div class="flex items-center justify-between px-5 py-3 border-b border-border/60 bg-card/40 backdrop-blur shrink-0">

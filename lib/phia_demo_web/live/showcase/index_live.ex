@@ -41,7 +41,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/showcase">
-      <div class="p-6 space-y-8 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-8 max-w-screen-xl mx-auto phia-animate">
 
         <%!-- Hero --%>
         <div class="text-center space-y-3 py-8">

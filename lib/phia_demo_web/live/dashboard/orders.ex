@@ -36,7 +36,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Orders do
       <div class="p-6 space-y-6 max-w-screen-2xl mx-auto">
 
         <%!-- Header --%>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 phia-animate">
           <div>
             <h1 class="text-xl font-bold text-foreground tracking-tight">Orders</h1>
             <p class="text-sm text-muted-foreground mt-0.5">{length(@orders)} orders found</p>

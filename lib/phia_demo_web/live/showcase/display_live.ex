@@ -26,7 +26,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/showcase/display">
-      <div class="p-6 space-y-8 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-8 max-w-screen-xl mx-auto phia-animate">
         <div>
           <h1 class="text-xl font-bold text-foreground tracking-tight">Display</h1>
           <p class="text-sm text-muted-foreground mt-0.5">Visual components for presenting data and content</p>

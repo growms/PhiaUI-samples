@@ -84,7 +84,7 @@ defmodule PhiaDemoWeb.Demo.Kanban.IndexLive do
       <div class="p-6 h-full flex flex-col gap-6 max-w-screen-2xl mx-auto">
 
         <%!-- Header --%>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between phia-animate">
           <div>
             <h1 class="text-xl font-bold text-foreground tracking-tight">Project Board</h1>
             <p class="text-sm text-muted-foreground mt-0.5">PhiaUI v0.2 — Sprint 3</p>
@@ -96,7 +96,7 @@ defmodule PhiaDemoWeb.Demo.Kanban.IndexLive do
         </div>
 
         <%!-- Columns --%>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 flex-1 min-h-0">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 flex-1 min-h-0 phia-animate-d1">
           <%= for col <- @columns do %>
             <% col_cards = Enum.filter(@cards, &(&1.column == col.id)) %>
             <div class={"flex flex-col gap-0 rounded-2xl border border-border/60 overflow-hidden shadow-sm " <> col.col_bg}>

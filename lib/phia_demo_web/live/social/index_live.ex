@@ -60,7 +60,7 @@ defmodule PhiaDemoWeb.Demo.Social.IndexLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/social">
-      <div class="flex gap-6 p-6 max-w-screen-xl mx-auto">
+      <div class="flex gap-6 p-6 max-w-screen-xl mx-auto phia-animate">
 
         <%!-- Main feed --%>
         <div class="flex-1 min-w-0 space-y-4">

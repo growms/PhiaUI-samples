@@ -86,7 +86,7 @@ defmodule PhiaDemoWeb.Demo.AiChatV2.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/ai-chat-v2">
-      <div class="flex h-full">
+      <div class="flex h-full phia-animate">
 
         <%!-- Conversation list --%>
         <div class="w-64 shrink-0 border-r border-border/60 bg-card/50 flex flex-col">

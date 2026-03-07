@@ -70,7 +70,7 @@ defmodule PhiaDemoWeb.Demo.FileManager.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/files">
-      <div class="flex h-full">
+      <div class="flex h-full phia-animate">
 
         <%!-- Folder tree panel --%>
         <div class="w-56 shrink-0 border-r border-border/60 bg-card/50 p-3 space-y-1">

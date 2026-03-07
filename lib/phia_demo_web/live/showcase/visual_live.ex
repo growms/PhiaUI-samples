@@ -12,7 +12,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.VisualLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/showcase/visual">
-      <div class="p-6 space-y-12 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-12 max-w-screen-xl mx-auto phia-animate">
 
         <div>
           <h1 class="text-2xl font-bold text-foreground tracking-tight">Visual Effects</h1>

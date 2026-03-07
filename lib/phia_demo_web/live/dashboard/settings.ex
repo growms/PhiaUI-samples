@@ -78,7 +78,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Settings do
         </.breadcrumb>
 
         <%!-- Header --%>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between phia-animate">
           <div>
             <h1 class="text-2xl font-bold text-foreground tracking-tight">Settings</h1>
             <p class="text-sm text-muted-foreground mt-1">Manage your account and platform preferences</p>
@@ -95,6 +95,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Settings do
           </.alert>
         <% end %>
 
+        <div class="phia-animate-d1">
         <.accordion id="settings-accordion" type={:single}>
 
           <%!-- Profile --%>
@@ -244,6 +245,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Settings do
           </.accordion_item>
 
         </.accordion>
+        </div>
 
         <%!-- Actions footer --%>
         <.card class="border-dashed">

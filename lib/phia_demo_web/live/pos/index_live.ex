@@ -100,7 +100,7 @@ defmodule PhiaDemoWeb.Demo.Pos.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/pos">
-      <div class="flex h-full">
+      <div class="flex h-full phia-animate">
 
         <%!-- Products panel --%>
         <div class="flex-1 flex flex-col min-w-0 p-5 space-y-4 overflow-auto">

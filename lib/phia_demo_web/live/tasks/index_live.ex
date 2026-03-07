@@ -75,7 +75,7 @@ defmodule PhiaDemoWeb.Demo.Tasks.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/tasks">
-      <div class="p-6 space-y-5 max-w-screen-xl mx-auto">
+      <div class="p-6 space-y-5 max-w-screen-xl mx-auto phia-animate">
 
         <%!-- Header --%>
         <div class="flex items-center justify-between">
