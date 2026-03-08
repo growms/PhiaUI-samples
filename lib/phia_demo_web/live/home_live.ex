@@ -113,10 +113,11 @@ defmodule PhiaDemoWeb.HomeLive do
             <span class="h-3 w-px bg-primary/30" />
             <span class="text-primary/70">Phoenix LiveView</span>
           </div>
-          <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-foreground mb-5 leading-tight">
-            Component Library<br />
-            <span class="text-primary">Demos</span>
-          </h1>
+          <img
+            src={~p"/images/phiaui-demo-logo.svg"}
+            alt="PhiaUI Demo"
+            class="mx-auto mb-5 w-full max-w-md sm:max-w-lg"
+          />
           <p class="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
             16 complete Phoenix LiveView applications built with PhiaUI —
             a Tailwind v4 component library with CSS-first theming and dark mode.
@@ -176,24 +177,6 @@ defmodule PhiaDemoWeb.HomeLive do
             <% end %>
           </div>
 
-          <%!-- Multi-theme preview (the killer v0.1.11 feature!) --%>
-          <div class="px-6 pb-6">
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-              All themes — live preview via CSS-first scoped theming
-            </p>
-            <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
-              <%= for theme <- @themes do %>
-                <.theme_provider theme={theme.atom} class="rounded-xl border border-primary/25 bg-gradient-to-b from-primary/15 to-primary/5 p-3 flex flex-col items-center gap-2.5">
-                  <span
-                    class="h-7 w-7 rounded-full ring-2 ring-white/30 shadow-md"
-                    style={"background-color: #{theme.color}"}
-                  />
-                  <.button size={:sm} class="w-full text-[10px] px-1 py-1 h-auto">Primary</.button>
-                  <span class="text-[9px] font-semibold text-primary/80">{theme.label}</span>
-                </.theme_provider>
-              <% end %>
-            </div>
-          </div>
         </div>
       </section>
 
