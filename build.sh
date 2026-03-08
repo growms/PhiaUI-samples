@@ -4,14 +4,13 @@ set -e
 echo "==> Installing dependencies..."
 mix deps.get --only prod
 
-echo "==> Installing asset build tools..."
-mix tailwind.install --if-missing
-mix esbuild.install --if-missing
-
 echo "==> Compiling (prod)..."
 MIX_ENV=prod mix compile
 
-echo "==> Building and deploying assets..."
+echo "==> Building assets (installs binaries if missing)..."
+MIX_ENV=prod mix assets.build
+
+echo "==> Deploying assets (minify + digest)..."
 MIX_ENV=prod mix assets.deploy
 
 echo "==> Generating release..."
