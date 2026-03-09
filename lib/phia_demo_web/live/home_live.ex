@@ -60,7 +60,8 @@ defmodule PhiaDemoWeb.HomeLive do
         %{id: :files,    title: "File Manager",   href: "/files",    icon: "folder",        desc: "File browser with grid/list views, upload, and folder tree."},
         %{id: :api_keys, title: "API Keys",       href: "/api-keys", icon: "shield",        desc: "Secure key management with copy, reveal, revoke, and scopes."},
         %{id: :pos,      title: "Point of Sale",  href: "/pos",      icon: "shopping-cart", desc: "POS terminal with catalog, cart, and checkout flow."},
-        %{id: :courses,  title: "Courses",        href: "/courses",  icon: "layers",        desc: "Learning platform with catalog, enrollment, and progress."}
+        %{id: :courses,  title: "Courses",        href: "/courses",  icon: "layers",        desc: "Learning platform with catalog, enrollment, and progress."},
+        %{id: :hotel,    title: "Hotel",           href: "/hotel",    icon: "building-2",    desc: "Hotel management with reservations, room calendar, and revenue stats."}
       ]
     },
     %{
@@ -72,6 +73,20 @@ defmodule PhiaDemoWeb.HomeLive do
         %{id: :ai_chat,  title: "AI Chat",           href: "/ai-chat",         icon: "message-square", desc: "Conversational AI with suggestions and typing indicator."},
         %{id: :ai_chat_v2, title: "AI Chat v2",      href: "/ai-chat-v2",      icon: "message-square", desc: "Advanced chat with model selection, temperature, and history."},
         %{id: :image_gen,  title: "Image Generator", href: "/image-generator", icon: "image",          desc: "AI image studio with prompt editor, styles, and gallery."}
+      ]
+    },
+    %{
+      label: "Pages",
+      icon: "list",
+      color: "text-purple-500",
+      bg: "bg-purple-500/10",
+      projects: [
+        %{id: :profile, title: "Profile", href: "/profile", icon: "user",
+          desc: "User profile pages — classic card layout (V1) and modern cover/stream layout (V2)."},
+        %{id: :pricing,        title: "Pricing",       href: "/pricing/column", icon: "tag",
+          desc: "Pricing pages — column cards, comparison table, and single plan layouts."},
+        %{id: :notifications, title: "Notifications", href: "/notifications",  icon: "bell",
+          desc: "Notifications feed with filters, search, pagination, and mark-as-read."}
       ]
     }
   ]
@@ -120,7 +135,7 @@ defmodule PhiaDemoWeb.HomeLive do
           <%!-- Description as visual chips --%>
           <div class="flex flex-wrap items-center justify-center gap-1.5 mb-4 text-sm">
             <span class="text-muted-foreground">
-              <span class="font-semibold text-foreground">16</span> complete
+              <span class="font-semibold text-foreground">20</span> complete
               <span class="font-medium text-foreground/80">Phoenix LiveView</span> apps
             </span>
             <span class="text-border/60 hidden sm:inline">·</span>
@@ -133,7 +148,7 @@ defmodule PhiaDemoWeb.HomeLive do
           <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <div class="text-center">
               <p class="text-2xl font-bold text-foreground tabular-nums">
-                <.number_ticker id="stat-apps" value={16} duration={1200} />
+                <.number_ticker id="stat-apps" value={20} duration={1200} />
               </p>
               <p class="text-[10px] text-muted-foreground mt-0.5">Apps</p>
             </div>

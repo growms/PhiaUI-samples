@@ -12,7 +12,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.CardsLive do
   def render(assigns) do
     ~H"""
     <Layout.layout current_path="/showcase/cards">
-      <div class="p-6 space-y-10 max-w-screen-xl mx-auto phia-animate">
+      <div class="p-4 md:p-6 space-y-10 max-w-screen-xl mx-auto phia-animate">
 
         <div>
           <h1 class="text-2xl font-bold text-foreground tracking-tight">Cards</h1>
@@ -60,7 +60,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.CardsLive do
         <%!-- Selectable Card --%>
         <section class="space-y-4">
           <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">SelectableCard</h2>
-          <.selectable_card_group class="grid gap-3 sm:grid-cols-4">
+          <.selectable_card_group class="grid gap-3 grid-cols-2 md:grid-cols-4">
             <.selectable_card selected={false} on_click="noop" value="free">
               <:title>Free — $0/mo</:title>
               <:description>For individuals</:description>
@@ -263,7 +263,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.CardsLive do
         <%!-- TeamCard --%>
         <section class="space-y-4">
           <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">TeamCard</h2>
-          <div class="grid gap-4 sm:grid-cols-4">
+          <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
             <.team_card name="Alex Rivera" role="Lead Engineer" fallback="AR" />
             <.team_card name="Mei Zhang" role="Product Designer" department="Design" fallback="MZ" />
             <.team_card name="Jordan Cole" role="DevOps" email="jordan@acme.com" variant={:compact} fallback="JC" />

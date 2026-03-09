@@ -287,7 +287,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Users do
           </div>
           <div class="space-y-3">
             <h3 class="text-sm font-semibold text-foreground">Account Information</h3>
-            <div class="grid grid-cols-2 gap-3 text-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               <div class="space-y-1"><p class="text-muted-foreground">ID</p><p class="font-mono font-medium">#1001</p></div>
               <div class="space-y-1"><p class="text-muted-foreground">Joined</p><p class="font-medium">Jan 2024</p></div>
               <div class="space-y-1"><p class="text-muted-foreground">Last access</p><p class="font-medium">Today, 07:42</p></div>

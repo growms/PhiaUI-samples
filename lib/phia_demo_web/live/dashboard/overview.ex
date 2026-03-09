@@ -81,7 +81,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
         </.card>
 
         <%!-- Two-column: Recent Orders + Right Panel --%>
-        <div class="grid gap-6 lg:grid-cols-5 phia-animate-d3">
+        <div class="grid gap-4 lg:gap-6 lg:grid-cols-5 phia-animate-d3">
 
           <%!-- Recent Orders (wider) --%>
           <.card class="lg:col-span-3 border-border/60 shadow-sm">
@@ -97,6 +97,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
               </div>
             </.card_header>
             <.card_content class="p-0">
+              <div class="overflow-x-auto">
               <.table>
                 <.table_header>
                   <.table_row class="hover:bg-transparent">
@@ -119,6 +120,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Overview do
                   </.table_row>
                 </.table_body>
               </.table>
+              </div>
             </.card_content>
           </.card>
 

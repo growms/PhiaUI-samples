@@ -41,7 +41,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
 
     ~H"""
     <Layout.layout current_path="/showcase">
-      <div class="p-6 space-y-8 max-w-screen-xl mx-auto phia-animate">
+      <div class="p-4 md:p-6 space-y-8 max-w-screen-xl mx-auto phia-animate">
 
         <%!-- Hero --%>
         <div class="text-center space-y-3 py-8">
@@ -62,9 +62,9 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
         </div>
 
         <%!-- Category Cards --%>
-        <div class="grid gap-6 sm:grid-cols-2">
+        <div class="grid gap-4 md:gap-6 sm:grid-cols-2">
           <%= for cat <- @categories do %>
-            <a href={cat.href} class="group block rounded-xl border border-border/60 bg-card p-6 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200">
+            <a href={cat.href} class="group block rounded-xl border border-border/60 bg-card p-4 md:p-6 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200">
               <div class="flex items-start gap-4">
                 <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary/15 transition-colors">
                   <.icon name={cat.icon} class="text-primary" />

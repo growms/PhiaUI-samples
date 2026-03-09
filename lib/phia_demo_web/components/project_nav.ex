@@ -55,7 +55,8 @@ defmodule PhiaDemoWeb.ProjectNav do
         %{id: :files,    label: "Files",    href: "/files",           icon: "folder"},
         %{id: :api_keys, label: "API Keys", href: "/api-keys",        icon: "shield"},
         %{id: :pos,      label: "POS",      href: "/pos",             icon: "shopping-cart"},
-        %{id: :courses,  label: "Courses",  href: "/courses",         icon: "layers"}
+        %{id: :courses,  label: "Courses",  href: "/courses",         icon: "layers"},
+        %{id: :hotel,    label: "Hotel",    href: "/hotel",           icon: "building-2"}
       ]
     },
     %{
@@ -65,6 +66,15 @@ defmodule PhiaDemoWeb.ProjectNav do
         %{id: :ai_chat,    label: "AI Chat",    href: "/ai-chat",         icon: "message-square"},
         %{id: :ai_chat_v2, label: "AI Chat v2", href: "/ai-chat-v2",      icon: "sparkles"},
         %{id: :image_gen,  label: "Image Gen",  href: "/image-generator", icon: "image"}
+      ]
+    },
+    %{
+      label: "Pages",
+      color: "text-purple-500",
+      items: [
+        %{id: :profile, label: "Profile", href: "/profile",        icon: "user"},
+        %{id: :pricing,        label: "Pricing",       href: "/pricing/column", icon: "tag"},
+        %{id: :notifications, label: "Notifications", href: "/notifications",  icon: "bell"}
       ]
     }
   ]
@@ -133,11 +143,11 @@ defmodule PhiaDemoWeb.ProjectNav do
               size={:xs}
               class={
                 if project.id == @current_project,
-                  do: "hidden sm:block shrink-0 text-primary",
-                  else: "hidden sm:block shrink-0 text-muted-foreground/60"
+                  do: "shrink-0 text-primary",
+                  else: "shrink-0 text-muted-foreground/60"
               }
             />
-            {project.label}
+            <span class="hidden sm:inline">{project.label}</span>
             <span
               :if={project.id == @current_project}
               class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-primary"
@@ -164,11 +174,11 @@ defmodule PhiaDemoWeb.ProjectNav do
               size={:xs}
               class={
                 if @more_active,
-                  do: "hidden sm:block shrink-0 text-primary",
-                  else: "hidden sm:block shrink-0 text-muted-foreground/60"
+                  do: "shrink-0 text-primary",
+                  else: "shrink-0 text-muted-foreground/60"
               }
             />
-            More
+            <span class="hidden sm:inline">More</span>
             <.icon
               name="chevron-down"
               size={:xs}
@@ -186,7 +196,7 @@ defmodule PhiaDemoWeb.ProjectNav do
                pt-2 transparent padding bridges trigger→panel gap on hover.
           --%>
           <div class="absolute hidden group-hover/more:block top-full right-0 pt-2 z-[100]">
-            <div class="w-72 sm:w-[440px] rounded-xl border border-border bg-popover shadow-xl overflow-hidden">
+            <div class="w-72 sm:w-[440px] max-w-[calc(100vw-1rem)] rounded-xl border border-border bg-popover shadow-xl overflow-hidden">
 
               <%!-- Panel header --%>
               <div class="px-4 py-2.5 border-b border-border/50 bg-muted/40 flex items-center justify-between">
@@ -200,7 +210,7 @@ defmodule PhiaDemoWeb.ProjectNav do
               </div>
 
               <%!-- 2-column categories grid --%>
-              <div class="grid grid-cols-2 p-3 gap-1">
+              <div class="grid grid-cols-1 sm:grid-cols-2 p-3 gap-1">
                 <%= for group <- @projects_more do %>
                   <div class="p-1.5">
                     <%!-- Category label --%>

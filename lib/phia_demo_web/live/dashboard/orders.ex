@@ -188,7 +188,7 @@ defmodule PhiaDemoWeb.Demo.Dashboard.Orders do
           </div>
           <div class="space-y-3">
             <h3 class="text-sm font-semibold text-foreground">Information</h3>
-            <div class="grid grid-cols-2 gap-3 text-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               <div class="space-y-1"><p class="text-muted-foreground">Customer</p><p class="font-medium">Ana Costa</p></div>
               <div class="space-y-1"><p class="text-muted-foreground">Date</p><p class="font-medium">Mar 1, 2026</p></div>
               <div class="space-y-1"><p class="text-muted-foreground">Product</p><p class="font-medium">Pro Plan</p></div>

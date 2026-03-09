@@ -84,6 +84,23 @@ defmodule PhiaDemoWeb.Router do
 
     # Image Generator demo
     live "/image-generator",      Demo.ImageGenerator.IndexLive, :index
+
+    # Hotel demo
+    live "/hotel",          Demo.Hotel.OverviewLive,  :index
+    live "/hotel/bookings", Demo.Hotel.BookingsLive,  :index
+
+    # Profile demo
+    live "/profile",    Demo.Profile.V1Live, :index
+    live "/profile/v2", Demo.Profile.V2Live, :index
+
+    # Notifications page
+    live "/notifications", Demo.Notifications.IndexLive, :index
+
+    # Pricing demo
+    live "/pricing",        Demo.Pricing.ColumnLive, :index
+    live "/pricing/column", Demo.Pricing.ColumnLive, :index
+    live "/pricing/table",  Demo.Pricing.TableLive,  :index
+    live "/pricing/single", Demo.Pricing.SingleLive, :index
   end
 
   # Enable LiveDashboard in development
