@@ -121,87 +121,89 @@ defmodule PhiaDemoWeb.Demo.Showcase.ChartsLive do
           </.demo_section>
         </div>
 
-        <%!-- Donut + Scatter side-by-side, Funnel full-width --%>
+        <%!-- Pie (Browser Share) + Multi-Series Line side-by-side --%>
         <div class="grid gap-6 lg:grid-cols-2">
-          <.demo_section title="Donut Chart" subtitle="Ring/donut variant of pie — great for proportional breakdown with center space">
+          <.demo_section title="Pie Chart (Browser Share)" subtitle="Proportional breakdown — browser market share distribution">
             <.phia_chart
-              id="showcase-donut"
-              type={:donut}
+              id="showcase-pie-browsers"
+              type={:pie}
               series={[%{name: "Browser Share", data: [64, 18, 12, 4, 2]}]}
               labels={["Chrome", "Safari", "Firefox", "Edge", "Other"]}
               height="280px"
             />
           </.demo_section>
 
-          <.demo_section title="Scatter Chart" subtitle="X/Y scatter plot — showing correlation between two variables">
+          <.demo_section title="Multi-Series Line" subtitle="Product growth comparison — two lines over the same period">
             <.phia_chart
-              id="showcase-scatter"
-              type={:scatter}
+              id="showcase-multi-line"
+              type={:line}
               series={[
-                %{name: "Product A", data: [[10, 8], [20, 15], [30, 22], [40, 28], [50, 35], [60, 42], [70, 38], [80, 48]]},
-                %{name: "Product B", data: [[15, 12], [25, 18], [35, 25], [45, 30], [55, 28], [65, 35], [75, 42], [85, 50]]}
+                %{name: "Product A", data: [8, 15, 22, 28, 35, 42, 38, 48]},
+                %{name: "Product B", data: [12, 18, 25, 30, 28, 35, 42, 50]}
               ]}
-              labels={[]}
+              labels={["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]}
               height="300px"
             />
           </.demo_section>
         </div>
 
-        <%!-- Funnel Chart --%>
-        <.demo_section title="Funnel Chart" subtitle="Conversion funnel — showing progressive reduction through stages">
+        <%!-- Conversion Bar Chart --%>
+        <.demo_section title="Bar Chart (Conversion Funnel)" subtitle="Conversion stages — progressive reduction through the pipeline">
           <.phia_chart
-            id="showcase-funnel"
-            type={:funnel}
+            id="showcase-funnel-bar"
+            type={:bar}
             series={[%{name: "Conversion", data: [5000, 3800, 2400, 1200, 600]}]}
             labels={["Visitors", "Sign Ups", "Trials", "Paid", "Retained"]}
             height="300px"
           />
         </.demo_section>
 
-        <%!-- Waterfall Chart --%>
-        <.demo_section title="Waterfall Chart" subtitle="Cumulative effect of sequential positive/negative values">
+        <%!-- Stacked Area Chart --%>
+        <.demo_section title="Area Chart (Revenue Breakdown)" subtitle="Stacked area showing cumulative revenue categories over time">
           <.phia_chart
-            id="showcase-waterfall"
-            type={:waterfall}
-            series={[%{name: "Revenue", data: [120, 30, -15, 45, -25, 60, -10]}]}
-            labels={["Q1 Base", "New Sales", "Refunds", "Upsells", "Churn", "Expansion", "Credits"]}
+            id="showcase-area-stacked"
+            type={:area}
+            series={[
+              %{name: "Subscriptions", data: [120, 135, 150, 162, 178, 195, 210]},
+              %{name: "One-time Sales", data: [30, 25, 45, 20, 60, 35, 50]},
+              %{name: "Services", data: [15, 18, 22, 28, 25, 32, 38]}
+            ]}
+            labels={["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]}
             height="300px"
           />
         </.demo_section>
 
-        <%!-- Heatmap Chart --%>
-        <.demo_section title="Heatmap Chart" subtitle="Matrix visualization — showing intensity across two dimensions">
+        <%!-- Weekly Activity Bar --%>
+        <.demo_section title="Bar Chart (Weekly Activity)" subtitle="Multi-series bar — activity breakdown by day of week">
           <.phia_chart
-            id="showcase-heatmap"
-            type={:heatmap}
+            id="showcase-weekly-bar"
+            type={:bar}
             series={[
-              %{name: "Mon", data: [3, 5, 8, 2, 6, 4, 7]},
-              %{name: "Tue", data: [7, 4, 2, 9, 5, 3, 6]},
-              %{name: "Wed", data: [2, 8, 5, 3, 7, 9, 4]},
-              %{name: "Thu", data: [6, 3, 7, 5, 2, 8, 9]},
-              %{name: "Fri", data: [9, 6, 4, 8, 3, 5, 2]}
+              %{name: "Commits", data: [12, 19, 15, 22, 18, 8, 3]},
+              %{name: "PRs Merged", data: [5, 8, 7, 10, 9, 3, 1]},
+              %{name: "Issues Closed", data: [3, 6, 4, 8, 5, 2, 0]}
             ]}
-            labels={["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm"]}
+            labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
             height="280px"
           />
         </.demo_section>
 
-        <%!-- Treemap Chart --%>
-        <.demo_section title="Treemap Chart" subtitle="Hierarchical data as proportionally-sized rectangles">
+        <%!-- Market Share Pie --%>
+        <.demo_section title="Pie Chart (Market Cap)" subtitle="Proportional market capitalization — top tech companies">
           <.phia_chart
-            id="showcase-treemap"
-            type={:treemap}
+            id="showcase-pie-market"
+            type={:pie}
             series={[%{name: "Market Cap", data: [450, 280, 200, 150, 120, 90, 60, 40]}]}
             labels={["Apple", "Microsoft", "Amazon", "Google", "Meta", "Tesla", "Netflix", "Uber"]}
             height="300px"
           />
         </.demo_section>
 
-        <%!-- Histogram Chart --%>
-        <.demo_section title="Histogram Chart" subtitle="Distribution of values across bins">
+        <%!-- Distribution Bar --%>
+        <.demo_section title="Bar Chart (Distribution)" subtitle="Response time distribution — frequency across time ranges">
           <.phia_chart
-            id="showcase-histogram"
-            type={:histogram}
+            id="showcase-distribution-bar"
+            type={:bar}
             series={[%{name: "Response Time (ms)", data: [12, 45, 89, 132, 95, 67, 34, 18, 8, 3]}]}
             labels={["0-50", "50-100", "100-150", "150-200", "200-250", "250-300", "300-350", "350-400", "400-450", "450-500"]}
             height="280px"

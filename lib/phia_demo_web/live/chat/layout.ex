@@ -78,7 +78,7 @@ defmodule PhiaDemoWeb.Demo.Chat.Layout do
                       <.avatar_fallback name={user.name} class="bg-primary/10 text-primary text-xs font-semibold" />
                     </.avatar>
                     <span class={[
-                      "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full ring-1 ring-background",
+                      "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full ring-1 ring-background chat-online-dot",
                       case user.status do
                         :online -> "bg-success"
                         :away -> "bg-warning"
