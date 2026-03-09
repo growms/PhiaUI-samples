@@ -180,8 +180,12 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                 <p class="text-sm text-muted-foreground">Card content with a footer below.</p>
               </.card_content>
               <.card_footer class="gap-2">
-                <.button variant={:outline} size={:sm}>Cancel</.button>
-                <.button variant={:default} size={:sm}>Confirm</.button>
+                <.button variant={:outline} size={:sm}>
+                  <.icon name="x" size={:xs} class="mr-1" />Cancel
+                </.button>
+                <.button variant={:default} size={:sm}>
+                  <.icon name="check" size={:xs} class="mr-1" />Confirm
+                </.button>
               </.card_footer>
             </.card>
           </div>
@@ -212,7 +216,10 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
               </.selectable_card>
             <% end %>
           </.selectable_card_group>
-          <p class="text-xs text-muted-foreground mt-3">Selected: <strong class="text-foreground">{@selected_plan}</strong></p>
+          <p class="text-xs text-muted-foreground mt-3">
+            <.icon name="check" size={:xs} class="inline-block mr-0.5 -mt-px text-primary" />
+            Selected: <strong class="text-foreground">{@selected_plan}</strong>
+          </p>
         </.demo_section>
 
         <%!-- ReceiptCard --%>
@@ -221,8 +228,14 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
             <:header>
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="font-semibold text-foreground text-sm">Order #1042</p>
-                  <p class="text-xs text-muted-foreground">March 6, 2026</p>
+                  <p class="font-semibold text-foreground text-sm flex items-center gap-1.5">
+                    <.icon name="package" size={:xs} class="text-primary" />
+                    Order #1042
+                  </p>
+                  <p class="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                    <.icon name="calendar" size={:xs} />
+                    March 6, 2026
+                  </p>
                 </div>
                 <.badge variant={:default} class="bg-green-600/80 text-white text-xs">Paid</.badge>
               </div>
@@ -241,36 +254,82 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
           </.receipt_card>
         </.demo_section>
 
-        <%!-- Timeline --%>
-        <.demo_section title="Timeline" subtitle="Vertical event sequence with icons and timestamps">
+        <%!-- Timeline (enhanced) --%>
+        <.demo_section title="Timeline" subtitle="Vertical event sequence with status icons, rich content, and timestamps">
           <.timeline>
             <.timeline_item timestamp="Just now">
               <:icon>
-                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 ring-4 ring-background">
-                  <.icon name="circle-check" size={:xs} class="text-primary" />
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 ring-4 ring-background">
+                  <.icon name="circle-check" size={:xs} class="text-green-600 dark:text-green-400" />
                 </div>
               </:icon>
               <p class="text-sm font-semibold text-foreground">Deployment completed</p>
-              <p class="text-xs text-muted-foreground mt-0.5">v0.1.13 is live in production</p>
+              <p class="text-xs text-muted-foreground mt-0.5">v0.1.14 is live in production</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <.badge variant={:default} class="bg-green-600/80 text-white text-xs">success</.badge>
+                <.badge variant={:outline} class="text-xs">auto-deploy</.badge>
+              </div>
             </.timeline_item>
+
+            <.timeline_item timestamp="45 min ago">
+              <:icon>
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 ring-4 ring-background">
+                  <.icon name="check-square" size={:xs} class="text-blue-600 dark:text-blue-400" />
+                </div>
+              </:icon>
+              <p class="text-sm font-semibold text-foreground">All tests passed</p>
+              <p class="text-xs text-muted-foreground mt-0.5">142 unit tests, 38 integration tests — 0 failures</p>
+              <div class="mt-2 flex items-center gap-2">
+                <div class="h-1.5 flex-1 max-w-32 rounded-full bg-muted overflow-hidden">
+                  <div class="h-full rounded-full bg-green-500" style="width: 100%" />
+                </div>
+                <span class="text-xs text-muted-foreground tabular-nums">180/180</span>
+              </div>
+            </.timeline_item>
+
             <.timeline_item timestamp="2 hours ago">
               <:icon>
                 <div class="flex h-7 w-7 items-center justify-center rounded-full bg-muted ring-4 ring-background">
                   <.icon name="code" size={:xs} class="text-muted-foreground" />
                 </div>
               </:icon>
-              <p class="text-sm font-semibold text-foreground">Build passed</p>
-              <p class="text-xs text-muted-foreground mt-0.5">All 142 tests passed</p>
+              <p class="text-sm font-semibold text-foreground">Build started</p>
+              <p class="text-xs text-muted-foreground mt-0.5">Triggered by push to <code class="bg-muted px-1 rounded text-xs font-mono">main</code></p>
             </.timeline_item>
+
+            <.timeline_item timestamp="3 hours ago">
+              <:icon>
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-violet-100 dark:bg-violet-900/30 ring-4 ring-background">
+                  <.icon name="user-plus" size={:xs} class="text-violet-600 dark:text-violet-400" />
+                </div>
+              </:icon>
+              <p class="text-sm font-semibold text-foreground">Code review approved</p>
+              <p class="text-xs text-muted-foreground mt-0.5">2 of 2 reviewers approved the changes</p>
+              <div class="mt-2 flex items-center gap-2">
+                <.avatar_group size="sm" max={3}>
+                  <:item name="Alice Smith" />
+                  <:item name="Bob Chen" />
+                </.avatar_group>
+                <span class="text-xs text-muted-foreground">approved</span>
+              </div>
+            </.timeline_item>
+
             <.timeline_item timestamp="5 hours ago">
               <:icon>
-                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-warning/10 ring-4 ring-background">
-                  <.icon name="triangle-alert" size={:xs} class="text-warning" />
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30 ring-4 ring-background">
+                  <.icon name="triangle-alert" size={:xs} class="text-amber-600 dark:text-amber-400" />
                 </div>
               </:icon>
               <p class="text-sm font-semibold text-foreground">Review requested</p>
-              <p class="text-xs text-muted-foreground mt-0.5">2 reviewers assigned</p>
+              <p class="text-xs text-muted-foreground mt-0.5">PR #247 — "feat: add activity feed component"</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <.badge variant={:outline} class="text-xs">
+                  <.icon name="git-branch" size={:xs} class="mr-1" />feat/activity-feed
+                </.badge>
+                <.badge variant={:secondary} class="text-xs">+342 -18</.badge>
+              </div>
             </.timeline_item>
+
             <.timeline_item timestamp="Yesterday">
               <:icon>
                 <div class="flex h-7 w-7 items-center justify-center rounded-full bg-muted ring-4 ring-background">
@@ -278,36 +337,123 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                 </div>
               </:icon>
               <p class="text-sm font-semibold text-foreground">Branch created</p>
-              <p class="text-xs text-muted-foreground mt-0.5">feat/phia-ui-showcase</p>
+              <p class="text-xs text-muted-foreground mt-0.5">
+                <code class="bg-muted px-1 rounded text-xs font-mono">feat/activity-feed</code> from <code class="bg-muted px-1 rounded text-xs font-mono">main</code>
+              </p>
+            </.timeline_item>
+
+            <.timeline_item timestamp="2 days ago">
+              <:icon>
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 ring-4 ring-background">
+                  <.icon name="circle-x" size={:xs} class="text-red-600 dark:text-red-400" />
+                </div>
+              </:icon>
+              <p class="text-sm font-semibold text-foreground">Build failed</p>
+              <p class="text-xs text-muted-foreground mt-0.5">3 tests failed in <code class="bg-muted px-1 rounded text-xs font-mono">test/components/timeline_test.exs</code></p>
+              <div class="mt-2">
+                <.badge variant={:destructive} class="text-xs">
+                  <.icon name="x" size={:xs} class="mr-1" />failure
+                </.badge>
+              </div>
             </.timeline_item>
           </.timeline>
         </.demo_section>
 
-        <%!-- ActivityFeed --%>
-        <.demo_section title="ActivityFeed" subtitle="Grouped activity log with icons and relative timestamps">
-          <.activity_feed>
+        <%!-- ActivityFeed (enhanced) --%>
+        <.demo_section title="ActivityFeed" subtitle="Grouped activity log — 6 event types with icons, avatars, and timestamps">
+          <.activity_feed id="showcase-activity">
             <.activity_group label="Today">
               <.activity_item type="task" timestamp="2 min ago">
-                <span class="font-medium">Deployment succeeded</span>
-                <span class="text-muted-foreground"> — Pushed to production by @admin</span>
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Admin" class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Deployment succeeded</strong> — v0.1.14 pushed to production by <span class="font-medium text-primary">@admin</span>
               </.activity_item>
-              <.activity_item type="mention" timestamp="1 hour ago">
-                <span class="font-medium">New member joined</span>
-                <span class="text-muted-foreground"> — Carol Davis accepted the invitation</span>
+
+              <.activity_item type="mention" timestamp="35 min ago">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Carol Davis" class="bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Carol Davis</strong> mentioned <span class="font-medium text-primary">@you</span> in <strong>#design-review</strong>
               </.activity_item>
-              <.activity_item type="system" timestamp="3 hours ago">
-                <span class="font-medium">Settings updated</span>
-                <span class="text-muted-foreground"> — Notification preferences changed</span>
+
+              <.activity_item type="file" timestamp="1 hour ago">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Bob Chen" class="bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Bob Chen</strong> uploaded <strong>Q1_Report_Final.pdf</strong> to <strong>Analytics Dashboard</strong>
+              </.activity_item>
+
+              <.activity_item type="call" timestamp="2 hours ago">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="David Lee" class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>David Lee</strong> completed a <strong>32 min call</strong> with Acme Corp — Sprint planning
+              </.activity_item>
+
+              <.activity_item type="reaction" timestamp="3 hours ago">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Eve Wilson" class="bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Eve Wilson</strong> reacted ❤️ to your comment in <strong>API Gateway</strong>
+              </.activity_item>
+
+              <.activity_item type="system" timestamp="5 hours ago">
+                <span class="font-medium">System backup completed</span> — All databases snapshotted successfully
               </.activity_item>
             </.activity_group>
+
             <.activity_group label="Yesterday">
-              <.activity_item type="file" timestamp="9 hours ago">
-                <span class="font-medium">New order received</span>
-                <span class="text-muted-foreground"> — Order #1042 — $195.20</span>
+              <.activity_item type="task" timestamp="9:00 AM">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Frank Lee" class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Frank Lee</strong> completed task <strong>Database migration</strong> in <strong>Data Pipeline</strong>
               </.activity_item>
-              <.activity_item type="system" timestamp="12 hours ago">
-                <span class="font-medium">Build failed</span>
-                <span class="text-muted-foreground"> — GitHub Actions — 3 tests failed</span>
+
+              <.activity_item type="file" timestamp="2:30 PM">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Grace Chen" class="bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Grace Chen</strong> shared <strong>brand-guidelines-v3.zip</strong> with the Design team
+              </.activity_item>
+
+              <.activity_item type="system" timestamp="6:00 PM">
+                <span class="font-medium">Sprint 14 archived</span> — 12 of 14 stories completed (86% velocity)
+              </.activity_item>
+            </.activity_group>
+
+            <.activity_group label="Mar 5, 2026">
+              <.activity_item type="mention" timestamp="10:00 AM">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Hank Davis" class="bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Hank Davis</strong> mentioned <span class="font-medium text-primary">@you</span> in <strong>Security checklist</strong> — "Can you review the auth flow?"
+              </.activity_item>
+
+              <.activity_item type="call" timestamp="3:00 PM">
+                <:avatar>
+                  <.avatar size="sm">
+                    <.avatar_fallback name="Alice Smith" class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-semibold" />
+                  </.avatar>
+                </:avatar>
+                <strong>Alice Smith</strong> scheduled a <strong>design review call</strong> for Thursday at 2 PM
               </.activity_item>
             </.activity_group>
           </.activity_feed>
@@ -325,11 +471,15 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                 </.breadcrumb_item>
                 <.breadcrumb_separator />
                 <.breadcrumb_item>
-                  <.breadcrumb_link href="#">Showcase</.breadcrumb_link>
+                  <.breadcrumb_link href="#" class="flex items-center gap-1">
+                    <.icon name="puzzle" size={:xs} /> Showcase
+                  </.breadcrumb_link>
                 </.breadcrumb_item>
                 <.breadcrumb_separator />
                 <.breadcrumb_item>
-                  <.breadcrumb_page>Display</.breadcrumb_page>
+                  <.breadcrumb_page class="flex items-center gap-1">
+                    <.icon name="eye" size={:xs} /> Display
+                  </.breadcrumb_page>
                 </.breadcrumb_item>
               </.breadcrumb_list>
             </.breadcrumb>
@@ -337,19 +487,27 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
             <.breadcrumb>
               <.breadcrumb_list>
                 <.breadcrumb_item>
-                  <.breadcrumb_link href="#">Dashboard</.breadcrumb_link>
+                  <.breadcrumb_link href="#" class="flex items-center gap-1">
+                    <.icon name="layout-dashboard" size={:xs} /> Dashboard
+                  </.breadcrumb_link>
                 </.breadcrumb_item>
                 <.breadcrumb_separator />
                 <.breadcrumb_item>
-                  <.breadcrumb_link href="#">Users</.breadcrumb_link>
+                  <.breadcrumb_link href="#" class="flex items-center gap-1">
+                    <.icon name="users" size={:xs} /> Users
+                  </.breadcrumb_link>
                 </.breadcrumb_item>
                 <.breadcrumb_separator />
                 <.breadcrumb_item>
-                  <.breadcrumb_link href="#">Alice Brown</.breadcrumb_link>
+                  <.breadcrumb_link href="#" class="flex items-center gap-1">
+                    <.icon name="user" size={:xs} /> Alice Brown
+                  </.breadcrumb_link>
                 </.breadcrumb_item>
                 <.breadcrumb_separator />
                 <.breadcrumb_item>
-                  <.breadcrumb_page>Edit Profile</.breadcrumb_page>
+                  <.breadcrumb_page class="flex items-center gap-1">
+                    <.icon name="pencil" size={:xs} /> Edit Profile
+                  </.breadcrumb_page>
                 </.breadcrumb_item>
               </.breadcrumb_list>
             </.breadcrumb>
@@ -370,11 +528,18 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
             </.collapsible_trigger>
             <.collapsible_content id="showcase-collapsible-content" open={@collapsible_open} class="mt-2">
               <div class="rounded-lg border border-border/60 bg-muted/30 p-4 space-y-2">
-                <p class="text-sm text-foreground font-medium">Advanced settings panel</p>
+                <p class="text-sm text-foreground font-medium flex items-center gap-1.5">
+                  <.icon name="settings" size={:xs} class="text-muted-foreground" />
+                  Advanced settings panel
+                </p>
                 <p class="text-xs text-muted-foreground">This content slides in and out with a CSS transition. The open state is server-controlled via phx-click.</p>
                 <div class="flex gap-2 mt-3">
-                  <.button size={:sm} variant={:outline}>Reset defaults</.button>
-                  <.button size={:sm}>Apply</.button>
+                  <.button size={:sm} variant={:outline}>
+                    <.icon name="refresh-cw" size={:xs} class="mr-1" />Reset defaults
+                  </.button>
+                  <.button size={:sm}>
+                    <.icon name="check" size={:xs} class="mr-1" />Apply
+                  </.button>
                 </div>
               </div>
             </.collapsible_content>
@@ -424,7 +589,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                 Is it production-ready?
               </.accordion_trigger>
               <.accordion_content value="a3">
-                PhiaUI is actively developed. v0.1.13 is suitable for demos and prototypes. Production apps should pin the version and test thoroughly.
+                PhiaUI is actively developed. v0.1.14 is suitable for demos and prototypes. Production apps should pin the version and test thoroughly.
               </.accordion_content>
             </.accordion_item>
           </.accordion>
@@ -435,10 +600,18 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
           <.table>
             <.table_header>
               <.table_row class="hover:bg-transparent">
-                <.table_head>Name</.table_head>
-                <.table_head>Role</.table_head>
-                <.table_head>Status</.table_head>
-                <.table_head class="text-right">Joined</.table_head>
+                <.table_head>
+                  <span class="inline-flex items-center gap-1"><.icon name="user" size={:xs} class="text-muted-foreground/60" /> Name</span>
+                </.table_head>
+                <.table_head>
+                  <span class="inline-flex items-center gap-1"><.icon name="briefcase" size={:xs} class="text-muted-foreground/60" /> Role</span>
+                </.table_head>
+                <.table_head>
+                  <span class="inline-flex items-center gap-1"><.icon name="circle-check" size={:xs} class="text-muted-foreground/60" /> Status</span>
+                </.table_head>
+                <.table_head class="text-right">
+                  <span class="inline-flex items-center gap-1"><.icon name="calendar" size={:xs} class="text-muted-foreground/60" /> Joined</span>
+                </.table_head>
               </.table_row>
             </.table_header>
             <.table_body>
@@ -493,7 +666,9 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
             <:title>No results found</:title>
             <:description>Try adjusting your search or filter to find what you're looking for.</:description>
             <:action>
-              <.button variant={:default} size={:sm}>Clear filters</.button>
+              <.button variant={:default} size={:sm}>
+                <.icon name="search" size={:xs} class="mr-1" />Clear filters
+              </.button>
             </:action>
           </.empty>
         </.demo_section>
@@ -502,7 +677,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
         <.demo_section title="Icon" subtitle="Lucide SVG sprite icons — 3 sizes, composable with any component">
           <div class="space-y-4">
             <div class="flex flex-wrap items-center gap-4">
-              <%= for name <- ~w(home settings user bell mail search star zap shield package code git-branch) do %>
+              <%= for name <- ~w(home settings user users bell inbox send search star zap shield package code git-branch folder file heart phone at-sign check-square pencil tag sparkles calendar image upload trash-2 plus minus x check circle-check circle-x triangle-alert info link paperclip building-2 briefcase chart-bar trending-up trending-down layout-dashboard layout-grid puzzle reply refresh-cw pause play) do %>
                 <div class="flex flex-col items-center gap-1.5">
                   <.icon name={name} size={:sm} class="text-foreground" />
                   <span class="text-[10px] text-muted-foreground">{name}</span>
@@ -537,10 +712,18 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
             <div>
               <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Underline (default)</p>
               <.tabs_nav>
-                <.tabs_nav_item href="#" active={true}>Overview</.tabs_nav_item>
-                <.tabs_nav_item href="#">Analytics</.tabs_nav_item>
-                <.tabs_nav_item href="#">Reports</.tabs_nav_item>
-                <.tabs_nav_item href="#" disabled={true}>Billing</.tabs_nav_item>
+                <.tabs_nav_item href="#" active={true}>
+                  <.icon name="eye" size={:xs} class="mr-1" />Overview
+                </.tabs_nav_item>
+                <.tabs_nav_item href="#">
+                  <.icon name="chart-bar" size={:xs} class="mr-1" />Analytics
+                </.tabs_nav_item>
+                <.tabs_nav_item href="#">
+                  <.icon name="file" size={:xs} class="mr-1" />Reports
+                </.tabs_nav_item>
+                <.tabs_nav_item href="#" disabled={true}>
+                  <.icon name="circle-dollar-sign" size={:xs} class="mr-1" />Billing
+                </.tabs_nav_item>
               </.tabs_nav>
             </div>
             <div>
@@ -555,9 +738,15 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
             <div>
               <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Segment</p>
               <.tabs_nav variant={:segment}>
-                <.tabs_nav_item href="#" variant={:segment} active={true}>List</.tabs_nav_item>
-                <.tabs_nav_item href="#" variant={:segment}>Grid</.tabs_nav_item>
-                <.tabs_nav_item href="#" variant={:segment}>Board</.tabs_nav_item>
+                <.tabs_nav_item href="#" variant={:segment} active={true}>
+                  <.icon name="list" size={:xs} class="mr-1" />List
+                </.tabs_nav_item>
+                <.tabs_nav_item href="#" variant={:segment}>
+                  <.icon name="layout-grid" size={:xs} class="mr-1" />Grid
+                </.tabs_nav_item>
+                <.tabs_nav_item href="#" variant={:segment}>
+                  <.icon name="layout-dashboard" size={:xs} class="mr-1" />Board
+                </.tabs_nav_item>
               </.tabs_nav>
             </div>
           </div>
