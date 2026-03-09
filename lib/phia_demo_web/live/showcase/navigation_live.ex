@@ -221,7 +221,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.NavigationLive do
                   What is PhiaUI?
                 </.accordion_trigger>
                 <.accordion_content value="a1">
-                  PhiaUI is a comprehensive Phoenix LiveView component library built on Tailwind CSS v4. It provides 584+ components covering all common UI patterns, from basic inputs to complex data visualization.
+                  PhiaUI is a comprehensive Phoenix LiveView component library built on Tailwind CSS v4. It provides 623+ components covering all common UI patterns, from basic inputs to complex data visualization.
                 </.accordion_content>
               </.accordion_item>
               <.accordion_item value="a2" type={:single} accordion_id="showcase-acc">
@@ -310,6 +310,65 @@ defmodule PhiaDemoWeb.Demo.Showcase.NavigationLive do
           </div>
         </section>
 
+        <%!-- ChipNav --%>
+        <.demo_section title="ChipNav" subtitle="Pill-shaped navigation tabs — compact horizontal navigation">
+          <.chip_nav
+            items={[
+              %{label: "All", value: "all", active: true},
+              %{label: "Active", value: "active"},
+              %{label: "Completed", value: "completed"},
+              %{label: "Archived", value: "archived"}
+            ]}
+          />
+        </.demo_section>
+
+        <%!-- DotNavigation --%>
+        <.demo_section title="DotNavigation" subtitle="Dot-style page indicators — for carousels or step wizards">
+          <div class="flex flex-col items-center gap-4">
+            <.dot_navigation total={5} active={2} />
+            <p class="text-xs text-muted-foreground">Page 3 of 5</p>
+          </div>
+        </.demo_section>
+
+        <%!-- LinkGroup --%>
+        <.demo_section title="LinkGroup" subtitle="Grouped link list — common for footer navigation or sidebars">
+          <div class="grid gap-6 sm:grid-cols-3">
+            <.link_group title="Product">
+              <:link href="#">Features</:link>
+              <:link href="#">Pricing</:link>
+              <:link href="#">Changelog</:link>
+              <:link href="#">Roadmap</:link>
+            </.link_group>
+            <.link_group title="Company">
+              <:link href="#">About</:link>
+              <:link href="#">Blog</:link>
+              <:link href="#">Careers</:link>
+              <:link href="#">Contact</:link>
+            </.link_group>
+            <.link_group title="Legal">
+              <:link href="#">Privacy</:link>
+              <:link href="#">Terms</:link>
+              <:link href="#">License</:link>
+            </.link_group>
+          </div>
+        </.demo_section>
+
+        <%!-- Toc --%>
+        <.demo_section title="Toc" subtitle="Table of contents — auto-generates from heading hierarchy">
+          <div class="max-w-sm">
+            <.toc items={[
+              %{id: "intro", label: "Introduction", level: 1},
+              %{id: "getting-started", label: "Getting Started", level: 2},
+              %{id: "installation", label: "Installation", level: 3},
+              %{id: "configuration", label: "Configuration", level: 3},
+              %{id: "components", label: "Components", level: 2},
+              %{id: "buttons", label: "Buttons", level: 3},
+              %{id: "inputs", label: "Inputs", level: 3},
+              %{id: "advanced", label: "Advanced Usage", level: 2}
+            ]} active="components" />
+          </div>
+        </.demo_section>
+
       </div>
     </Layout.layout>
     """
@@ -318,4 +377,20 @@ defmodule PhiaDemoWeb.Demo.Showcase.NavigationLive do
   defp step_status(step_num, active) when step_num < active, do: "complete"
   defp step_status(step_num, active) when step_num == active, do: "active"
   defp step_status(_step_num, _active), do: "upcoming"
+
+  attr :title, :string, required: true
+  attr :subtitle, :string, required: true
+  slot :inner_block, required: true
+
+  defp demo_section(assigns) do
+    ~H"""
+    <section class="space-y-4">
+      <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">{@title}</h2>
+      <p class="text-xs text-muted-foreground -mt-2">{@subtitle}</p>
+      <div class="rounded-xl border border-border/60 bg-card p-3 sm:p-5 shadow-sm">
+        <%= render_slot(@inner_block) %>
+      </div>
+    </section>
+    """
+  end
 end

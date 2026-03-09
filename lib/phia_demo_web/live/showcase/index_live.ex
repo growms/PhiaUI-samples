@@ -4,30 +4,32 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
   alias PhiaDemoWeb.Demo.Showcase.Layout
 
   @categories [
-    %{name: "Inputs", href: "/showcase/inputs", icon: "keyboard", count: 35,
-      description: "Button, ButtonGroup, FancyButton, SplitButton, IconButton, SocialButton, ActionButton, Switch, Slider, Rating, Toggle, Chip, Input, Textarea, PasswordInput, ColorPicker, OTP, InputAddon, MultiSelect, Combobox, Checkbox, RadioGroup, DatePicker, TagsInput, FileUpload, CopyButton, AutocompleteInput, MentionInput, PhoneInput, SearchInput, CopyInput, ClearableInput, Editable, InputGroup e mais"},
-    %{name: "Display", href: "/showcase/display", icon: "eye", count: 31,
-      description: "Badge, Separator, Kbd, Tabs, TabsNav, Avatar, AvatarGroup, Card, SelectableCard, Timeline, ActivityFeed, Breadcrumb, Accordion, Skeleton, Table, Pagination, EmptyState, Icon, Tree, Direction, QrCode, ScrollArea, AspectRatio e mais"},
+    %{name: "Inputs", href: "/showcase/inputs", icon: "keyboard", count: 42,
+      description: "Button, ButtonGroup, FancyButton, IconButton, SocialButton, Switch, Slider, Rating, Toggle, Chip, PasswordInput, ColorPicker, OTP, InputAddon, MultiSelect, Combobox, Checkbox, RadioGroup, DatePicker, TagsInput, FileUpload, CopyButton, AutocompleteInput, MentionInput, PhoneInput, SearchInput, CopyInput, ClearableInput, Editable, InputGroup, UrlInput, UnitInput, TextareaCounter, InlineSearch e mais"},
+    %{name: "Display", href: "/showcase/display", icon: "eye", count: 38,
+      description: "Badge, Separator, Kbd, Tabs, TabsNav, Avatar, AvatarGroup, Card, SelectableCard, Timeline, ActivityFeed, Breadcrumb, Accordion, Skeleton, Table, Pagination, EmptyState, Icon, Tree, Direction, QrCode, ScrollArea, AspectRatio, ChatMessage, Typography, CodeSnippet, Article e mais"},
     %{name: "Feedback", href: "/showcase/feedback", icon: "bell", count: 32,
       description: "Spinner, Progress, ProgressEnhanced, CircularProgress, StepTracker, Alert, Toast, Snackbar, Sheet, Dialog, AlertDialog, Drawer, Command, HoverCard, Tooltip, Popover, DropdownMenu, ContextMenu, Carousel, BackTop, FloatButton, DarkModeToggle, Sonner, Banner, Notification, ErrorDisplay, StatusIndicator, Popconfirm, LoadingOverlay, FeedbackWidget, ResultState, GlobalMessage"},
-    %{name: "Data & Charts", href: "/showcase/charts", icon: "chart-bar", count: 38,
-      description: "phia_chart (ECharts), LineChart, AreaChart, BarChart, PieChart, DonutChart, RadarChart, ScatterChart, BubbleChart, FunnelChart, HeatmapChart, TreemapChart, WaterfallChart, RadialBarChart, HistogramChart, PolarAreaChart, SlopeChart, TimelineChart, GanttChart, StatCard, MetricGrid, SparklineCard, GaugeChart, UptimeBar, FilterBar, DataGrid, Resizable"},
-    %{name: "Calendar", href: "/showcase/calendar", icon: "calendar", count: 22,
-      description: "Calendar, BigCalendar, EventCalendar, HeatmapCalendar, WeekCalendar, RangeCalendar, MultiSelectCalendar, BadgeCalendar, StreakCalendar, BookingCalendar, DateRangePresets, DateCard, DateStrip, CountdownTimer, TimePicker, DateField, DateTimePicker, MonthPicker, YearPicker, WeekPicker, WeekDayPicker e mais"},
-    %{name: "Cards", href: "/showcase/cards", icon: "layers", count: 28,
-      description: "Card, SelectableCard, ReceiptCard, ProfileCard, FeatureCard, ArticleCard, CtaCard, EventCard, ImageCard, PricingCard, ProductCard, ProgressCard, TestimonialCard, TeamCard, NotificationCard, StatCard, SparklineCard, MetricGrid — all card variants"},
-    %{name: "Navigation", href: "/showcase/navigation", icon: "list", count: 23,
-      description: "Breadcrumb, Tabs, TabsNav, Separator, Pagination, StepTracker, Accordion, Kbd, CommandPalette, MegaMenu, FloatingNav, SpeedDial, Dock, NavRail, Topbar, VerticalNav, BottomNavigation, StepperNav, Toolbar — core navigation and structure"},
-    %{name: "Tables", href: "/showcase/tables", icon: "list-ordered", count: 21,
-      description: "Table, DataGrid, FilterBar, Tree, BulkActionBar, ExpandableTable, ResponsiveTable, ComparisonTable, InlineEditTable, TimelineTable, KanbanBoard — sortable, filterable, expandable tables"},
+    %{name: "Data & Charts", href: "/showcase/charts", icon: "chart-bar", count: 52,
+      description: "ECharts (Line, Area, Bar, Pie, Donut, Scatter, Funnel, Heatmap, Treemap, Waterfall, Histogram), StatCard, MetricGrid, SparklineCard, GaugeChart, UptimeBar, FilterBar, DataGrid, Resizable, BarList, CategoryBar, BadgeDelta, BulletChart, MeterGroup, Leaderboard, Tracker e mais"},
+    %{name: "Calendar", href: "/showcase/calendar", icon: "calendar", count: 28,
+      description: "Calendar, BigCalendar, EventCalendar, HeatmapCalendar, WeekCalendar, RangeCalendar, MultiSelectCalendar, BadgeCalendar, StreakCalendar, BookingCalendar, DateRangePresets, DateCard, DateStrip, CountdownTimer, TimePicker, DateField, DateTimePicker, MonthPicker, YearPicker, WeekPicker, WeekDayPicker, DailyAgenda, MultiMonthCalendar, WheelPicker e mais"},
+    %{name: "Cards", href: "/showcase/cards", icon: "layers", count: 31,
+      description: "Card, SelectableCard, ReceiptCard, ProfileCard, FeatureCard, ArticleCard, CtaCard, EventCard, ImageCard, PricingCard, ProductCard, ProgressCard, TestimonialCard, TeamCard, NotificationCard, StatCard, SparklineCard, MetricGrid, ColorSwatchCard, FileCard, LinkPreviewCard — all card variants"},
+    %{name: "Navigation", href: "/showcase/navigation", icon: "list", count: 28,
+      description: "Breadcrumb, Tabs, TabsNav, Separator, Pagination, StepTracker, Accordion, Kbd, CommandPalette, MegaMenu, FloatingNav, SpeedDial, Dock, NavRail, Topbar, VerticalNav, BottomNavigation, StepperNav, Toolbar, ChipNav, DotNavigation, LinkGroup, Toc e mais"},
+    %{name: "Tables", href: "/showcase/tables", icon: "list-ordered", count: 24,
+      description: "Table, DataGrid, DataTable, FilterBar, Tree, TreeEnhanced, BulkActionBar, ExpandableTable, ResponsiveTable, ComparisonTable, InlineEditTable, TimelineTable, KanbanBoard, PivotTable, TableGroup — sortable, filterable, expandable tables"},
     %{name: "Upload", href: "/showcase/upload", icon: "upload", count: 10,
       description: "ImageUpload, FileUpload, CopyButton, DropZone, DocumentUpload, AvatarUpload — all file upload patterns including drag-and-drop and progress indicators"},
-    %{name: "Media", href: "/showcase/media", icon: "image", count: 10,
-      description: "Carousel, QrCode, AspectRatio, ScrollArea, Resizable, Direction, AudioPlayer, ImageComparison, Watermark — media display and layout utilities"},
+    %{name: "Media", href: "/showcase/media", icon: "image", count: 12,
+      description: "Carousel, QrCode, AspectRatio, ScrollArea, Resizable, Direction, AudioPlayer, ImageComparison, Watermark, Lightbox, VideoPlayer — media display and layout utilities"},
     %{name: "Animation", href: "/showcase/animation", icon: "sparkles", count: 22,
       description: "marquee, orbit, aurora, meteor_shower, shimmer_text, typewriter, word_rotate, text_scramble, fade_in, float, spotlight, tilt_card, number_ticker, typing_indicator, wave_loader, animated_border, pulse_ring, confetti_burst, particle_bg e mais"},
     %{name: "Visual Effects", href: "/showcase/visual", icon: "eye", count: 20,
       description: "gradient_mesh, retro_grid, wave_bg, hex_pattern, bokeh_bg, flicker_grid, flowing_lines, beam_bg — plus glass_card, glass_panel, acrylic_surface, liquid_glass, neon_glow_card, border_beam, shine_border, magic_card, card_spotlight, moving_border"},
+    %{name: "Layout", href: "/showcase/layout", icon: "layout-grid", count: 22,
+      description: "Stack, Flex, Grid, SimpleGrid, Center, Container, Wrap, Spacer, DescriptionList, PageHeader, Section, MediaObject, SplitLayout, ResponsiveStack, MasonryGrid, ContainerQuery, Box, Cover, Divider, FixedBar, Sticky, ResponsiveVisibility"},
   ]
 
   @impl true
@@ -53,11 +55,11 @@ defmodule PhiaDemoWeb.Demo.Showcase.IndexLive do
             Every PhiaUI component — live demos, fully interactive, dark-mode ready.
           </p>
           <div class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-            <.badge variant={:secondary}>v0.1.14</.badge>
+            <.badge variant={:secondary}>v0.1.15</.badge>
             <span>·</span>
-            <span>584 components</span>
+            <span>623 components</span>
             <span>·</span>
-            <span>12 categories</span>
+            <span>13 categories</span>
           </div>
         </div>
 

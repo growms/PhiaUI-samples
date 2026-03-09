@@ -591,7 +591,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.FeedbackLive do
           <div class="space-y-3">
             <.banner id="demo-banner-info" variant={:info}>
               <:icon><.icon name="info" class="h-4 w-4" /></:icon>
-              New version v0.1.13 is available with 50+ new components.
+              New version v0.1.15 is available with 39+ new components.
             </.banner>
             <.banner id="demo-banner-success" variant={:success}>
               <:icon><.icon name="circle-check" class="h-4 w-4" /></:icon>

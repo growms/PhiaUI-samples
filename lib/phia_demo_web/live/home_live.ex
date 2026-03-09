@@ -25,7 +25,7 @@ defmodule PhiaDemoWeb.HomeLive do
       bg: "bg-violet-500/10",
       projects: [
         %{id: :dashboard, title: "Dashboard",  href: "/dashboard",  icon: "layout-dashboard", desc: "Admin panel with metrics, SVG charts, and sidebar navigation."},
-        %{id: :showcase,  title: "Showcase",   href: "/showcase",   icon: "puzzle",           desc: "Gallery of 584 PhiaUI components — interactive, dark-mode ready."},
+        %{id: :showcase,  title: "Showcase",   href: "/showcase",   icon: "puzzle",           desc: "Gallery of 623 PhiaUI components — interactive, dark-mode ready."},
         %{id: :chat,      title: "Chat",       href: "/chat",       icon: "message-circle",   desc: "Real-time chat rooms with agents, polls, and reactions."}
       ]
     },
@@ -123,7 +123,7 @@ defmodule PhiaDemoWeb.HomeLive do
         <div class="relative z-10 phia-animate">
           <div class="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary mb-2">
             <.icon name="layers" size={:xs} />
-            PhiaUI v0.1.14
+            PhiaUI v0.1.15
             <span class="h-3 w-px bg-primary/30" />
             <span class="text-primary/70">Phoenix LiveView</span>
           </div>
@@ -155,7 +155,7 @@ defmodule PhiaDemoWeb.HomeLive do
             <div class="h-7 w-px bg-border/60" />
             <div class="text-center">
               <p class="text-2xl font-bold text-foreground tabular-nums">
-                <.number_ticker id="stat-components" value={584} duration={1600} />
+                <.number_ticker id="stat-components" value={623} duration={1600} />
               </p>
               <p class="text-[10px] text-muted-foreground mt-0.5">Components</p>
             </div>
@@ -229,11 +229,11 @@ defmodule PhiaDemoWeb.HomeLive do
           <div class="flex items-center gap-2">
             <.icon name="layers" size={:xs} class="text-primary" />
             <span class="text-sm font-semibold text-foreground">PhiaUI</span>
-            <.badge variant={:outline} class="text-[10px]">v0.1.14</.badge>
+            <.badge variant={:outline} class="text-[10px]">v0.1.15</.badge>
           </div>
           <div class="flex items-center gap-4">
             <p class="text-xs text-muted-foreground">
-              Phoenix LiveView + Tailwind CSS v4 · CSS-first theming · 584 components
+              Phoenix LiveView + Tailwind CSS v4 · CSS-first theming · 623 components
             </p>
             <a
               href="https://github.com/charlenopires/PhiaUI-samples"

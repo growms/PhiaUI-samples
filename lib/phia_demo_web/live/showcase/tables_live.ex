@@ -292,6 +292,50 @@ defmodule PhiaDemoWeb.Demo.Showcase.TablesLive do
           </.card>
         </section>
 
+        <%!-- DataTable --%>
+        <.demo_section title="DataTable" subtitle="Declarative table from rows + named columns — auto-generated headers with sorting">
+          <.data_table
+            rows={[
+              %{name: "Alice Brown", email: "alice@acme.com", role: "Admin", status: "Active"},
+              %{name: "Bob Chen", email: "bob@acme.com", role: "Editor", status: "Active"},
+              %{name: "Carol Davis", email: "carol@acme.com", role: "Viewer", status: "Inactive"},
+              %{name: "David Evans", email: "david@acme.com", role: "Editor", status: "Active"},
+              %{name: "Elena Fox", email: "elena@acme.com", role: "Admin", status: "Pending"}
+            ]}
+            striped={true}
+          >
+            <:column key="name" label="Name" sortable={true} />
+            <:column key="email" label="Email" />
+            <:column key="role" label="Role" />
+            <:column key="status" label="Status" />
+          </.data_table>
+        </.demo_section>
+
+        <%!-- TreeEnhanced --%>
+        <.demo_section title="TreeEnhanced — File Tree" subtitle="Enhanced tree variants — file browser style with icons">
+          <div class="max-w-sm">
+            <.file_tree>
+              <.file_tree_item label="src" type="folder" expanded={true}>
+                <.file_tree_item label="components" type="folder" expanded={true}>
+                  <.file_tree_item label="button.ex" type="file" />
+                  <.file_tree_item label="card.ex" type="file" />
+                  <.file_tree_item label="input.ex" type="file" />
+                </.file_tree_item>
+                <.file_tree_item label="live" type="folder">
+                  <.file_tree_item label="home_live.ex" type="file" />
+                  <.file_tree_item label="dashboard_live.ex" type="file" />
+                </.file_tree_item>
+                <.file_tree_item label="router.ex" type="file" />
+              </.file_tree_item>
+              <.file_tree_item label="test" type="folder">
+                <.file_tree_item label="test_helper.exs" type="file" />
+              </.file_tree_item>
+              <.file_tree_item label="mix.exs" type="file" />
+              <.file_tree_item label="README.md" type="file" />
+            </.file_tree>
+          </div>
+        </.demo_section>
+
       </div>
     </Layout.layout>
     """
@@ -301,4 +345,20 @@ defmodule PhiaDemoWeb.Demo.Showcase.TablesLive do
   defp status_variant(:pending), do: :secondary
   defp status_variant(:cancelled), do: :destructive
   defp status_variant(_), do: :outline
+
+  attr :title, :string, required: true
+  attr :subtitle, :string, required: true
+  slot :inner_block, required: true
+
+  defp demo_section(assigns) do
+    ~H"""
+    <section class="space-y-4">
+      <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">{@title}</h2>
+      <p class="text-xs text-muted-foreground -mt-2">{@subtitle}</p>
+      <div class="rounded-xl border border-border/60 bg-card p-3 sm:p-5 shadow-sm">
+        <%= render_slot(@inner_block) %>
+      </div>
+    </section>
+    """
+  end
 end

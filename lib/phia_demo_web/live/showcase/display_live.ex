@@ -264,7 +264,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                 </div>
               </:icon>
               <p class="text-sm font-semibold text-foreground">Deployment completed</p>
-              <p class="text-xs text-muted-foreground mt-0.5">v0.1.14 is live in production</p>
+              <p class="text-xs text-muted-foreground mt-0.5">v0.1.15 is live in production</p>
               <div class="mt-2 flex flex-wrap gap-1.5">
                 <.badge variant={:default} class="bg-green-600/80 text-white text-xs">success</.badge>
                 <.badge variant={:outline} class="text-xs">auto-deploy</.badge>
@@ -369,7 +369,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                     <.avatar_fallback name="Admin" class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold" />
                   </.avatar>
                 </:avatar>
-                <strong>Deployment succeeded</strong> — v0.1.14 pushed to production by <span class="font-medium text-primary">@admin</span>
+                <strong>Deployment succeeded</strong> — v0.1.15 pushed to production by <span class="font-medium text-primary">@admin</span>
               </.activity_item>
 
               <.activity_item type="mention" timestamp="35 min ago">
@@ -589,7 +589,7 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
                 Is it production-ready?
               </.accordion_trigger>
               <.accordion_content value="a3">
-                PhiaUI is actively developed. v0.1.14 is suitable for demos and prototypes. Production apps should pin the version and test thoroughly.
+                PhiaUI is actively developed. v0.1.15 is suitable for demos and prototypes. Production apps should pin the version and test thoroughly.
               </.accordion_content>
             </.accordion_item>
           </.accordion>
@@ -879,6 +879,88 @@ defmodule PhiaDemoWeb.Demo.Showcase.DisplayLive do
               </.aspect_ratio>
             </div>
           </div>
+        </.demo_section>
+
+        <%!-- v0.1.15 — New Display Components --%>
+        <div class="flex items-center gap-2 border-b border-border/60 pb-2 mt-4">
+          <.icon name="layers" size={:sm} class="text-primary" />
+          <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">v0.1.15 Components</p>
+        </div>
+
+        <%!-- ChatMessage --%>
+        <.demo_section title="ChatMessage" subtitle="Chat UI components — message bubbles with role-based alignment">
+          <.chat_container class="h-64 rounded-lg border border-border/60 bg-muted/10 p-4">
+            <.chat_message role={:assistant}>
+              <.chat_bubble role={:assistant} timestamp="10:32 AM">
+                Hello! How can I help you today? I'm here to answer any questions about PhiaUI components.
+              </.chat_bubble>
+            </.chat_message>
+            <.chat_message role={:user}>
+              <.chat_bubble role={:user} timestamp="10:33 AM">
+                Can you show me how to use the new Layout components in v0.1.15?
+              </.chat_bubble>
+            </.chat_message>
+            <.chat_message role={:assistant}>
+              <.chat_bubble role={:assistant} timestamp="10:33 AM">
+                Of course! The Layout module includes Stack, Flex, Grid, Center, Container, and more. Each supports responsive breakpoint maps for adaptive layouts.
+              </.chat_bubble>
+            </.chat_message>
+          </.chat_container>
+        </.demo_section>
+
+        <%!-- Typography --%>
+        <.demo_section title="Typography" subtitle="Text hierarchy — heading, text, lead, blockquote, inline_code, mark, overline, caption">
+          <div class="space-y-6">
+            <div class="space-y-2">
+              <.heading level={1}>Heading Level 1</.heading>
+              <.heading level={2}>Heading Level 2</.heading>
+              <.heading level={3}>Heading Level 3</.heading>
+              <.heading level={4}>Heading Level 4</.heading>
+            </div>
+            <.separator />
+            <div class="space-y-3">
+              <.lead>This is a lead paragraph — larger, muted text perfect for article introductions.</.lead>
+              <.text>Regular body text with <.mark>highlighted content</.mark> and <.inline_code>code snippets</.inline_code> inline.</.text>
+              <.blockquote>
+                "The best way to predict the future is to invent it." — Alan Kay
+              </.blockquote>
+            </div>
+            <.separator />
+            <div class="space-y-2">
+              <.overline>Category Label</.overline>
+              <.caption>Figure 1: Typography component hierarchy</.caption>
+            </div>
+          </div>
+        </.demo_section>
+
+        <%!-- CodeSnippet --%>
+        <.demo_section title="CodeSnippet" subtitle="Styled code display block with optional language badge">
+          <.code_block language="elixir">
+            defmodule MyApp.UserController do
+              use MyAppWeb, :controller
+
+              def show(conn, params) do
+                user = Accounts.get_user!(params["id"])
+                render(conn, :show, user: user)
+              end
+            end
+          </.code_block>
+        </.demo_section>
+
+        <%!-- Article --%>
+        <.demo_section title="Article" subtitle="Article content wrapper with semantic HTML and typographic rhythm">
+          <.article>
+            <:title>Building Real-Time UIs with Phoenix LiveView</:title>
+            <:meta>
+              <span>Mar 9, 2026</span>
+              <span>·</span>
+              <span>5 min read</span>
+            </:meta>
+            <:content>
+              <p>Phoenix LiveView enables rich, real-time user experiences with server-rendered HTML. It leverages Elixir's concurrency model and Phoenix's channel layer to provide seamless interactivity without writing JavaScript.</p>
+              <p>With PhiaUI v0.1.15, you get 623 pre-built components that integrate natively with LiveView's event system, making it easy to build complex dashboards, forms, and data visualizations.</p>
+            </:content>
+          </.article>
         </.demo_section>
 
       </div>

@@ -339,6 +339,123 @@ defmodule PhiaDemoWeb do
       import PhiaUi.Components.ImageComparison
       import PhiaUi.Components.Watermark
 
+      # v0.1.15 — Calendar (new)
+      import PhiaUi.Components.CalendarTimePicker
+      import PhiaUi.Components.CalendarWeekView
+      import PhiaUi.Components.DailyAgenda
+      import PhiaUi.Components.MultiMonthCalendar
+      import PhiaUi.Components.ScheduleView
+      import PhiaUi.Components.TimeSliderPicker
+      import PhiaUi.Components.TimeSlotGrid
+      import PhiaUi.Components.TimeSlotList
+      import PhiaUi.Components.WheelPicker
+
+      # v0.1.15 — Cards (new)
+      import PhiaUi.Components.ColorSwatchCard
+      import PhiaUi.Components.FileCard
+      import PhiaUi.Components.LinkPreviewCard
+
+      # v0.1.15 — Data & Visualization (new)
+      import PhiaUi.Components.BadgeDelta
+      import PhiaUi.Components.BarList
+      import PhiaUi.Components.BulletChart
+      import PhiaUi.Components.CategoryBar
+      import PhiaUi.Components.DataTable
+      import PhiaUi.Components.FilterBuilder
+      import PhiaUi.Components.Leaderboard
+      import PhiaUi.Components.MeterGroup
+      import PhiaUi.Components.NpsWidget
+      import PhiaUi.Components.PivotTable
+      import PhiaUi.Components.TableGroup
+      import PhiaUi.Components.TreeEnhanced
+      import PhiaUi.Components.Data.BarTotals
+      import PhiaUi.Components.Data.DataZoom
+      import PhiaUi.Components.Data.DeltaBar
+      import PhiaUi.Components.Data.ResponsiveChart
+      import PhiaUi.Components.Data.SparkChart
+      import PhiaUi.Components.Data.Tracker
+      import PhiaUi.Components.Data.XyChart
+
+      # v0.1.15 — Display (new)
+      import PhiaUi.Components.Article
+      import PhiaUi.Components.BadgeGroup
+      import PhiaUi.Components.ChatMessage
+      import PhiaUi.Components.CodeSnippet
+      import PhiaUi.Components.Comment
+      import PhiaUi.Components.Tag
+      import PhiaUi.Components.Typography
+
+      # v0.1.15 — Editor
+      import PhiaUi.Components.Editor
+
+      # v0.1.15 — Inputs (new)
+      import PhiaUi.Components.AvatarUpload
+      import PhiaUi.Components.DocumentUpload
+      import PhiaUi.Components.FullscreenDrop
+      import PhiaUi.Components.ImageGalleryUpload
+      import PhiaUi.Components.InlineSearch
+      import PhiaUi.Components.RichTextEditor
+      import PhiaUi.Components.TextareaCounter
+      import PhiaUi.Components.TextareaEnhanced
+      import PhiaUi.Components.UnitInput
+      import PhiaUi.Components.UrlInput
+
+      # v0.1.15 — Interaction (new)
+      import PhiaUi.Components.MultiDrag
+
+      # v0.1.15 — Layout (new)
+      import PhiaUi.Components.Layout.Box
+      import PhiaUi.Components.Layout.Center
+      import PhiaUi.Components.Layout.Container
+      import PhiaUi.Components.Layout.Cover
+      import PhiaUi.Components.Layout.DescriptionList
+      import PhiaUi.Components.Layout.Divider
+      import PhiaUi.Components.Layout.FixedBar
+      import PhiaUi.Components.Layout.Flex
+      import PhiaUi.Components.Layout.Grid
+      import PhiaUi.Components.Layout.MediaObject
+      import PhiaUi.Components.Layout.PageHeader
+      import PhiaUi.Components.Layout.PageLayout
+      import PhiaUi.Components.Layout.ResponsiveVisibility
+      import PhiaUi.Components.Layout.Section
+      import PhiaUi.Components.Layout.SectionFooter
+      import PhiaUi.Components.Layout.SectionHeader
+      import PhiaUi.Components.Layout.SimpleGrid
+      import PhiaUi.Components.Layout.Spacer
+      import PhiaUi.Components.Layout.Stack
+      import PhiaUi.Components.Layout.Sticky
+      import PhiaUi.Components.Layout.Wrap
+
+      # v0.1.15 — Marketing (new)
+      import PhiaUi.Components.Marketing
+      import PhiaUi.Components.Marketing.FeatureSection
+      import PhiaUi.Components.Marketing.HeroSection
+
+      # v0.1.15 — Media (new)
+      import PhiaUi.Components.Lightbox
+      import PhiaUi.Components.VideoPlayer
+
+      # v0.1.15 — Navigation (new)
+      import PhiaUi.Components.ActionSheet
+      import PhiaUi.Components.AppShell
+      import PhiaUi.Components.BackToTop
+      import PhiaUi.Components.ChipNav
+      import PhiaUi.Components.ContextNav
+      import PhiaUi.Components.DotNavigation
+      import PhiaUi.Components.LinkGroup
+      import PhiaUi.Components.Menubar
+      import PhiaUi.Components.NavigationMenu
+      import PhiaUi.Components.PageProgress
+      import PhiaUi.Components.Sidebar
+      import PhiaUi.Components.Thumbnav
+      import PhiaUi.Components.Toc
+
+      # v0.1.15 — Buttons (new)
+      import PhiaUi.Components.AppStoreButton
+
+      # v0.1.15 — Surface (new)
+      import PhiaUi.Components.OverlaySurface
+
       # Common modules used in templates
       alias Phoenix.LiveView.JS
       alias PhiaDemoWeb.Layouts

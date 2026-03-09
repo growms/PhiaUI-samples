@@ -121,6 +121,93 @@ defmodule PhiaDemoWeb.Demo.Showcase.ChartsLive do
           </.demo_section>
         </div>
 
+        <%!-- Donut + Scatter side-by-side, Funnel full-width --%>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <.demo_section title="Donut Chart" subtitle="Ring/donut variant of pie — great for proportional breakdown with center space">
+            <.phia_chart
+              id="showcase-donut"
+              type={:donut}
+              series={[%{name: "Browser Share", data: [64, 18, 12, 4, 2]}]}
+              labels={["Chrome", "Safari", "Firefox", "Edge", "Other"]}
+              height="280px"
+            />
+          </.demo_section>
+
+          <.demo_section title="Scatter Chart" subtitle="X/Y scatter plot — showing correlation between two variables">
+            <.phia_chart
+              id="showcase-scatter"
+              type={:scatter}
+              series={[
+                %{name: "Product A", data: [[10, 8], [20, 15], [30, 22], [40, 28], [50, 35], [60, 42], [70, 38], [80, 48]]},
+                %{name: "Product B", data: [[15, 12], [25, 18], [35, 25], [45, 30], [55, 28], [65, 35], [75, 42], [85, 50]]}
+              ]}
+              labels={[]}
+              height="300px"
+            />
+          </.demo_section>
+        </div>
+
+        <%!-- Funnel Chart --%>
+        <.demo_section title="Funnel Chart" subtitle="Conversion funnel — showing progressive reduction through stages">
+          <.phia_chart
+            id="showcase-funnel"
+            type={:funnel}
+            series={[%{name: "Conversion", data: [5000, 3800, 2400, 1200, 600]}]}
+            labels={["Visitors", "Sign Ups", "Trials", "Paid", "Retained"]}
+            height="300px"
+          />
+        </.demo_section>
+
+        <%!-- Waterfall Chart --%>
+        <.demo_section title="Waterfall Chart" subtitle="Cumulative effect of sequential positive/negative values">
+          <.phia_chart
+            id="showcase-waterfall"
+            type={:waterfall}
+            series={[%{name: "Revenue", data: [120, 30, -15, 45, -25, 60, -10]}]}
+            labels={["Q1 Base", "New Sales", "Refunds", "Upsells", "Churn", "Expansion", "Credits"]}
+            height="300px"
+          />
+        </.demo_section>
+
+        <%!-- Heatmap Chart --%>
+        <.demo_section title="Heatmap Chart" subtitle="Matrix visualization — showing intensity across two dimensions">
+          <.phia_chart
+            id="showcase-heatmap"
+            type={:heatmap}
+            series={[
+              %{name: "Mon", data: [3, 5, 8, 2, 6, 4, 7]},
+              %{name: "Tue", data: [7, 4, 2, 9, 5, 3, 6]},
+              %{name: "Wed", data: [2, 8, 5, 3, 7, 9, 4]},
+              %{name: "Thu", data: [6, 3, 7, 5, 2, 8, 9]},
+              %{name: "Fri", data: [9, 6, 4, 8, 3, 5, 2]}
+            ]}
+            labels={["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm"]}
+            height="280px"
+          />
+        </.demo_section>
+
+        <%!-- Treemap Chart --%>
+        <.demo_section title="Treemap Chart" subtitle="Hierarchical data as proportionally-sized rectangles">
+          <.phia_chart
+            id="showcase-treemap"
+            type={:treemap}
+            series={[%{name: "Market Cap", data: [450, 280, 200, 150, 120, 90, 60, 40]}]}
+            labels={["Apple", "Microsoft", "Amazon", "Google", "Meta", "Tesla", "Netflix", "Uber"]}
+            height="300px"
+          />
+        </.demo_section>
+
+        <%!-- Histogram Chart --%>
+        <.demo_section title="Histogram Chart" subtitle="Distribution of values across bins">
+          <.phia_chart
+            id="showcase-histogram"
+            type={:histogram}
+            series={[%{name: "Response Time (ms)", data: [12, 45, 89, 132, 95, 67, 34, 18, 8, 3]}]}
+            labels={["0-50", "50-100", "100-150", "150-200", "200-250", "250-300", "300-350", "350-400", "400-450", "450-500"]}
+            height="280px"
+          />
+        </.demo_section>
+
         <%!-- ═══════════════════════════════════════════════════ --%>
         <%!-- Specialized Components Section --%>
         <%!-- ═══════════════════════════════════════════════════ --%>
@@ -271,6 +358,126 @@ defmodule PhiaDemoWeb.Demo.Showcase.ChartsLive do
                 </div>
               </.resizable_panel>
             </.resizable>
+          </div>
+        </.demo_section>
+
+        <%!-- ═══════════════════════════════════════════════════ --%>
+        <%!-- Data Components Section --%>
+        <%!-- ═══════════════════════════════════════════════════ --%>
+
+        <div class="flex items-center gap-2 border-b border-border/60 pb-2 mt-4">
+          <.icon name="chart-bar" size={:sm} class="text-primary" />
+          <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Data Components</p>
+        </div>
+
+        <%!-- BarList --%>
+        <.demo_section title="BarList" subtitle="Horizontal ranked bars — showing relative values in a category">
+          <.bar_list data={[
+            %{name: "Google", value: 456},
+            %{name: "Direct", value: 351},
+            %{name: "Twitter", value: 271},
+            %{name: "GitHub", value: 191},
+            %{name: "Reddit", value: 91}
+          ]} />
+        </.demo_section>
+
+        <%!-- CategoryBar --%>
+        <.demo_section title="CategoryBar" subtitle="Stacked percentage bar — showing proportional breakdown of a whole">
+          <div class="space-y-6">
+            <div class="space-y-2">
+              <p class="text-sm font-medium text-foreground">Storage Usage</p>
+              <.category_bar
+                values={[35, 25, 20, 20]}
+                colors={[:blue, :green, :orange, :red]}
+                labels={["Documents", "Photos", "Videos", "Other"]}
+                show_labels={true}
+              />
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm font-medium text-foreground">With Marker (Budget — 60% spent)</p>
+              <.category_bar
+                values={[40, 20, 25, 15]}
+                colors={[:blue, :green, :purple, :teal]}
+                marker_value={60}
+              />
+            </div>
+          </div>
+        </.demo_section>
+
+        <%!-- BadgeDelta --%>
+        <.demo_section title="BadgeDelta" subtitle="KPI trend badges with directional icons — 5 delta types">
+          <div class="flex flex-wrap gap-3 items-center">
+            <.badge_delta value="+12.5%" delta_type={:increase} />
+            <.badge_delta value="+3.2%" delta_type={:moderate_increase} />
+            <.badge_delta value="0.0%" delta_type={:unchanged} />
+            <.badge_delta value="-1.8%" delta_type={:moderate_decrease} />
+            <.badge_delta value="-8.4%" delta_type={:decrease} />
+          </div>
+          <div class="flex flex-wrap gap-3 items-center mt-4">
+            <.badge_delta value="+22%" delta_type={:increase} size={:xs} />
+            <.badge_delta value="+22%" delta_type={:increase} size={:sm} />
+            <.badge_delta value="+22%" delta_type={:increase} size={:default} />
+            <.badge_delta value="+22%" delta_type={:increase} size={:lg} />
+          </div>
+        </.demo_section>
+
+        <%!-- BulletChart --%>
+        <.demo_section title="BulletChart" subtitle="SVG bullet gauge with ranges and target marker — compact KPI display">
+          <div class="space-y-6">
+            <div class="space-y-1">
+              <p class="text-sm font-medium text-foreground">Revenue (Target: $280k)</p>
+              <.bullet_chart value={245} target={280} max={350} label="$245k" />
+            </div>
+            <div class="space-y-1">
+              <p class="text-sm font-medium text-foreground">Performance Score</p>
+              <.bullet_chart value={82} target={90} max={100} ranges={[%{to: 40, color: "red"}, %{to: 70, color: "orange"}, %{to: 100, color: "green"}]} label="82%" />
+            </div>
+          </div>
+        </.demo_section>
+
+        <%!-- MeterGroup --%>
+        <.demo_section title="MeterGroup" subtitle="Multiple labeled meters in a collection — resource allocation">
+          <.meter_group
+            meters={[
+              %{label: "Storage", value: 68, max: 100, color: :blue},
+              %{label: "Memory", value: 42, max: 100, color: :green},
+              %{label: "CPU", value: 87, max: 100, color: :orange},
+              %{label: "Network", value: 23, max: 100, color: :purple}
+            ]}
+            total_label="System Resources"
+          />
+        </.demo_section>
+
+        <%!-- Leaderboard --%>
+        <.demo_section title="Leaderboard" subtitle="Ranked list with medals, metrics, and delta badges">
+          <div class="max-w-lg">
+            <.leaderboard items={[
+              %{rank: 1, name: "Sarah Connor", metric: "2,847 pts", delta: "+124", delta_type: :increase},
+              %{rank: 2, name: "John Smith", metric: "2,614 pts", delta: "+89", delta_type: :increase},
+              %{rank: 3, name: "Ana Costa", metric: "2,398 pts", delta: "-12", delta_type: :decrease},
+              %{rank: 4, name: "Diego Melo", metric: "2,201 pts", delta: "+45", delta_type: :moderate_increase},
+              %{rank: 5, name: "Elena Rocha", metric: "1,987 pts", delta: "0", delta_type: :unchanged}
+            ]} />
+          </div>
+        </.demo_section>
+
+        <%!-- Tracker --%>
+        <.demo_section title="Tracker" subtitle="Status blocks for time-series monitoring — inspired by Statuspage.io">
+          <div class="space-y-4">
+            <div class="space-y-1">
+              <p class="text-sm font-medium text-foreground">API Gateway — 30 days</p>
+              <.tracker data={Enum.map(1..30, fn i ->
+                cond do
+                  rem(i, 15) == 0 -> %{color: :red, tooltip: "Day #{i}: Outage"}
+                  rem(i, 7) == 0 -> %{color: :orange, tooltip: "Day #{i}: Degraded"}
+                  true -> %{color: :green, tooltip: "Day #{i}: Operational"}
+                end
+              end)} />
+            </div>
+            <div class="space-y-1">
+              <p class="text-sm font-medium text-foreground">Database — 30 days</p>
+              <.tracker data={Enum.map(1..30, fn _ -> %{color: :green, tooltip: "Operational"} end)} />
+            </div>
           </div>
         </.demo_section>
 

@@ -271,6 +271,57 @@ defmodule PhiaDemoWeb.Demo.Showcase.CardsLive do
           </div>
         </section>
 
+        <%!-- ColorSwatchCard --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">ColorSwatchCard</h2>
+          <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
+            <.color_swatch_card name="Primary Blue" hex="#3B82F6" rgb="59, 130, 246" />
+            <.color_swatch_card name="Emerald" hex="#10B981" hsl="160, 84%, 39%" />
+            <.color_swatch_card name="Amber" hex="#F59E0B" />
+            <.color_swatch_card name="Rose" hex="#F43F5E" size={:sm} />
+          </div>
+        </section>
+
+        <%!-- FileCard --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">FileCard</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <.file_card filename="quarterly-report.pdf" size="2.4 MB" uploaded_at="Mar 8, 2026" href="#" />
+            <.file_card filename="design-system.figma" size="18.2 MB" uploaded_at="Mar 7, 2026">
+              <:actions>
+                <.button variant={:ghost} size={:sm}>Share</.button>
+                <.button variant={:ghost} size={:sm}>Delete</.button>
+              </:actions>
+            </.file_card>
+            <.file_card filename="data-export.xlsx" size="890 KB" uploaded_at="Mar 5, 2026" variant={:compact} />
+          </div>
+        </section>
+
+        <%!-- LinkPreviewCard --%>
+        <section class="space-y-4">
+          <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">LinkPreviewCard</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <.link_preview_card
+              url="https://hexdocs.pm/phia_ui"
+              title="PhiaUI — Hex Docs"
+              description="Comprehensive Phoenix LiveView component library with 623+ components."
+              site_name="HexDocs"
+            />
+            <.link_preview_card
+              url="https://github.com/elixir-lang/elixir"
+              title="Elixir Programming Language"
+              description="A dynamic, functional language for building scalable applications."
+              variant={:compact}
+            />
+            <.link_preview_card
+              url="https://tailwindcss.com"
+              title="Tailwind CSS"
+              description="A utility-first CSS framework for rapid UI development."
+              variant={:minimal}
+            />
+          </div>
+        </section>
+
       </div>
     </Layout.layout>
     """

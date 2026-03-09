@@ -883,6 +883,98 @@ defmodule PhiaDemoWeb.Demo.Showcase.InputsLive do
           </div>
         </.demo_section>
 
+        <%!-- UrlInput --%>
+        <.demo_section title="UrlInput" subtitle="URL input with lockable protocol prefix — https:// or http://">
+          <div class="grid gap-6 lg:grid-cols-2">
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Website URL</label>
+              <.url_input name="website" placeholder="example.com" />
+              <p class="text-xs text-muted-foreground">Protocol defaults to https://</p>
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Custom protocol</label>
+              <.url_input name="website_http" placeholder="legacy-site.com" protocol="http" />
+            </div>
+          </div>
+        </.demo_section>
+
+        <%!-- UnitInput --%>
+        <.demo_section title="UnitInput" subtitle="Numeric input with unit symbol — currency, percentage, weight, distance">
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Price (USD)</label>
+              <.unit_input name="price" unit={:currency_usd} placeholder="0.00" />
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Discount</label>
+              <.unit_input name="discount" unit={:percent} placeholder="0" />
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Weight</label>
+              <.unit_input name="weight" unit={:kg} placeholder="0.0" />
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Custom unit</label>
+              <.unit_input name="custom" symbol="px" symbol_position="right" placeholder="16" />
+            </div>
+          </div>
+        </.demo_section>
+
+        <%!-- TextareaCounter --%>
+        <.demo_section title="TextareaCounter" subtitle="Textarea with live character counter — color changes at 80% and over limit">
+          <div class="grid gap-6 lg:grid-cols-2">
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Bio (max 280)</label>
+              <.textarea_counter name="bio" max_length={280} placeholder="Write a short bio..." rows={4} />
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-foreground">Notes (no limit)</label>
+              <.textarea_counter name="notes" placeholder="Free-form notes..." rows={4} />
+            </div>
+          </div>
+        </.demo_section>
+
+        <%!-- InlineSearch --%>
+        <.demo_section title="InlineSearch" subtitle="Icon button that expands to search input on click — collapses on Escape/blur">
+          <div class="flex items-center gap-4">
+            <.inline_search id="inline-search-demo" name="inline_q" placeholder="Search items..." />
+            <p class="text-sm text-muted-foreground">Click the search icon to expand</p>
+          </div>
+        </.demo_section>
+
+        <%!-- FancyButton Variants --%>
+        <.demo_section title="FancyButton, SplitButton, IconButton, SocialButton, ActionButton" subtitle="Extended button variants — shimmer, split dropdown, icon-only, social, and action styles">
+          <div class="space-y-6">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">FancyButton</p>
+              <div class="flex flex-wrap gap-2 items-center">
+                <.shimmer_button>Shimmer</.shimmer_button>
+                <.glow_button>Glow</.glow_button>
+                <.gradient_button>Gradient</.gradient_button>
+              </div>
+            </div>
+            <.separator />
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">IconButton</p>
+              <div class="flex flex-wrap gap-2 items-center">
+                <.icon_button icon="settings" label="Settings" />
+                <.icon_button icon="heart" label="Favorite" variant={:outline} />
+                <.icon_button icon="trash-2" label="Delete" variant={:destructive} />
+                <.icon_button icon="plus" label="Add" variant={:secondary} size={:lg} />
+              </div>
+            </div>
+            <.separator />
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">SocialButton</p>
+              <div class="flex flex-wrap gap-2 items-center">
+                <.social_button provider={:github}>GitHub</.social_button>
+                <.social_button provider={:google}>Google</.social_button>
+                <.social_button provider={:apple}>Apple</.social_button>
+              </div>
+            </div>
+          </div>
+        </.demo_section>
+
       </div>
     </Layout.layout>
     """

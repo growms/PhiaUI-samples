@@ -485,6 +485,46 @@ defmodule PhiaDemoWeb.Demo.Showcase.CalendarLive do
           </div>
         </.demo_section>
 
+        <%!-- DailyAgenda --%>
+        <.demo_section title="DailyAgenda" subtitle="Day view with time slots and event blocks">
+          <.daily_agenda
+            date={Date.utc_today()}
+            events={[
+              %{id: "1", title: "Team Standup", start_time: ~T[09:00:00], end_time: ~T[09:30:00], color: :blue},
+              %{id: "2", title: "Design Review", start_time: ~T[11:00:00], end_time: ~T[12:00:00], color: :purple},
+              %{id: "3", title: "Lunch Break", start_time: ~T[12:00:00], end_time: ~T[13:00:00], color: :green},
+              %{id: "4", title: "Sprint Planning", start_time: ~T[14:00:00], end_time: ~T[15:30:00], color: :orange}
+            ]}
+          />
+        </.demo_section>
+
+        <%!-- MultiMonthCalendar --%>
+        <.demo_section title="MultiMonthCalendar" subtitle="Side-by-side month panels — great for date range selection">
+          <.multi_month_calendar months={3} start_month={Date.utc_today() |> Date.beginning_of_month()} />
+        </.demo_section>
+
+        <%!-- WheelPicker --%>
+        <.demo_section title="WheelPicker" subtitle="iOS-style scroll wheel selector — for time, date, or custom values">
+          <div class="flex gap-6 items-center">
+            <.wheel_picker
+              id="wheel-hours"
+              items={Enum.map(1..12, &%{value: "#{&1}", label: "#{&1}"})}
+              selected="9"
+            />
+            <span class="text-xl font-bold text-foreground">:</span>
+            <.wheel_picker
+              id="wheel-minutes"
+              items={Enum.map(0..59//5, &%{value: "#{&1}", label: String.pad_leading("#{&1}", 2, "0")})}
+              selected="30"
+            />
+            <.wheel_picker
+              id="wheel-ampm"
+              items={[%{value: "AM", label: "AM"}, %{value: "PM", label: "PM"}]}
+              selected="AM"
+            />
+          </div>
+        </.demo_section>
+
       </div>
     </Layout.layout>
     """
