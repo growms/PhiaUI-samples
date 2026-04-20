@@ -175,7 +175,7 @@ defmodule PhiaDemoWeb.Demo.Components.AnimationLive do
             <div class="rounded-xl border border-border/60 bg-card p-5 space-y-3">
               <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">fade_in</p>
               <div class="flex items-center justify-center py-4 bg-muted/30 rounded-lg">
-                <.fade_in direction={:up} delay={0} once={false}>
+                <.fade_in id="fade-in-demo" direction={:up} delay={0} once={false}>
                   <div class="rounded-lg bg-primary/10 border border-primary/20 px-4 py-2">
                     <span class="text-sm font-semibold text-primary">Fades in ↑</span>
                   </div>

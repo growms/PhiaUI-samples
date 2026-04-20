@@ -512,7 +512,7 @@ defmodule PhiaDemoWeb.Demo.Components.FeedbackLive do
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <%= for {name, icon, color} <- [{"document.pdf", "bold", "text-blue-500"}, {"image.png", "image", "text-green-500"}, {"archive.zip", "package", "text-orange-500"}] do %>
               <.context_menu id={"ctx-#{name}"}>
-                <.context_menu_trigger context_menu_id={"ctx-#{name}"}>
+                <.context_menu_trigger id={"ctx-#{name}-trigger"} context_menu_id={"ctx-#{name}"}>
                   <div class="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:bg-muted/60 cursor-default select-none transition-colors">
                     <.icon name={icon} size={:lg} class={color} />
                     <span class="text-xs text-foreground font-medium truncate w-full text-center">{name}</span>

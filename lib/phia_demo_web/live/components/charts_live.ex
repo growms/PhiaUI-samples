@@ -332,7 +332,7 @@ defmodule PhiaDemoWeb.Demo.Components.ChartsLive do
         <.demo_section title="Resizable, ResizablePanel, ResizableHandle" subtitle="Drag-to-resize split panels — 3 sub-components, keyboard accessible">
           <div class="space-y-4">
             <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Horizontal split</p>
-            <.resizable class="h-40 rounded-lg border border-border/60 overflow-hidden">
+            <.resizable id="charts-resizable-h" class="h-40 rounded-lg border border-border/60 overflow-hidden">
               <.resizable_panel default_size={50} min_size={20}>
                 <div class="h-full p-4 bg-muted/30 flex items-center justify-center">
                   <p class="text-sm text-muted-foreground">Left panel — drag the handle</p>
@@ -347,7 +347,7 @@ defmodule PhiaDemoWeb.Demo.Components.ChartsLive do
             </.resizable>
 
             <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mt-4">Vertical split</p>
-            <.resizable direction="vertical" class="h-40 rounded-lg border border-border/60 overflow-hidden">
+            <.resizable id="charts-resizable-v" direction="vertical" class="h-40 rounded-lg border border-border/60 overflow-hidden">
               <.resizable_panel default_size={60} min_size={30}>
                 <div class="h-full p-4 bg-muted/30 flex items-center justify-center">
                   <p class="text-sm text-muted-foreground">Top panel</p>

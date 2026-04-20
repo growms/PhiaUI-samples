@@ -148,7 +148,7 @@ defmodule PhiaDemoWeb.Demo.Components.MediaLive do
         <%!-- Resizable --%>
         <section class="space-y-4">
           <h2 class="text-base font-semibold text-foreground border-b border-border/60 pb-2">Resizable</h2>
-          <.resizable class="h-48 rounded-xl border border-border overflow-hidden">
+          <.resizable id="resizable-demo" class="h-48 rounded-xl border border-border overflow-hidden">
             <.resizable_panel default_size={35} min_size={20}>
               <div class="h-full flex items-center justify-center bg-muted/30">
                 <div class="text-center">
