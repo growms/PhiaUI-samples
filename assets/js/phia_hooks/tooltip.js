@@ -1,5 +1,16 @@
-// PhiaUI Tooltip Hook — PhiaTooltip
-
+/**
+ * PhiaTooltip — vanilla JS hook for tooltip show/hide.
+ *
+ * Triggers on mouseenter/mouseleave and focus/blur.
+ * Uses getBoundingClientRect() for positioning with smart viewport-edge flip.
+ * Respects `data-delay` (ms) and `data-position` (top|bottom|left|right).
+ * Escape key closes the tooltip.
+ *
+ * Markup contract:
+ *   - Hook root: `phx-hook="PhiaTooltip"`, `data-delay`, `id`
+ *   - Trigger child: `[data-tooltip-trigger]`
+ *   - Content child: `[data-tooltip-content]`, `data-position`
+ */
 const PhiaTooltip = {
   mounted() {
     this.trigger = this.el.querySelector("[data-tooltip-trigger]");
@@ -55,8 +66,9 @@ const PhiaTooltip = {
     const contentRect = this.content.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const gap = 8;
+    const gap = 8; // px gap between trigger and content
 
+    // Determine actual position with smart flip
     let position = preferred;
     if (preferred === "top" && triggerRect.top < contentRect.height + gap) {
       position = "bottom";
@@ -68,7 +80,14 @@ const PhiaTooltip = {
       position = "left";
     }
 
-    Object.assign(this.content.style, { top: "", bottom: "", left: "", right: "", transform: "" });
+    // Reset positioning styles
+    Object.assign(this.content.style, {
+      top: "",
+      bottom: "",
+      left: "",
+      right: "",
+      transform: "",
+    });
 
     switch (position) {
       case "top":

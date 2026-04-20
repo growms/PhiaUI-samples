@@ -1,4 +1,18 @@
-// PhiaUI Toast Hook — PhiaToast
+/**
+ * PhiaToast — vanilla JS hook for toast notification stack.
+ *
+ * Usage in LiveView:
+ *   push_event(socket, "phia-toast", %{
+ *     title: "Saved!",
+ *     description: "Optional body text.",
+ *     variant: "success",   // default | success | destructive | warning
+ *     duration_ms: 5000     // auto-dismiss delay, 0 = no auto-dismiss
+ *   })
+ *
+ * Markup contract:
+ *   - Hook root: `phx-hook="PhiaToast"`, `data-max-toasts`
+ *   - Toasts are created dynamically inside the viewport container
+ */
 
 const VARIANT_CLASSES = {
   default: "bg-background text-foreground border-border",
@@ -10,10 +24,11 @@ const VARIANT_CLASSES = {
 const PhiaToast = {
   mounted() {
     this.maxToasts = parseInt(this.el.dataset.maxToasts ?? "5", 10);
-    this._handleEvent("phia-toast", (payload) => this._createToast(payload));
+    this.handleEvent("phia-toast", (payload) => this._createToast(payload));
   },
 
   _createToast({ title, description, variant = "default", duration_ms = 5000 }) {
+    // Enforce max stack
     const existing = this.el.querySelectorAll("[data-toast-item]");
     if (existing.length >= this.maxToasts) {
       this._dismiss(existing[0]);
@@ -29,7 +44,7 @@ const PhiaToast = {
     node.className = [
       "pointer-events-auto relative flex w-full items-start justify-between gap-2",
       "overflow-hidden rounded-md border p-4 pr-6 shadow-lg transition-all",
-      "translate-x-full opacity-0",
+      "translate-x-full opacity-0",   // initial state (off-screen right)
       variantClass,
     ].join(" ");
     node.id = id;
@@ -55,6 +70,7 @@ const PhiaToast = {
     node.addEventListener("phia:toast-dismiss", () => this._dismiss(node));
     this.el.appendChild(node);
 
+    // Slide-in animation (next frame)
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         node.classList.remove("translate-x-full", "opacity-0");
@@ -62,6 +78,7 @@ const PhiaToast = {
       });
     });
 
+    // Auto-dismiss
     if (duration_ms > 0) {
       setTimeout(() => this._dismiss(node), duration_ms);
     }
@@ -72,6 +89,7 @@ const PhiaToast = {
     node.classList.remove("translate-x-0", "opacity-100");
     node.classList.add("translate-x-full", "opacity-0");
     node.addEventListener("transitionend", () => node.remove(), { once: true });
+    // Fallback remove if transition doesn't fire
     setTimeout(() => node.isConnected && node.remove(), 400);
   },
 

@@ -330,22 +330,20 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         <%!-- Slider --%>
         <.demo_section title="Slider" subtitle="Range input with live value display — keyboard accessible">
           <div class="space-y-6">
-            <div class="space-y-2">
+            <form class="space-y-2" phx-change="slider-change" phx-value-field="volume" onsubmit="return false">
               <div class="flex justify-between text-sm">
                 <label class="font-medium text-foreground">Volume</label>
                 <span class="text-muted-foreground">{@slider_volume}%</span>
               </div>
-              <.slider value={@slider_volume} min={0} max={100} step={1}
-                phx-change="slider-change" phx-value-field="volume" name="volume" />
-            </div>
-            <div class="space-y-2">
+              <.slider value={@slider_volume} min={0} max={100} step={1} name="value" />
+            </form>
+            <form class="space-y-2" phx-change="slider-change" phx-value-field="brightness" onsubmit="return false">
               <div class="flex justify-between text-sm">
                 <label class="font-medium text-foreground">Brightness</label>
                 <span class="text-muted-foreground">{@slider_brightness}%</span>
               </div>
-              <.slider value={@slider_brightness} min={0} max={100} step={5}
-                phx-change="slider-change" phx-value-field="brightness" name="brightness" />
-            </div>
+              <.slider value={@slider_brightness} min={0} max={100} step={5} name="value" />
+            </form>
           </div>
         </.demo_section>
 
@@ -488,13 +486,22 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
           <div class="grid gap-6 lg:grid-cols-2">
             <div class="space-y-1.5">
               <label class="text-sm font-medium text-foreground">Password</label>
-              <.password_input placeholder="Enter your password" name="password" />
+              <.password_input id="demo-password" placeholder="Enter your password" name="password" />
               <p class="text-xs text-muted-foreground">Click the eye icon to reveal</p>
             </div>
-            <div class="space-y-1.5">
+            <form class="space-y-1.5" phx-change="number-change" onsubmit="return false">
               <label class="text-sm font-medium text-foreground">Quantity — live: {@number_qty}</label>
-              <.number_input value={@number_qty} min={1} max={99} step={1} name="qty" />
-            </div>
+              <div class="flex items-center">
+                <button type="button" aria-label="Decrease"
+                  onclick="const i=this.form.elements.value; i.stepDown(); i.dispatchEvent(new Event('input',{bubbles:true}));"
+                  class="h-10 w-10 flex items-center justify-center border border-border rounded-md bg-background text-foreground hover:bg-accent">−</button>
+                <input type="number" name="value" value={@number_qty} min={1} max={99} step={1}
+                  class="flex h-10 w-full border border-border bg-background px-3 py-2 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" />
+                <button type="button" aria-label="Increase"
+                  onclick="const i=this.form.elements.value; i.stepUp(); i.dispatchEvent(new Event('input',{bubbles:true}));"
+                  class="h-10 w-10 flex items-center justify-center border border-border rounded-md bg-background text-foreground hover:bg-accent">+</button>
+              </div>
+            </form>
           </div>
         </.demo_section>
 
@@ -546,11 +553,11 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
 
         <%!-- MultiSelect --%>
         <.demo_section title="MultiSelect" subtitle="Multi-value native select with chip-style display">
-          <div class="space-y-1.5">
+          <form class="space-y-1.5" phx-change="multi-change" onsubmit="return false">
             <label class="text-sm font-medium text-foreground">Technologies</label>
             <.multi_select
               id="showcase-multi"
-              name="tech"
+              name="values"
               options={@multi_options}
               selected={@multi_selected}
               placeholder="Select technologies..."
@@ -559,13 +566,13 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
             <p class="text-xs text-muted-foreground">
               Selected: {if @multi_selected == [], do: "none", else: Enum.join(@multi_selected, ", ")}
             </p>
-          </div>
+          </form>
         </.demo_section>
 
         <%!-- Combobox --%>
         <.demo_section title="Combobox" subtitle="Searchable select with live filtering — keyboard navigable">
           <div class="grid gap-6 lg:grid-cols-2">
-            <div>
+            <form onsubmit="return false">
               <label class="text-sm font-medium text-foreground mb-1.5 block">Favorite Fruit</label>
               <div :if={@fruit_open} phx-click="fruit-toggle" class="fixed inset-0 z-40" aria-hidden="true" />
               <.combobox
@@ -580,8 +587,8 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
                 on_search="fruit-search"
                 on_toggle="fruit-toggle"
               />
-            </div>
-            <div>
+            </form>
+            <form onsubmit="return false">
               <label class="text-sm font-medium text-foreground mb-1.5 block">Country</label>
               <div :if={@country_open} phx-click="country-toggle" class="fixed inset-0 z-40" aria-hidden="true" />
               <.combobox
@@ -596,7 +603,7 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
                 on_search="country-search"
                 on_toggle="country-toggle"
               />
-            </div>
+            </form>
           </div>
         </.demo_section>
 
@@ -728,19 +735,18 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         <%!-- AutocompleteInput --%>
         <.demo_section title="AutocompleteInput" subtitle="Text input with native HTML5 datalist suggestions — no JS required">
           <div class="grid gap-6 lg:grid-cols-2">
-            <div class="space-y-1.5">
+            <form class="space-y-1.5" phx-change="ac-language-change" onsubmit="return false">
               <label class="text-sm font-medium text-foreground">Programming Language</label>
               <.autocomplete_input
-                name="language"
+                name="value"
                 value={@ac_language}
                 placeholder="Start typing a language..."
                 suggestions={["Elixir", "Erlang", "Rust", "Go", "Python", "TypeScript", "JavaScript", "Ruby", "Java", "Kotlin", "Swift", "C#", "Haskell", "Clojure", "Scala"]}
-                phx-change="ac-language-change"
               />
               <p class="text-xs text-muted-foreground">
                 {if @ac_language != "", do: "Selected: #{@ac_language}", else: "Type to see browser suggestions"}
               </p>
-            </div>
+            </form>
             <div class="space-y-1.5">
               <label class="text-sm font-medium text-foreground">City (tuple suggestions)</label>
               <.autocomplete_input
@@ -756,19 +762,18 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         <%!-- PhoneInput --%>
         <.demo_section title="PhoneInput" subtitle="Phone number input with country dial-code prefix selector — ~50 countries included">
           <div class="grid gap-6 lg:grid-cols-2">
-            <div class="space-y-1.5">
+            <form class="space-y-1.5" phx-change="phone-change" onsubmit="return false">
               <label class="text-sm font-medium text-foreground">Phone Number</label>
               <.phone_input
-                name="phone"
+                name="value"
                 value={@phone_value}
                 selected_code={@phone_code}
                 placeholder="555 123 4567"
-                phx-change="phone-change"
               />
               <p class="text-xs text-muted-foreground">
                 {if @phone_value != "", do: "Number: #{@phone_code} #{@phone_value}", else: "Select a country code and type a number"}
               </p>
-            </div>
+            </form>
             <div class="space-y-1.5">
               <label class="text-sm font-medium text-foreground">Disabled</label>
               <.phone_input
@@ -785,20 +790,19 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         <%!-- SearchInput --%>
         <.demo_section title="SearchInput" subtitle="Search field with magnifier icon, optional clear button and shortcut badge — 3 variants">
           <div class="space-y-4">
-            <div class="space-y-1.5">
+            <form class="space-y-1.5" phx-change="search-change" onsubmit="return false">
               <label class="text-sm font-medium text-foreground">Default variant</label>
               <.search_input
-                name="q"
+                name="value"
                 value={@search_query}
                 placeholder="Search products..."
                 on_clear="clear-search"
-                phx-change="search-change"
                 phx-debounce="300"
               />
               <p class="text-xs text-muted-foreground">
                 {if @search_query != "", do: "Query: \"#{@search_query}\"", else: "Type to search — × button appears when non-empty"}
               </p>
-            </div>
+            </form>
             <.separator />
             <div class="grid gap-4 lg:grid-cols-2">
               <div class="space-y-1.5">
@@ -856,20 +860,19 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         <%!-- ClearableInput --%>
         <.demo_section title="ClearableInput" subtitle="Text input with inline × clear button — disappears when empty">
           <div class="grid gap-6 lg:grid-cols-2">
-            <div class="space-y-1.5">
+            <form class="space-y-1.5" phx-change="clearable-change" onsubmit="return false">
               <label class="text-sm font-medium text-foreground">Filter by name</label>
               <.clearable_input
-                name="filter"
+                name="value"
                 value={@clearable_value}
                 placeholder="Type to filter..."
                 on_clear="clear-clearable"
-                phx-change="clearable-change"
                 phx-debounce="300"
               />
               <p class="text-xs text-muted-foreground">
                 {if @clearable_value != "", do: "Value: \"#{@clearable_value}\" — click × to clear", else: "× button appears when non-empty"}
               </p>
-            </div>
+            </form>
             <div class="space-y-1.5">
               <label class="text-sm font-medium text-foreground">Email (no clear button)</label>
               <.clearable_input

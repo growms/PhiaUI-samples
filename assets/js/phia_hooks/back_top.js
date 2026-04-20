@@ -1,41 +1,56 @@
-// PhiaUI BackTop Hook — PhiaBackTop
-//
-// Monitors window scroll position and toggles the button's visibility
-// once the user scrolls past `data-threshold` pixels.
-// Clicking the button scrolls to the top using the native scrollTo API.
-
+/**
+ * PhiaBackTop — vanilla JS hook for the back-to-top floating button.
+ *
+ * Listens to the window scroll event and toggles `opacity-0` / `opacity-100`
+ * on the button element based on whether the current scroll position exceeds
+ * the configured threshold.  Clicking the button scrolls the page back to
+ * the top using the native `scrollTo` API.
+ *
+ * HTML attributes read from the element:
+ *   data-threshold  — scroll distance in pixels before showing (default 200)
+ *   data-smooth     — "true" | "false", enables smooth scroll (default true)
+ *
+ * HTML anatomy expected:
+ *   <button id="back-top" phx-hook="PhiaBackTop"
+ *           data-threshold="200" data-smooth="true" aria-label="Scroll to top">
+ *     <svg ...>...</svg>
+ *     <span class="sr-only">Scroll to top</span>
+ *   </button>
+ */
 const PhiaBackTop = {
   mounted() {
-    this._threshold = parseInt(this.el.dataset.threshold ?? "200");
-    this._smooth = this.el.dataset.smooth !== "false";
+    this.threshold = parseInt(this.el.dataset.threshold || '200', 10);
+    this.smooth = this.el.dataset.smooth !== 'false';
 
-    this._onScroll = () => {
-      const scrollY = window.scrollY ?? window.pageYOffset ?? 0;
-      if (scrollY > this._threshold) {
-        this.el.style.opacity = "1";
-        this.el.style.pointerEvents = "auto";
-        this.el.setAttribute("aria-hidden", "false");
-      } else {
-        this.el.style.opacity = "0";
-        this.el.style.pointerEvents = "none";
-        this.el.setAttribute("aria-hidden", "true");
-      }
-    };
+    this._onScroll = () => this.handleScroll();
+    window.addEventListener('scroll', this._onScroll, { passive: true });
 
-    this._onClick = () => {
-      window.scrollTo({ top: 0, behavior: this._smooth ? "smooth" : "instant" });
-    };
+    // Click handler — scroll to the top of the page.
+    this.el.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: this.smooth ? 'smooth' : 'auto'
+      });
+    });
 
-    window.addEventListener("scroll", this._onScroll, { passive: true });
-    this.el.addEventListener("click", this._onClick);
-    // Run initial check in case page is already scrolled on mount
-    this._onScroll();
+    // Check initial scroll position in case the page is already scrolled.
+    this.handleScroll();
+  },
+
+  handleScroll() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    if (scrollY > this.threshold) {
+      this.el.classList.remove('opacity-0');
+      this.el.classList.add('opacity-100');
+    } else {
+      this.el.classList.remove('opacity-100');
+      this.el.classList.add('opacity-0');
+    }
   },
 
   destroyed() {
-    window.removeEventListener("scroll", this._onScroll);
-    this.el.removeEventListener("click", this._onClick);
-  },
+    window.removeEventListener('scroll', this._onScroll);
+  }
 };
 
 export default PhiaBackTop;
