@@ -31,3 +31,15 @@ reuses an already-running server on :4000.
   (slider, radio, combobox, tags, autocomplete).
 
 Add a new file per page when you want deep interaction coverage.
+
+## Git hook (pre-merge-commit)
+
+The repo ships a `.githooks/pre-merge-commit` that runs the smoke suite
+before a merge commit is finalised. Enable it once per clone with:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+It only fires on non-fast-forward merges; a plain `git pull` that
+fast-forwards will not trigger it. Bypass with `git merge --no-verify`.
