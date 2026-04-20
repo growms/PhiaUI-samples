@@ -91,7 +91,9 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
      # SearchInput
      |> assign(:search_query, "")
      # ClearableInput
-     |> assign(:clearable_value, "")}
+     |> assign(:clearable_value, "")
+     # Radio group
+     |> assign(:plan, "pro")}
   end
 
   @impl true
@@ -104,6 +106,18 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
   def handle_event("country-change", %{"value" => v}, s), do: {:noreply, assign(s, country_value: v, country_open: false, country_search: "")}
 
   def handle_event("tags-change", %{"tags" => tags}, s), do: {:noreply, assign(s, :tags, tags)}
+
+  def handle_event("tags-add", %{"tag" => tag}, s) do
+    tag = String.trim(tag)
+    if tag == "" or tag in s.assigns.tags do
+      {:noreply, s}
+    else
+      {:noreply, assign(s, :tags, s.assigns.tags ++ [tag])}
+    end
+  end
+
+  def handle_event("tags-remove", %{"tag" => tag}, s),
+    do: {:noreply, assign(s, :tags, List.delete(s.assigns.tags, tag))}
 
   def handle_event("date-range-change", %{"date" => date_str}, s) do
     date = Date.from_iso8601!(date_str)
@@ -149,6 +163,8 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
     key = String.to_existing_atom("slider_#{field}")
     {:noreply, assign(s, key, String.to_integer(val))}
   end
+
+  def handle_event("plan-change", %{"plan" => plan}, s), do: {:noreply, assign(s, :plan, plan)}
 
   def handle_event("rating-change", %{"value" => val}, s) do
     {:noreply, assign(s, :rating_value, String.to_integer(val))}
@@ -350,13 +366,13 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         <%!-- Rating --%>
         <.demo_section title="Rating" subtitle="Star rating — click to set, server-controlled">
           <div class="space-y-4">
-            <div class="space-y-1">
+            <form class="space-y-1" phx-change="rating-change" onsubmit="return false">
               <p class="text-sm font-medium text-foreground">Product Rating</p>
-              <.rating value={@rating_value} max={5} phx-click="rating-change" name="rating" />
+              <.rating value={@rating_value} max={5} name="value" />
               <p class="text-xs text-muted-foreground mt-1">
                 {if @rating_value > 0, do: "#{@rating_value} / 5 stars selected", else: "No rating selected"}
               </p>
-            </div>
+            </form>
             <.separator />
             <div class="space-y-1">
               <p class="text-sm font-medium text-foreground">Read-only (4.5 stars)</p>
@@ -629,14 +645,14 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
                 <span class="text-sm text-foreground">Select all (indeterminate)</span>
               </label>
             </div>
-            <div class="space-y-3">
+            <form class="space-y-3" phx-change="plan-change" onsubmit="return false">
               <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">RadioGroup & RadioGroupItem</p>
-              <.radio_group :let={group} value="pro" name="plan">
+              <.radio_group :let={group} value={@plan} name="plan">
                 <.radio_group_item value="free" label="Free — $0/month" {group} />
                 <.radio_group_item value="pro" label="Pro — $29/month" {group} />
                 <.radio_group_item value="enterprise" label="Enterprise — Custom pricing" {group} />
               </.radio_group>
-            </div>
+            </form>
           </div>
         </.demo_section>
 
@@ -682,20 +698,21 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
         </.demo_section>
 
         <%!-- TagsInput --%>
-        <.demo_section title="TagsInput" subtitle="Tag chips — manual fallback demo (full version uses Phoenix.HTML.FormField)">
-          <div class="space-y-1.5">
+        <.demo_section title="TagsInput" subtitle="Tag chips — press Enter to add, × to remove">
+          <form class="space-y-1.5" phx-submit="tags-add">
             <label class="text-sm font-medium text-foreground">Technologies</label>
             <div class="flex flex-wrap gap-1.5 rounded-md border border-input bg-background px-3 py-2 min-h-10">
               <%= for tag <- @tags do %>
                 <span class="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
                   {tag}
-                  <button type="button" class="text-primary/60 hover:text-primary ml-0.5" aria-label={"Remove tag " <> tag}>×</button>
+                  <button type="button" phx-click="tags-remove" phx-value-tag={tag}
+                          class="text-primary/60 hover:text-primary ml-0.5" aria-label={"Remove tag " <> tag}>×</button>
                 </span>
               <% end %>
-              <input type="text" placeholder="Add tag..." aria-label="Add tag" class="flex-1 min-w-20 text-sm bg-transparent outline-none placeholder:text-muted-foreground" />
+              <input type="text" name="tag" placeholder="Add tag..." aria-label="Add tag"
+                     class="flex-1 min-w-20 text-sm bg-transparent outline-none placeholder:text-muted-foreground" />
             </div>
-            <p class="text-xs text-muted-foreground">Use <code class="font-mono bg-muted px-1 rounded">.form</code> + FormField for full functionality</p>
-          </div>
+          </form>
         </.demo_section>
 
         <%!-- FileUpload --%>
@@ -738,6 +755,7 @@ defmodule PhiaDemoWeb.Demo.Components.InputsLive do
             <form class="space-y-1.5" phx-change="ac-language-change" onsubmit="return false">
               <label class="text-sm font-medium text-foreground">Programming Language</label>
               <.autocomplete_input
+                id="ac-language"
                 name="value"
                 value={@ac_language}
                 placeholder="Start typing a language..."

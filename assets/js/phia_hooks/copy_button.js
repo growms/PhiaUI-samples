@@ -25,7 +25,15 @@ const PhiaCopyButton = {
   },
 
   copy() {
-    const value = this.el.dataset.value;
+    let value = this.el.dataset.value;
+    if (value == null || value === "") {
+      const target = this.el.dataset.copyTarget;
+      if (target) {
+        const el = document.querySelector(target);
+        if (el) value = el.value != null ? el.value : el.textContent;
+      }
+    }
+    if (value == null) return;
 
     const doFallback = () => {
       const ta = document.createElement('textarea');
@@ -55,6 +63,12 @@ const PhiaCopyButton = {
     const liveEl = this.el.querySelector('[aria-live]');
     if (liveEl) liveEl.textContent = 'Copied!';
 
+    if (!this.copyIcon && !this.checkIcon && !liveEl) {
+      this._originalHTML = this.el.innerHTML;
+      this.el.innerHTML = '<span>✓ Copied</span>';
+      this.el.classList.add('text-green-600', 'dark:text-green-400');
+    }
+
     if (this._timer) clearTimeout(this._timer);
     this._timer = setTimeout(() => this.reset(), this.timeout);
   },
@@ -64,6 +78,11 @@ const PhiaCopyButton = {
     if (this.checkIcon) this.checkIcon.classList.add('hidden');
     const liveEl = this.el.querySelector('[aria-live]');
     if (liveEl) liveEl.textContent = '';
+    if (this._originalHTML != null) {
+      this.el.innerHTML = this._originalHTML;
+      this.el.classList.remove('text-green-600', 'dark:text-green-400');
+      this._originalHTML = null;
+    }
   },
 
   destroyed() {
